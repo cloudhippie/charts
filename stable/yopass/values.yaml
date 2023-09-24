@@ -1,0 +1,206 @@
+---
+# -- (string) Override the name
+nameOverride: ""
+
+# -- (string) Override the fullname
+fullnameOverride: ""
+
+# -- (int) Replicas for the deployment
+replicaCount: 1
+
+image:
+  # -- Image repository used by deployment
+  repository: jhaals/yopass
+
+  # -- (string) Optional tag for the repository, defaults to app version
+  tag: ""
+
+  # -- Image pull policy
+  pullPolicy: IfNotPresent
+
+  # -- Optional name of pull secret if using a private registry
+  pullSecrets: []
+
+serviceAccount:
+  # -- Create a new service account
+  create: true
+
+  # -- (string) Optional name for an existing service account
+  name: ""
+
+  # -- Define annotations for the service account
+  annotations: {}
+
+# -- Define additional labels
+labels: {}
+
+# -- Define additional annotations
+annotations: {}
+
+# -- Security context for the deployment
+securityContext: {}
+
+service:
+  # -- Type of the service
+  type: ClusterIP
+
+  # -- (int) Port of the service
+  port: 3000
+
+  # -- (int) Internal port of the service
+  internalPort: 3000
+
+  # -- Additional annotations for the service
+  annotations: {}
+
+  # -- Additional labels for the service
+  labels: {}
+
+ingress:
+  # -- Enable ingress
+  enabled: false
+
+  # -- (string) Class name for the ingress resource
+  className:
+
+  # -- Host definition for ingress
+  hosts:
+    - host: example.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+  # -- Optional TLS configuration for ingress
+  tls: []
+
+  # -- Additional annotations for the ingress
+  annotations: {}
+
+  # -- Additional labels for the ingress
+  labels: {}
+
+metrics:
+  # -- Enable metrics
+  enabled: true
+
+  # -- (int) Metrics port of the service
+  port: 3001
+
+  # -- (int) Internal metrics port of the service
+  internalPort: 3001
+
+  serviceMonitor:
+    # -- Enable service monitor
+    enabled: false
+
+    # -- (string) Namespace for ServiceMonitor, defaults to release namespace
+    namespace:
+
+    # -- (string) Optional job label for the target service in Prometheus
+    jobLabel:
+
+    # -- (string) Interval at which metrics should be scraped
+    interval:
+
+    # -- (string) Timeout after which the scrape is ended
+    scrapeTimeout:
+
+    # -- HonorLabels chooses the metric’s labels on collisions with target labels
+    honorLabels: false
+
+    # -- List of metric relabel configs to apply to samples before ingestion
+    metricRelabelings: []
+
+    # -- List of relabel configs to apply to samples before scraping
+    relabelings: []
+
+    # -- Additional annotations for the service monitor
+    annotations: {}
+
+    # -- Additional labels for the service monitor
+    labels: {}
+
+database:
+  # -- Type of database backend
+  type: memcached
+
+  # -- DSN to access the database
+  dsn: memcached:11211
+
+config:
+  # -- (int) Max length of encrypted secret
+  maxLength: 10000
+
+# -- Resources for the deployment
+resources:
+  limits: {}
+  requests:
+    cpu: 100m
+    memory: 64Mi
+
+# -- Node selector for the deployment
+nodeSelector: {}
+
+# -- Affinity for the deployment
+affinity: {}
+
+# -- Tolerations for the deployment
+tolerations: []
+
+# -- List of environment variables from existing secrets
+envFromSecrets: []
+
+# -- List of environment variables from existing configmaps
+envFromConfigMaps: []
+
+# -- Extra environment variables from mapping
+extraEnvVariables: {}
+
+# -- Extra environment variables from secrets
+extraEnvSecrets: {}
+
+redis:
+  # -- Enable redis dependency
+  enabled: false
+
+  # -- Override fullname of redis dependency
+  fullnameOverride: redis
+
+  serviceAccount:
+    # -- Create service account for redis
+    create: true
+
+  metrics:
+    # -- Enable metrics for redis
+    enabled: true
+
+    # -- Enforce pod annotations for redis
+    podAnnotations: null
+
+    serviceMonitor:
+      # -- Enable service monitor for redis
+      enabled: false
+
+memcached:
+  # -- Enable memcached dependency
+  enabled: true
+
+  # -- Override fullname of memcached dependency
+  fullnameOverride: memcached
+
+  serviceAccount:
+    # -- Create service account for memcached
+    create: true
+
+  metrics:
+    # -- Enable metrics for memcached
+    enabled: true
+
+    # -- Enforce pod annotations for memcached
+    podAnnotations: null
+
+    serviceMonitor:
+      # -- Enable service monitor for memcached
+      enabled: false
+
+...

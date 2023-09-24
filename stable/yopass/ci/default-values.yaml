@@ -1,0 +1,10 @@
+---
+ingress:
+  enabled: true
+
+metrics:
+  enabled: true
+
+resources: {}
+
+...
