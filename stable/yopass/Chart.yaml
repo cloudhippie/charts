@@ -1,0 +1,32 @@
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/signKey: |
+    fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+    url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+apiVersion: v2
+appVersion: 11.15.0
+dependencies:
+- condition: redis.enabled
+  name: redis
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 18.1.0
+- condition: memcached.enabled
+  name: memcached
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 6.6.2
+description: A Helm chart for yopass
+home: https://yopass.se/
+keywords:
+- password
+- secret
+- sharing
+maintainers:
+- email: thomas@webhippie.de
+  name: tboerger
+  url: https://github.com/tboerger
+name: yopass
+sources:
+- https://github.com/cloudhippie/charts/tree/master/stable/yopass
+- https://github.com/jhaals/yopass
+type: application
+version: 1.0.0

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: "{{ include "yopass.fullname" . }}-test-connection"
+  labels:
+    {{- include "yopass.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: "test-success"
+
+spec:
+  restartPolicy: Never
+
+  containers:
+    - name: wget
+      image: busybox
+      command:
+        - wget
+      args:
+        - --spider
+        - http://{{ include "yopass.fullname" . }}:{{ .Values.service.port }}

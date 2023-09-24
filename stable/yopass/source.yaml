@@ -1,0 +1,6 @@
+---
+registry: docker.io
+image: jhaals/yopass
+prerelease: false
+
+...
