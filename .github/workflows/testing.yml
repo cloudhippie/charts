@@ -1,0 +1,60 @@
+---
+name: testing
+
+"on":
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        id: source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup helm
+        id: helm
+        uses: azure/setup-helm@v3
+
+      - name: Setup python
+        id: python
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: .python-version
+
+      - name: Setup testing
+        id: setup
+        uses: helm/chart-testing-action@v2.4.0
+
+      - name: Detect testing
+        id: detect
+        run: |
+          CHANGED=$(ct list-changed --config ct.yaml --target-branch ${{ github.event.repository.default_branch }})
+
+          if [[ -n "${CHANGED}" ]]; then
+            echo "changed=true" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Run Linting
+        id: linting
+        if: steps.detect.outputs.changed == 'true'
+        run: |
+          ct lint --config ct.yaml --target-branch ${{ github.event.repository.default_branch }}
+
+      - name: Create kind
+        id: kind
+        if: steps.detect.outputs.changed == 'true'
+        uses: helm/kind-action@v1.8.0
+
+      - name: Run testing
+        id: testing
+        if: steps.detect.outputs.changed == 'true'
+        run: |
+          ct install --config ct.yaml --target-branch ${{ github.event.repository.default_branch }}
+
+...

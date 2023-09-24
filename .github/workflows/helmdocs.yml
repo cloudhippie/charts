@@ -1,0 +1,40 @@
+---
+name: helmdocs
+
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  helmdocs:
+    runs-on: ubuntu-latest
+    if: github.repository == 'cloudhippie/charts'
+
+    steps:
+      - name: Checkout source
+        id: source
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.BOT_ACCESS_TOKEN }}
+          fetch-depth: 0
+
+      - name: Update readme
+        id: docs
+        uses: docker://jnorwood/helm-docs:v1.11.2
+        with:
+          entrypoint: helm-docs
+
+      - name: Commit changes
+        id: commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: GitHub Actions
+          author_email: github@cloudhippie.de
+          add: stable/
+          message: "docs: automated readme update [skip ci]"
+          push: true
+          commit: --signoff
+
+...
