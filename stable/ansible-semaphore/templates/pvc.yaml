@@ -1,0 +1,64 @@
+{{- if and (not .Values.database.persistence.existingClaim) (.Values.database.persistence.enabled) (eq .Values.database.type "bolt") }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: {{ include "ansible-semaphore.fullname" . }}-boltdb
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ansible-semaphore.labels" . | nindent 4 }}
+{{- if .Values.labels }}
+    {{- toYaml .Values.labels | nindent 4 }}
+{{- end }}
+{{- if  .Values.annotations }}
+  annotations:
+    {{- toYaml .Values.annotations | nindent 4 }}
+{{- end }}
+
+spec:
+  {{- if not (empty .Values.database.persistence.storageClass) }}
+  storageClassName: {{ .Values.database.persistence.storageClass }}
+
+  {{- end }}
+  accessModes:
+  {{- range .Values.database.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+
+  resources:
+    requests:
+      storage: {{ .Values.database.persistence.size | quote }}
+{{- end }}
+{{- if and (not .Values.persistence.existingClaim) (.Values.persistence.enabled) }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: {{ include "ansible-semaphore.fullname" . }}-workdir
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ansible-semaphore.labels" . | nindent 4 }}
+{{- if .Values.labels }}
+    {{- toYaml .Values.labels | nindent 4 }}
+{{- end }}
+{{- if  .Values.annotations }}
+  annotations:
+    {{- toYaml .Values.annotations | nindent 4 }}
+{{- end }}
+
+spec:
+  {{- if not (empty .Values.persistence.storageClass) }}
+  storageClassName: {{ .Values.persistence.storageClass }}
+
+  {{- end }}
+  accessModes:
+  {{- range .Values.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size | quote }}
+{{- end }}

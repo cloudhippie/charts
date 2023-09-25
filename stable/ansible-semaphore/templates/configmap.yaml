@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: {{ include "ansible-semaphore.fullname" . }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ansible-semaphore.labels" . | nindent 4 }}
+{{- if .Values.labels }}
+    {{- toYaml .Values.labels | nindent 4 }}
+{{- end }}
+{{- if  .Values.annotations }}
+  annotations:
+    {{- toYaml .Values.annotations | nindent 4 }}
+{{- end }}
+
+data:
+  config.json: |
+    {
+      {{- if .Values.ldap.enable }}
+      "ldap_mappings": {
+        "dn": "{{ .Values.ldap.mappings.dn }}",
+        "mail": "{{ .Values.ldap.mappings.mail }}",
+        "uid": "{{ .Values.ldap.mappings.uid }}",
+        "cn": "{{ .Values.ldap.mappings.cn }}"
+      },
+      {{- end }}
+      {{- if .Values.oidc.enable }}
+      {{- $providers := dict }}
+      {{- range $provider, $values := .Values.oidc.providers }}
+        {{- $config := dict }}
+        {{- range $val := keys $values }}
+          {{- $_ := set $config ($val | snakecase) (get $values $val) }}
+        {{- end }}
+        {{- $_ := set $providers $provider $config }}
+      {{- end }}
+      "oidc_providers": {{ $providers | toJson }},
+      {{- end }}
+      "ssh_config_path": "{{ .Values.general.sshConfigPath }}",
+      "billing_enabled": {{ .Values.billing.enabled }}
+    }
