@@ -2,9 +2,12 @@
 
 ![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.9.37](https://img.shields.io/badge/AppVersion-2.9.37-informational?style=flat-square)
 
-A Helm chart for ansible-semaphore
+Modern and open-source alternative to AWX/Tower
 
 **Homepage:** <https://semaphoreui.com/>
+
+**This chart is not maintained by the upstream project and any issues with the
+chart should be raised [here](https://github.com/cloudhippie/charts/issues/new)**
 
 ## Installing the Chart
 
