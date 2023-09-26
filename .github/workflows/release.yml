@@ -60,16 +60,10 @@ jobs:
           config: cr.yaml
           charts_dir: stable
 
-      - name: Ghcr login
-        id: login
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: bothippie
-          password: ${{ secrets.BOT_ACCESS_TOKEN }}
-
       - name: Push charts
         run: |
+          echo "${{ secrets.BOT_ACCESS_TOKEN }}" | helm registry login --username bothippie --password-stdin ghcr.io
+
           for pkg in .cr-release-packages/*.tgz; do
             if [ -z "${pkg:-}" ]; then
               break
