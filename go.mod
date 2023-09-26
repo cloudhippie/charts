@@ -6,7 +6,7 @@ require (
 	github.com/go-git/go-git/v5 v5.9.0
 	github.com/google/go-containerregistry v0.16.1
 	github.com/hashicorp/go-version v1.6.0
-	github.com/rs/zerolog v1.30.0
+	github.com/rs/zerolog v1.31.0
 	gopkg.in/yaml.v3 v3.0.1
 	helm.sh/helm/v3 v3.12.3
 	k8s.io/client-go v0.28.2
@@ -37,7 +37,7 @@ require (
 	github.com/kevinburke/ssh_config v1.2.0 // indirect
 	github.com/klauspost/compress v1.16.5 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.17 // indirect
+	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
