@@ -3,6 +3,11 @@ annotations:
   artifacthub.io/signKey: |
     fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
     url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+  artifacthub.io/links: |-
+    - name: Source
+      url: https://github.com/jhaals/yopass
+    - name: Chart
+      url: https://github.com/cloudhippie/charts/tree/master/stable/yopass
 apiVersion: v2
 appVersion: 11.15.0
 dependencies:
@@ -14,8 +19,9 @@ dependencies:
   name: memcached
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 6.6.2
-description: A Helm chart for yopass
+description: Secure sharing of secrets, passwords and files
 home: https://yopass.se/
+icon: https://raw.githubusercontent.com/jhaals/yopass/master/logo/yopass.svg
 keywords:
 - password
 - secret
@@ -26,7 +32,6 @@ maintainers:
   url: https://github.com/tboerger
 name: yopass
 sources:
-- https://github.com/cloudhippie/charts/tree/master/stable/yopass
 - https://github.com/jhaals/yopass
 type: application
-version: 1.0.0
+version: 1.0.1
