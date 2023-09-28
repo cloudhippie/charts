@@ -64,13 +64,13 @@ func CommitChanges(c *Chart) error {
 		)
 	case c.Bump == MinorBump:
 		msg = fmt.Sprintf(
-			"major(%s): raised chart version to %s",
+			"minor(%s): raised chart version to %s",
 			c.Meta.Name,
 			c.Meta.Version,
 		)
 	case c.Bump == PatchBump:
 		msg = fmt.Sprintf(
-			"major(%s): raised chart version to %s",
+			"patch(%s): raised chart version to %s",
 			c.Meta.Name,
 			c.Meta.Version,
 		)

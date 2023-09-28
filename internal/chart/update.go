@@ -38,7 +38,7 @@ func UpdateApp(c *Chart, latest string) error {
 		return err
 	}
 
-	bump := detectBump(old, new)
+	bump := detectBump(c, old, new)
 
 	if c.Bump < bump {
 		c.Bump = bump
@@ -67,7 +67,7 @@ func UpdateDependency(c *Chart, d *chart.Dependency, latest string) error {
 		return err
 	}
 
-	bump := detectBump(old, new)
+	bump := detectBump(c, old, new)
 
 	if c.Bump < bump {
 		c.Bump = bump
@@ -150,20 +150,32 @@ func UpdateVersion(c *Chart) error {
 	return cmd.Run()
 }
 
-func detectBump(old, new *version.Version) Bump {
+func detectBump(c *Chart, old, new *version.Version) Bump {
 	oldSegments := old.Segments()
 	newSegments := new.Segments()
 
 	if newSegments[0] > oldSegments[0] {
+		log.Info().
+			Str("chart", c.Meta.Name).
+			Msg("detected major bump")
+
 		return MajorBump
 	}
 
 	if newSegments[1] > oldSegments[1] {
+		log.Info().
+			Str("chart", c.Meta.Name).
+			Msg("detected minor bump")
+
 		return MinorBump
 	}
 
 	if newSegments[2] > oldSegments[2] {
-		return MinorBump
+		log.Info().
+			Str("chart", c.Meta.Name).
+			Msg("detected patch bump")
+
+		return PatchBump
 	}
 
 	return NoBump
