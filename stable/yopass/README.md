@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.15.0](https://img.shields.io/badge/AppVersion-11.15.0-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.15.0](https://img.shields.io/badge/AppVersion-11.15.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
@@ -115,6 +115,7 @@ memcached:
 | metrics.serviceMonitor.scrapeTimeout | string | `nil` | Timeout after which the scrape is ended |
 | nameOverride | string | `""` | Override the name |
 | nodeSelector | object | `{}` | Node selector for the deployment |
+| podSecurityContext | object | `{}` | Security context for the pod |
 | redis.enabled | bool | `false` | Enable redis dependency |
 | redis.fullnameOverride | string | `"redis"` | Override fullname of redis dependency |
 | redis.metrics.enabled | bool | `true` | Enable metrics for redis |
@@ -133,3 +134,4 @@ memcached:
 | serviceAccount.create | bool | `true` | Create a new service account |
 | serviceAccount.name | string | `""` | Optional name for an existing service account |
 | tolerations | list | `[]` | Tolerations for the deployment |
+| updateStrategy | object | `{"type":"Recreate"}` | Updaqte strategy for deployment |
