@@ -31,6 +31,10 @@ serviceAccount:
   # -- Define annotations for the service account
   annotations: {}
 
+# -- Updaqte strategy for deployment
+updateStrategy:
+  type: Recreate
+
 # -- Define additional labels
 labels: {}
 
@@ -39,6 +43,9 @@ annotations: {}
 
 # -- Security context for the deployment
 securityContext: {}
+
+# -- Security context for the pod
+podSecurityContext: {}
 
 service:
   # -- Type of the service

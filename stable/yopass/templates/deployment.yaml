@@ -13,6 +13,11 @@ metadata:
 
 spec:
   replicas: {{ .Values.replicaCount }}
+  {{- if .Values.updateStrategy }}
+
+  strategy:
+    {{ toYaml .Values.updateStrategy | nindent 4 }}
+  {{- end }}
 
   selector:
     matchLabels:
@@ -36,6 +41,11 @@ spec:
         - name: {{ . }}
       {{- end }}
       {{- end }}
+      {{- with .Values.securityContext }}
+
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
 
       containers:
         - name: {{ .Chart.Name }}
@@ -56,7 +66,7 @@ spec:
             - --memcached={{ .Values.database.dsn }}
             {{- end }}
             - --max-length={{ .Values.config.maxLength }}
-          {{- with .Values.securityContext }}
+          {{- with .Values.podSecurityContext }}
 
           securityContext:
             {{- toYaml . | nindent 12 }}
