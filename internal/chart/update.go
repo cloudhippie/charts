@@ -101,8 +101,11 @@ func UpdateVersion(c *Chart) error {
 	switch {
 	case c.Bump == MajorBump:
 		segments[0] += 1
+		segments[1] = 0
+		segments[2] = 0
 	case c.Bump == MinorBump:
 		segments[1] += 1
+		segments[2] = 0
 	case c.Bump == PatchBump:
 		segments[2] += 1
 	}
