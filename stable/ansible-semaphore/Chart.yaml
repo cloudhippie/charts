@@ -1,13 +1,13 @@
 annotations:
   artifacthub.io/license: Apache-2.0
-  artifacthub.io/signKey: |
-    fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
-    url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
   artifacthub.io/links: |-
     - name: Source
       url: https://github.com/ansible-semaphore/semaphore
     - name: Chart
       url: https://github.com/cloudhippie/charts/tree/master/stable/ansible-semaphore
+  artifacthub.io/signKey: |
+    fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
+    url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
 apiVersion: v2
 appVersion: 2.9.37
 dependencies:
@@ -18,7 +18,7 @@ dependencies:
 - condition: postgresql.enabled
   name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 12.12.7
+  version: 12.12.10
 description: Modern and open-source alternative to AWX/Tower
 home: https://semaphoreui.com/
 icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
@@ -34,4 +34,4 @@ name: ansible-semaphore
 sources:
 - https://github.com/ansible-semaphore/semaphore
 type: application
-version: 1.0.1
+version: 1.0.2
