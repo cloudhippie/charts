@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+      url = "github:nixos/nixpkgs/nixpkgs-unstable";
     };
 
     utils = {
@@ -22,13 +22,14 @@
       {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
+            _1password
             chart-testing
+            go
             helm-docs
             kind
             kubeconform
             kubernetes-helm
             yamllint
-            go
           ];
         };
       }
