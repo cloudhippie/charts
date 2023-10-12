@@ -8,7 +8,7 @@ require (
 	github.com/hashicorp/go-version v1.6.0
 	github.com/rs/zerolog v1.31.0
 	gopkg.in/yaml.v3 v3.0.1
-	helm.sh/helm/v3 v3.13.0
+	helm.sh/helm/v3 v3.13.1
 	k8s.io/client-go v0.28.2
 )
 
