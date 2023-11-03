@@ -31,7 +31,6 @@ jobs:
         id: source
         uses: actions/checkout@v4
         with:
-          token: ${{ steps.token.outputs.token }}
           fetch-depth: 0
 
       - name: Setup golang
