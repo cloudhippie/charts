@@ -61,7 +61,7 @@ jobs:
         if: steps.request.outputs.pull-request-operation == 'created'
         run: gh pr review --approve "${{ steps.request.outputs.pull-request-number }}"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.token.outputs.token }}
 
       - name: Enable automerge
         id: automerge
