@@ -13,6 +13,47 @@ entries:
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
     appVersion: 2.9.37
+    created: "2023-11-24T08:14:03.304854281Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.1.4
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 13.2.16
+    description: Modern and open-source alternative to AWX/Tower
+    digest: 7f61eb4eb7153d9ddee3b11365bd3913fef2b8f1a34f09caf8e4021852d270ae
+    home: https://semaphoreui.com/
+    icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
+    keywords:
+    - ansible
+    - awx
+    - tower
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: ansible-semaphore
+    sources:
+    - https://github.com/ansible-semaphore/semaphore
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/ansible-semaphore-3.2.11/ansible-semaphore-3.2.11.tgz
+    version: 3.2.11
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/ansible-semaphore/semaphore
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/ansible-semaphore
+      artifacthub.io/signKey: |
+        fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 2.9.37
     created: "2023-11-22T08:15:17.576169064Z"
     dependencies:
     - condition: mariadb.enabled
@@ -1303,4 +1344,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-1.0.0/yopass-1.0.0.tgz
     version: 1.0.0
-generated: "2023-11-22T08:15:17.811089357Z"
+generated: "2023-11-24T08:14:03.433552772Z"
