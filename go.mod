@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/go-git/go-git/v5 v5.10.1
-	github.com/google/go-containerregistry v0.16.1
+	github.com/google/go-containerregistry v0.17.0
 	github.com/hashicorp/go-version v1.6.0
 	github.com/rs/zerolog v1.31.0
 	gopkg.in/yaml.v3 v3.0.1
