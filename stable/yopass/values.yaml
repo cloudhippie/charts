@@ -47,6 +47,12 @@ securityContext: {}
 # -- Security context for the pod
 podSecurityContext: {}
 
+# -- List of extra init containers
+extraInitContainers: []
+
+# -- List of extra sidecar containers
+extraSidecarContainers: []
+
 service:
   # -- Type of the service
   type: ClusterIP
