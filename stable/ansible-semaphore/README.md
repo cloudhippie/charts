@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 3.2.15](https://img.shields.io/badge/Version-3.2.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.9.37](https://img.shields.io/badge/AppVersion-2.9.37-informational?style=flat-square)
+![Version: 3.3.0](https://img.shields.io/badge/Version-3.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.9.37](https://img.shields.io/badge/AppVersion-2.9.37-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -152,6 +152,8 @@ oidc:
 | envFromSecrets | list | `[]` | List of environment variables from existing secrets |
 | extraEnvSecrets | object | `{}` | Extra environment variables from secrets |
 | extraEnvVariables | object | `{}` | Extra environment variables from mapping |
+| extraInitContainers | list | `[]` | List of extra init containers |
+| extraSidecarContainers | list | `[]` | List of extra sidecar containers |
 | fullnameOverride | string | `""` | Override the fullname |
 | general.gitClient | string | `"cmd_git"` | Use Git client implementation |
 | general.host | string | `nil` | Host to access Semaphore |
