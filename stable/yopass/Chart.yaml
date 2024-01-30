@@ -14,11 +14,11 @@ dependencies:
 - condition: redis.enabled
   name: redis
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 18.9.0
+  version: 18.9.1
 - condition: memcached.enabled
   name: memcached
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 6.9.0
+  version: 6.9.2
 description: Secure sharing of secrets, passwords and files
 home: https://yopass.se/
 icon: https://raw.githubusercontent.com/jhaals/yopass/master/logo/yopass.svg
@@ -34,4 +34,4 @@ name: yopass
 sources:
 - https://github.com/jhaals/yopass
 type: application
-version: 1.11.0
+version: 1.11.1
