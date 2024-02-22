@@ -1,9 +1,9 @@
 dependencies:
 - name: redis
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 18.14.2
+  version: 18.16.0
 - name: memcached
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 6.11.5
-digest: sha256:60138f2d3b7ace3af9245ee28c76dfd4864996fd86f7b0ba28c4a9d20352abaf
-generated: "2024-02-17T08:10:33.780536429Z"
+  version: 6.12.1
+digest: sha256:ffd7a49b4e182cefb8601e706efc1e2aedca71ec279aca8b107206528ee3d8d2
+generated: "2024-02-22T08:12:25.473898438Z"
