@@ -25,7 +25,7 @@ jobs:
 
       - name: Setup helm
         id: helm
-        uses: azure/setup-helm@v3
+        uses: azure/setup-helm@v4
 
       - name: Configure Git
         id: git
