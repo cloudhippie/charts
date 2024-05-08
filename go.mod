@@ -1,8 +1,6 @@
 module github.com/cloudhippie/charts
 
-go 1.21
-
-toolchain go1.22.3
+go 1.22.3
 
 require (
 	github.com/go-git/go-git/v5 v5.12.0
