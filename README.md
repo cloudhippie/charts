@@ -7,7 +7,7 @@ tools built within our GitHub organization.
 
 ## Usage
 
-Make sure you have install [Helm][helm], after that you can install the charts
+Make sure you have installed [Helm][helm], after that you can install the charts
 repository and search for available charts:
 
 ```console
