@@ -9,12 +9,12 @@ annotations:
     fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
     url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
 apiVersion: v2
-appVersion: 11.15.1
+appVersion: 11.16.0
 dependencies:
 - condition: redis.enabled
   name: redis
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 19.2.0
+  version: 19.3.0
 - condition: memcached.enabled
   name: memcached
   repository: oci://registry-1.docker.io/bitnamicharts
@@ -34,4 +34,4 @@ name: yopass
 sources:
 - https://github.com/jhaals/yopass
 type: application
-version: 3.2.1
+version: 3.3.0
