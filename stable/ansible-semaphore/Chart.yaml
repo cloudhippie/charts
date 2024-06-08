@@ -14,11 +14,11 @@ dependencies:
 - condition: mariadb.enabled
   name: mariadb
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 18.2.1
+  version: 18.2.2
 - condition: postgresql.enabled
   name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 15.5.2
+  version: 15.5.4
 description: Modern and open-source alternative to AWX/Tower
 home: https://semaphoreui.com/
 icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
@@ -34,4 +34,4 @@ name: ansible-semaphore
 sources:
 - https://github.com/ansible-semaphore/semaphore
 type: application
-version: 9.4.2
+version: 9.4.3
