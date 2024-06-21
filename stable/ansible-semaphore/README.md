@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 9.5.3](https://img.shields.io/badge/Version-9.5.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.10.7](https://img.shields.io/badge/AppVersion-2.10.7-informational?style=flat-square)
+![Version: 9.5.4](https://img.shields.io/badge/Version-9.5.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.10.7](https://img.shields.io/badge/AppVersion-2.10.7-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -113,7 +113,7 @@ oidc:
 | Repository | Name | Version |
 |------------|------|---------|
 | oci://registry-1.docker.io/bitnamicharts | mariadb | 18.2.4 |
-| oci://registry-1.docker.io/bitnamicharts | postgresql | 15.5.7 |
+| oci://registry-1.docker.io/bitnamicharts | postgresql | 15.5.9 |
 
 ## Values
 
