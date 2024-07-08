@@ -25,7 +25,7 @@ jobs:
 
       - name: Update readme
         id: docs
-        uses: docker://jnorwood/helm-docs:1.14.0
+        uses: docker://jnorwood/helm-docs:v1.14.2
         with:
           entrypoint: helm-docs
 
