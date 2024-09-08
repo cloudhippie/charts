@@ -4641,6 +4641,47 @@ entries:
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
     appVersion: 11.16.0
+    created: "2024-09-08T08:15:50.287937013Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.0.5
+    - condition: memcached.enabled
+      name: memcached
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 7.4.15
+    description: Secure sharing of secrets, passwords and files
+    digest: 666d77198ad63d78b770b1e4764102d3aba4f00370b2aa5ea054f25a01daf995
+    home: https://yopass.se/
+    icon: https://raw.githubusercontent.com/jhaals/yopass/master/logo/yopass.svg
+    keywords:
+    - password
+    - secret
+    - sharing
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: yopass
+    sources:
+    - https://github.com/jhaals/yopass
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/yopass-4.0.7/yopass-4.0.7.tgz
+    version: 4.0.7
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/jhaals/yopass
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/yopass
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 11.16.0
     created: "2024-09-06T08:16:59.569012351Z"
     dependencies:
     - condition: redis.enabled
@@ -8027,4 +8068,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-1.0.0/yopass-1.0.0.tgz
     version: 1.0.0
-generated: "2024-09-06T08:16:59.569410366Z"
+generated: "2024-09-08T08:15:50.288459292Z"
