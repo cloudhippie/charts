@@ -191,6 +191,9 @@ database:
   # -- Name of the used database
   name: semaphore
 
+  # -- Options for database connection
+  options: {}
+
   # -- Path for the boltdb
   path: /var/lib/semaphore/database.boltdb
 

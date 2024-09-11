@@ -116,7 +116,6 @@ oidc:
 | oci://registry-1.docker.io/bitnamicharts | postgresql | 15.5.29 |
 
 ## Values
-
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity for the deployment |
@@ -127,6 +126,7 @@ oidc:
 | database.name | string | `"semaphore"` | Name of the used database |
 | database.password | string | `nil` | Password for database |
 | database.passwordKey | string | `"password"` | Key used within secret for password |
+| database.options | object | `{}` | Options for database connection |
 | database.path | string | `"/var/lib/semaphore/database.boltdb"` | Path for the boltdb |
 | database.persistence.accessModes | list | `["ReadWriteOnce"]` | Access modes used for boltdb volume |
 | database.persistence.enabled | bool | `true` | Enable persistence for boltdb |

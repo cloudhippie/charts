@@ -111,6 +111,10 @@ spec:
                   name: {{ .Values.database.existingSecret | default (printf "%s-database" (include "ansible-semaphore.fullname" .)) }}
                   key: {{ .Values.database.passwordKey }}
             {{- end }}
+            {{- if .Values.database.options }}
+            - name: SEMAPHORE_DB_OPTIONS
+              value: {{ .Values.database.options | toJson | quote }}
+            {{- end }}
             - name: SEMAPHORE_LDAP_ENABLE
               value: {{ .Values.ldap.enable | quote }}
             {{- if .Values.ldap.enable }}
