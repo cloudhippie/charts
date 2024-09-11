@@ -20,13 +20,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup gnupg
-        id: gnupg
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GNUPG_KEY }}
-          passphrase: ${{ secrets.GNUPG_PASSWORD }}
-          trust_level: 5
+      # - name: Setup gnupg
+      #   id: gnupg
+      #   uses: crazy-max/ghaction-import-gpg@v6
+      #   with:
+      #     gpg_private_key: ${{ secrets.GNUPG_KEY }}
+      #     passphrase: ${{ secrets.GNUPG_PASSWORD }}
+      #     trust_level: 5
 
       - name: Setup python
         id: python
@@ -34,8 +34,8 @@ jobs:
         with:
           python-version-file: .python-version
 
-      - name: Setup sops
-        uses: nhedger/setup-sops@v2
+      # - name: Setup sops
+      #   uses: nhedger/setup-sops@v2
 
       - name: Setup testing
         id: setup
@@ -45,18 +45,18 @@ jobs:
         id: helm
         uses: azure/setup-helm@v4
 
-      - name: Helm plugins
-        id: plugins
-        run: |
-          helm plugin install https://github.com/jkroepke/helm-secrets
+      # - name: Helm plugins
+      #   id: plugins
+      #   run: |
+      #     helm plugin install https://github.com/jkroepke/helm-secrets
 
-      - name: Decrypt secrets
-        id: secrets
-        run: |
-          for FILE in $(find stable -iname \*.enc); do
-            helm secrets decrypt ${FILE} >| ${FILE%.enc}.yaml
-            echo >> ${FILE%.enc}.yaml
-          done
+      # - name: Decrypt secrets
+      #   id: secrets
+      #   run: |
+      #     for FILE in $(find stable -iname \*.enc); do
+      #       helm secrets decrypt ${FILE} >| ${FILE%.enc}.yaml
+      #       echo >> ${FILE%.enc}.yaml
+      #     done
 
       - name: Detect testing
         id: detect
