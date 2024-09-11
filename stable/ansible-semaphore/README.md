@@ -116,6 +116,7 @@ oidc:
 | oci://registry-1.docker.io/bitnamicharts | postgresql | 15.5.29 |
 
 ## Values
+
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity for the deployment |
