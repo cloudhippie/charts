@@ -254,6 +254,11 @@ spec:
             - name: boltdb
               mountPath: {{ .Values.database.path | dir }}
             {{- end }}
+            {{- if .Values.general.additionalPythonPackages }}
+            - name: config
+              mountPath: /etc/semaphore/requirements.txt
+              subPath: requirements.txt
+            {{- end }}
         {{- if .Values.extraSidecarContainers }}
         {{- toYaml .Values.extraSidecarContainers | nindent 8 }}
         {{- end }}

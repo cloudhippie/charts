@@ -157,6 +157,9 @@ general:
   # -- Path to SSH config
   sshConfigPath: ~/.ssh/config
 
+  # -- Additional Python packages
+  additionalPythonPackages: []
+
 database:
   # -- Type of database backend
   type: bolt
