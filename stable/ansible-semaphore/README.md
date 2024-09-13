@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 10.0.16](https://img.shields.io/badge/Version-10.0.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.10.22](https://img.shields.io/badge/AppVersion-2.10.22-informational?style=flat-square)
+![Version: 10.1.0](https://img.shields.io/badge/Version-10.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.10.22](https://img.shields.io/badge/AppVersion-2.10.22-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -125,9 +125,9 @@ oidc:
 | database.existingSecret | string | `nil` | Existing secret to use for credentials |
 | database.host | string | `nil` | Host for database connection |
 | database.name | string | `"semaphore"` | Name of the used database |
+| database.options | object | `{}` | Options for database connection |
 | database.password | string | `nil` | Password for database |
 | database.passwordKey | string | `"password"` | Key used within secret for password |
-| database.options | object | `{}` | Options for database connection |
 | database.path | string | `"/var/lib/semaphore/database.boltdb"` | Path for the boltdb |
 | database.persistence.accessModes | list | `["ReadWriteOnce"]` | Access modes used for boltdb volume |
 | database.persistence.enabled | bool | `true` | Enable persistence for boltdb |
@@ -156,7 +156,7 @@ oidc:
 | extraInitContainers | list | `[]` | List of extra init containers |
 | extraSidecarContainers | list | `[]` | List of extra sidecar containers |
 | fullnameOverride | string | `""` | Override the fullname |
-| general.additionalPythonPackages | list | `[]` | Additional Python packages to install on launch |
+| general.additionalPythonPackages | list | `[]` | Additional Python packages |
 | general.gitClient | string | `"cmd_git"` | Use Git client implementation |
 | general.host | string | `nil` | Host to access Semaphore |
 | general.maxParallelTasks | int | `0` | Maximum parallel tasks |
