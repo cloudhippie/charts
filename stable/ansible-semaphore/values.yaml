@@ -157,6 +157,9 @@ general:
   # -- Path to SSH config
   sshConfigPath: ~/.ssh/config
 
+  # -- Additional Python packages
+  additionalPythonPackages: []
+
 database:
   # -- Type of database backend
   type: bolt
@@ -187,6 +190,9 @@ database:
 
   # -- Name of the used database
   name: semaphore
+
+  # -- Options for database connection
+  options: {}
 
   # -- Path for the boltdb
   path: /var/lib/semaphore/database.boltdb

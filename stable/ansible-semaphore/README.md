@@ -127,6 +127,7 @@ oidc:
 | database.name | string | `"semaphore"` | Name of the used database |
 | database.password | string | `nil` | Password for database |
 | database.passwordKey | string | `"password"` | Key used within secret for password |
+| database.options | object | `{}` | Options for database connection |
 | database.path | string | `"/var/lib/semaphore/database.boltdb"` | Path for the boltdb |
 | database.persistence.accessModes | list | `["ReadWriteOnce"]` | Access modes used for boltdb volume |
 | database.persistence.enabled | bool | `true` | Enable persistence for boltdb |
@@ -155,6 +156,7 @@ oidc:
 | extraInitContainers | list | `[]` | List of extra init containers |
 | extraSidecarContainers | list | `[]` | List of extra sidecar containers |
 | fullnameOverride | string | `""` | Override the fullname |
+| general.additionalPythonPackages | list | `[]` | Additional Python packages to install on launch |
 | general.gitClient | string | `"cmd_git"` | Use Git client implementation |
 | general.host | string | `nil` | Host to access Semaphore |
 | general.maxParallelTasks | int | `0` | Maximum parallel tasks |
