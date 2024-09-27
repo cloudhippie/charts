@@ -53,6 +53,17 @@ extraInitContainers: []
 # -- List of extra sidecar containers
 extraSidecarContainers: []
 
+# -- List of extra volumes
+extraVolumes: []
+  # - name: extra
+  #   emptyDir: {}
+
+# -- List of extra volume mounts
+extraVolumeMounts: []
+  # - name: extra
+  #   mountPath: /usr/local/share
+  #   readOnly: true
+
 service:
   # -- Type of the service
   type: ClusterIP
