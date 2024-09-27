@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 10.2.0](https://img.shields.io/badge/Version-10.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.10.22](https://img.shields.io/badge/AppVersion-2.10.22-informational?style=flat-square)
+![Version: 10.3.0](https://img.shields.io/badge/Version-10.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.10.22](https://img.shields.io/badge/AppVersion-2.10.22-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -119,6 +119,16 @@ oidc:
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| admin.create | bool | `false` | Create an local admin user |
+| admin.email | string | `"admin@localhost"` | Email for local admin |
+| admin.emailKey | string | `"email"` | Key used within secret for email |
+| admin.existingSecret | string | `nil` | Existing secret to use for admin |
+| admin.fullname | string | `"Admin"` | Fullname for local admin |
+| admin.fullnameKey | string | `"fullname"` | Key used within secret for fullname |
+| admin.password | string | `nil` | Password for local admin |
+| admin.passwordKey | string | `"password"` | Key used within secret for password |
+| admin.username | string | `"admin"` | Username for local admin |
+| admin.usernameKey | string | `"username"` | Key used within secret for username |
 | affinity | object | `{}` | Affinity for the deployment |
 | annotations | object | `{}` | Define additional annotations |
 | billing.enabled | bool | `false` | Enable billing |
