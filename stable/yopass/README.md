@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 4.1.5](https://img.shields.io/badge/Version-4.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.16.0](https://img.shields.io/badge/AppVersion-11.16.0-informational?style=flat-square)
+![Version: 4.2.0](https://img.shields.io/badge/Version-4.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.16.0](https://img.shields.io/badge/AppVersion-11.16.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
@@ -84,6 +84,8 @@ memcached:
 | extraEnvVariables | object | `{}` | Extra environment variables from mapping |
 | extraInitContainers | list | `[]` | List of extra init containers |
 | extraSidecarContainers | list | `[]` | List of extra sidecar containers |
+| extraVolumeMounts | list | `[]` | List of extra volume mounts |
+| extraVolumes | list | `[]` | List of extra volumes |
 | fullnameOverride | string | `""` | Override the fullname |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.pullSecrets | list | `[]` | Optional name of pull secret if using a private registry |
