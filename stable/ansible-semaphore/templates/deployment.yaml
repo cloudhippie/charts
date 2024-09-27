@@ -263,6 +263,9 @@ spec:
               mountPath: /etc/semaphore/requirements.txt
               subPath: requirements.txt
             {{- end }}
+            {{- if .Values.extraVolumeMounts }}
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+            {{- end }}
         {{- if .Values.extraSidecarContainers }}
         {{- toYaml .Values.extraSidecarContainers | nindent 8 }}
         {{- end }}
@@ -301,4 +304,7 @@ spec:
           {{- else }}
           emptyDir: {}
           {{- end }}
+        {{- end }}
+        {{- if .Values.extraVolumes }}
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
         {{- end }}
