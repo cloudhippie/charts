@@ -347,6 +347,37 @@ billing:
   # -- Enable billing
   enabled: false
 
+admin:
+  # -- Create an local admin user
+  create: false
+
+  # -- Fullname for local admin
+  fullname: Admin
+
+  # -- Key used within secret for fullname
+  fullnameKey: fullname
+
+  # -- Username for local admin
+  username: admin
+
+  # -- Key used within secret for username
+  usernameKey: username
+
+  # -- Password for local admin
+  password:
+
+  # -- Key used within secret for password
+  passwordKey: password
+
+  # -- Email for local admin
+  email: admin@localhost
+
+  # -- Key used within secret for email
+  emailKey: email
+
+  # -- Existing secret to use for admin
+  existingSecret:
+
 # -- Resources for the deployment
 resources:
   limits: {}

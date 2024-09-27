@@ -48,10 +48,246 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.extraInitContainers }}
+      {{- if or .Values.admin.create .Values.extraInitContainers }}
 
       initContainers:
+        {{- if or .Values.admin.create }}
+        - name: admin
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default (printf "v%s" .Chart.AppVersion) }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- with .Values.podSecurityContext }}
+
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          command:
+            - sh
+            - -c
+            - |
+              if ! semaphore user get --config=/etc/semaphore/config.json --login $(SEMAPHORE_ADMIN_USERNAME) >/dev/null; then
+                semaphore user add \
+                  --config=/etc/semaphore/config.json \
+                  --admin \
+                  --name=$(SEMAPHORE_ADMIN_FULLNAME) \
+                  --login=$(SEMAPHORE_ADMIN_USERNAME) \
+                  --password=$(SEMAPHORE_ADMIN_PASSWORD) \
+                  --email=$(SEMAPHORE_ADMIN_EMAIL)
+              else
+                echo "Admin already extists"
+              fi
+
+          env:
+            - name: SEMAPHORE_ADMIN_FULLNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.admin.existingSecret | default (printf "%s-admin" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.admin.fullnameKey }}
+            - name: SEMAPHORE_ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.admin.existingSecret | default (printf "%s-admin" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.admin.usernameKey }}
+            - name: SEMAPHORE_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.admin.existingSecret | default (printf "%s-admin" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.admin.passwordKey }}
+            - name: SEMAPHORE_ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.admin.existingSecret | default (printf "%s-admin" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.admin.emailKey }}
+            - name: SEMAPHORE_PORT
+              value: {{ .Values.service.internalPort | quote }}
+            {{- if not (empty .Values.general.host) }}
+            - name: SEMAPHORE_WEB_ROOT
+              value: {{ .Values.general.host | quote }}
+            {{- end }}
+            - name: SEMAPHORE_GIT_CLIENT
+              value: {{ .Values.general.gitClient | quote }}
+            - name: SEMAPHORE_TMP_PATH
+              value: {{ .Values.general.tmpPath | quote }}
+            - name: SEMAPHORE_MAX_PARALLEL_TASKS
+              value: {{ .Values.general.maxParallelTasks | quote }}
+            - name: SEMAPHORE_PASSWORD_LOGIN_DISABLED
+              value: {{ .Values.general.passwordLoginDisable | quote }}
+            - name: SEMAPHORE_NON_ADMIN_CAN_CREATE_PROJECT
+              value: {{ .Values.general.nonAdminCanCreateProject | quote }}
+            - name: SEMAPHORE_USE_REMOTE_RUNNER
+              value: {{ .Values.general.useRemoteRunner | quote }}
+            - name: SEMAPHORE_DB_DIALECT
+              value: {{ .Values.database.type | quote }}
+            {{- if eq .Values.database.type "bolt" }}
+            - name: SEMAPHORE_DB_HOST
+              value: {{ .Values.database.path | quote }}
+            {{- else }}
+            - name: SEMAPHORE_DB_HOST
+              value: {{ .Values.database.host | quote }}
+            - name: SEMAPHORE_DB_PORT
+              value: {{ .Values.database.port | quote }}
+            - name: SEMAPHORE_DB
+              value: {{ .Values.database.name | quote }}
+            {{- if .Values.database.usernameFromSecret }}
+            - name: SEMAPHORE_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.existingSecret | default (printf "%s-database" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.database.usernameKey }}
+            {{- else }}
+            - name: SEMAPHORE_DB_USER
+              value: {{ .Values.database.username | quote }}
+            {{- end }}
+            - name: SEMAPHORE_DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.existingSecret | default (printf "%s-database" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.database.passwordKey }}
+            {{- end }}
+            {{- if .Values.database.options }}
+            - name: SEMAPHORE_DB_OPTIONS
+              value: {{ .Values.database.options | toJson | quote }}
+            {{- end }}
+            - name: SEMAPHORE_LDAP_ENABLE
+              value: {{ .Values.ldap.enable | quote }}
+            {{- if .Values.ldap.enable }}
+            - name: SEMAPHORE_LDAP_SERVER
+              value: {{ .Values.ldap.server | quote }}
+            - name: SEMAPHORE_LDAP_NEEDTLS
+              value: {{ .Values.ldap.needtls | quote }}
+            - name: SEMAPHORE_LDAP_SEARCH_DN
+              value: {{ .Values.ldap.searchdn | quote }}
+            - name: SEMAPHORE_LDAP_SEARCH_FILTER
+              value: {{ .Values.ldap.filter | quote }}
+            - name: SEMAPHORE_LDAP_BIND_DN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ldap.existingSecret | default (printf "%s-ldap" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.ldap.binddnKey }}
+            - name: SEMAPHORE_LDAP_BIND_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ldap.existingSecret | default (printf "%s-ldap" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.ldap.passwordKey }}
+            {{- end }}
+            - name: SEMAPHORE_EMAIL_ALERT
+              value: {{ .Values.email.alert | quote }}
+            {{- if .Values.email.alert }}
+            - name: SEMAPHORE_EMAIL_SENDER
+              value: {{ .Values.email.sender | quote }}
+            - name: SEMAPHORE_EMAIL_HOST
+              value: {{ .Values.email.host | quote }}
+            - name: SEMAPHORE_EMAIL_PORT
+              value: {{ .Values.email.port | quote }}
+            - name: SEMAPHORE_EMAIL_SECURE
+              value: {{ .Values.email.secure | quote }}
+            - name: SEMAPHORE_EMAIL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.email.existingSecret | default (printf "%s-email" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.email.usernameKey }}
+            - name: SEMAPHORE_EMAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.email.existingSecret | default (printf "%s-email" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.email.passwordKey }}
+            {{- end }}
+            - name: SEMAPHORE_TELEGRAM_ALERT
+              value: {{ .Values.telegram.alert | quote }}
+            {{- if .Values.telegram.alert }}
+            - name: SEMAPHORE_TELEGRAM_CHAT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.telegram.existingSecret | default (printf "%s-telegram" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.telegram.chatKey }}
+            - name: SEMAPHORE_TELEGRAM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.telegram.existingSecret | default (printf "%s-telegram" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.telegram.tokenKey }}
+            {{- end }}
+            - name: SEMAPHORE_SLACK_ALERT
+              value: {{ .Values.slack.alert | quote }}
+            {{- if .Values.slack.alert }}
+            - name: SEMAPHORE_SLACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.slack.existingSecret | default (printf "%s-slack" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.slack.urlKey }}
+            {{- end }}
+            - name: SEMAPHORE_RUNNER_REGISTRATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.runner.existingSecret | default (printf "%s-runner" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.runner.tokenKey }}
+            - name: SEMAPHORE_COOKIE_HASH
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.existingSecret | default (printf "%s-general" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.secrets.cookieHashKey }}
+            - name: SEMAPHORE_COOKIE_ENCRYPTION
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.existingSecret | default (printf "%s-general" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.secrets.cookieEncryptionKey }}
+            - name: SEMAPHORE_ACCESS_KEY_ENCRYPTION
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.existingSecret | default (printf "%s-general" (include "ansible-semaphore.fullname" .)) }}
+                  key: {{ .Values.secrets.accesskeyEncryptionKey }}
+          {{- if or .Values.extraEnvSecrets .Values.extraEnvVariables }}
+            {{- range $key, $value := .Values.extraEnvSecrets }}
+            - name: {{ $key }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "Must specify secret!" $value.secret }}
+                  key: {{ required "Must specify key!" $value.key }}
+            {{- end }}
+            {{- range $key, $value := .Values.extraEnvVariables }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+          {{- end }}
+          {{- if or .Values.envFromSecrets .Values.envFromConfigMaps }}
+
+          envFrom:
+          {{- range $name := .Values.envFromSecrets }}
+            - secretRef:
+                name: {{ $name }}
+          {{- end }}
+          {{- range $name := .Values.envFromConfigMaps }}
+            - configMapRef:
+                name: {{ $name }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.resources }}
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            - name: config
+              mountPath: /etc/semaphore/config.json
+              subPath: config.json
+            - name: workdir
+              mountPath: {{ .Values.general.tmpPath }}
+            {{- if eq .Values.database.type "bolt" }}
+            - name: boltdb
+              mountPath: {{ .Values.database.path | dir }}
+            {{- end }}
+            {{- if .Values.general.additionalPythonPackages }}
+            - name: config
+              mountPath: /etc/semaphore/requirements.txt
+              subPath: requirements.txt
+            {{- end }}
+            {{- if .Values.extraVolumeMounts }}
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+            {{- end }}
+        {{- end }}
+        {{- if .Values.extraInitContainers }}
         {{- toYaml .Values.extraInitContainers | nindent 8 }}
+        {{- end }}
       {{- end }}
 
       containers:
