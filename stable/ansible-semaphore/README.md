@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 10.1.4](https://img.shields.io/badge/Version-10.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.10.22](https://img.shields.io/badge/AppVersion-2.10.22-informational?style=flat-square)
+![Version: 10.2.0](https://img.shields.io/badge/Version-10.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.10.22](https://img.shields.io/badge/AppVersion-2.10.22-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -155,6 +155,8 @@ oidc:
 | extraEnvVariables | object | `{}` | Extra environment variables from mapping |
 | extraInitContainers | list | `[]` | List of extra init containers |
 | extraSidecarContainers | list | `[]` | List of extra sidecar containers |
+| extraVolumeMounts | list | `[]` | List of extra volume mounts |
+| extraVolumes | list | `[]` | List of extra volumes |
 | fullnameOverride | string | `""` | Override the fullname |
 | general.additionalPythonPackages | list | `[]` | Additional Python packages |
 | general.gitClient | string | `"cmd_git"` | Use Git client implementation |
