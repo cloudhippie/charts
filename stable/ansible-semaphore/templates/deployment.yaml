@@ -29,7 +29,30 @@ spec:
         {{- include "ansible-semaphore.labels" . | nindent 8 }}
       annotations:
         checksum/config: {{ (include (print $.Template.BasePath "/configmap.yaml") . | fromYaml).data | toYaml | sha256sum }}
-        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        {{- if and (not .Values.admin.existingSecret) (.Values.admin.create) }}
+        checksum/secret-admin: {{ (include (print $.Template.BasePath "/secret-admin.yaml") . | fromYaml).data | toYaml | sha256sum }}
+        {{- end }}
+        {{- if and (not .Values.database.existingSecret) (ne .Values.database.type "bolt") }}
+        checksum/secret-database: {{ (include (print $.Template.BasePath "/secret-database.yaml") . | fromYaml).data | toYaml | sha256sum }}
+        {{- end }}
+        {{- if and (not .Values.email.existingSecret) (.Values.email.alert) }}
+        checksum/secret-email: {{ (include (print $.Template.BasePath "/secret-email.yaml") . | fromYaml).data | toYaml | sha256sum }}
+        {{- end }}
+        {{- if not .Values.secrets.existingSecret }}
+        checksum/secret-general: {{ (include (print $.Template.BasePath "/secret-general.yaml") . | fromYaml).data | toYaml | sha256sum }}
+        {{- end }}
+        {{- if and (not .Values.ldap.existingSecret) (.Values.ldap.enable) }}
+        checksum/secret-ldap: {{ (include (print $.Template.BasePath "/secret-ldap.yaml") . | fromYaml).data | toYaml | sha256sum }}
+        {{- end }}
+        {{- if not .Values.runner.existingSecret }}
+        checksum/secret-runner: {{ (include (print $.Template.BasePath "/secret-runner.yaml") . | fromYaml).data | toYaml | sha256sum }}
+        {{- end }}
+        {{- if and (not .Values.slack.existingSecret) (.Values.slack.alert) }}
+        checksum/secret-slack: {{ (include (print $.Template.BasePath "/secret-slack.yaml") . | fromYaml).data | toYaml | sha256sum }}
+        {{- end }}
+        {{- if and (not .Values.telegram.existingSecret) (.Values.telegram.alert) }}
+        checksum/secret-telegram: {{ (include (print $.Template.BasePath "/secret-telegram.yaml") . | fromYaml).data | toYaml | sha256sum }}
+        {{- end }}
 {{- if  .Values.annotations }}
         {{- toYaml .Values.annotations | nindent 8 }}
 {{- end }}
