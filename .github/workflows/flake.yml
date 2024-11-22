@@ -8,7 +8,6 @@ name: flake
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   flake:
@@ -24,11 +23,13 @@ jobs:
           installation_retrieval_payload: ${{ secrets.TOKEN_EXCHANGE_INSTALL }}
           private_key: ${{ secrets.TOKEN_EXCHANGE_KEY }}
           permissions: >-
-            {"contents": "write", "pull_requests": "write"}
+            {"contents": "write"}
 
       - name: Checkout source
         id: source
         uses: actions/checkout@v4
+        with:
+          token: ${{ steps.token.outputs.token }}
 
       - name: Install nix
         id: nix
@@ -36,21 +37,20 @@ jobs:
 
       - name: Update flake
         id: flake
-        uses: DeterminateSystems/update-flake-lock@v24
-        with:
-          commit-msg: "chore(flake): updated lockfile"
-          pr-title: "chore: automated flake update"
-          pr-body: "New flakelock generated, automerge should handle that!"
-          pr-labels: renovate
-          git-author-name: GitHub Actions
-          git-author-email: github@cloudhippie.de
-          token: ${{ steps.token.outputs.token }}
+        run: nix flake update
 
-      - name: Enable automerge
-        id: automerge
-        if: steps.flake.outputs.pull-request-operation == 'created'
-        run: gh pr merge --rebase --auto "${{ steps.flake.outputs.pull-request-number }}"
-        env:
-          GH_TOKEN: ${{ steps.token.outputs.token }}
+      - name: Source rebase
+        id: rebase
+        run: git pull --autostash --rebase
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: GitHub Actions
+          author_email: github@cloudhippie.de
+          add: flake.lock
+          message: "chore(flake): updated lockfile [skip ci]"
+          push: true
+          commit: --signoff
 
 ...
