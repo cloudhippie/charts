@@ -203,7 +203,8 @@ database:
   name: semaphore
 
   # -- Options for database connection
-  options: {}
+  options:
+    sslmode: "disable"
 
   # -- Path for the boltdb
   path: /var/lib/semaphore/database.boltdb
