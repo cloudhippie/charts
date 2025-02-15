@@ -64,3 +64,14 @@ Selector labels
 app.kubernetes.io/name: {{ include "ansible-semaphore.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Database options
+*/}}
+{{- define "ansible-semaphore.databaseOptions" -}}
+{{- $options := .Values.database.options | default dict }}
+{{- if and (eq .Values.database.type "postgres") (not (hasKey $options "sslmode")) }}
+{{- $options = merge (dict "sslmode" "disable") $options }}
+{{- end }}
+{{- toYaml $options }}
+{{- end }}
