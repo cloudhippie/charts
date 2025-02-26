@@ -1,9 +1,9 @@
 dependencies:
 - name: mariadb
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 20.4.0
+  version: 20.4.1
 - name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 16.4.14
-digest: sha256:535284e5f6d75aca789c6711fe6880ef656762d839c8531f30f88e0116a2c976
-generated: "2025-02-25T08:15:53.149555696Z"
+digest: sha256:d75c4c32f9260a2a157feb57c733954708bc9d8733e2b92877d779a2e7da8cb4
+generated: "2025-02-26T08:16:01.543918056Z"
