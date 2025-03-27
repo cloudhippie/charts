@@ -15,48 +15,20 @@ jobs:
 
     steps:
       - name: Checkout source
-        id: source
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # - name: Setup gnupg
-      #   id: gnupg
-      #   uses: crazy-max/ghaction-import-gpg@v6
-      #   with:
-      #     gpg_private_key: ${{ secrets.GNUPG_KEY }}
-      #     passphrase: ${{ secrets.GNUPG_PASSWORD }}
-      #     trust_level: 5
-
       - name: Setup python
-        id: python
         uses: actions/setup-python@v5
         with:
           python-version-file: .python-version
 
-      # - name: Setup sops
-      #   uses: nhedger/setup-sops@v2
-
       - name: Setup testing
-        id: setup
         uses: helm/chart-testing-action@v2.7.0
 
       - name: Setup helm
-        id: helm
         uses: azure/setup-helm@v4
-
-      # - name: Helm plugins
-      #   id: plugins
-      #   run: |
-      #     helm plugin install https://github.com/jkroepke/helm-secrets
-
-      # - name: Decrypt secrets
-      #   id: secrets
-      #   run: |
-      #     for FILE in $(find stable -iname \*.enc); do
-      #       helm secrets decrypt ${FILE} >| ${FILE%.enc}.yaml
-      #       echo >> ${FILE%.enc}.yaml
-      #     done
 
       - name: Detect testing
         id: detect
@@ -68,18 +40,15 @@ jobs:
           fi
 
       - name: Run Linting
-        id: linting
         if: steps.detect.outputs.changed == 'true'
         run: |
           ct lint --config ct.yaml
 
       - name: Create kind
-        id: kind
         if: steps.detect.outputs.changed == 'true'
         uses: helm/kind-action@v1.12.0
 
       - name: Run testing
-        id: testing
         if: steps.detect.outputs.changed == 'true'
         run: |
           ct install --config ct.yaml

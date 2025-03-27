@@ -28,20 +28,17 @@ jobs:
             {"contents": "write", "pull_requests": "write", "issues": "write"}
 
       - name: Checkout source
-        id: source
         uses: actions/checkout@v4
         with:
           token: ${{ steps.token.outputs.token }}
           fetch-depth: 0
 
       - name: Setup golang
-        id: golang
         uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
 
       - name: Update versions
-        id: updater
         run: |
           go run ./internal/cmd/updater .
 
@@ -57,32 +54,15 @@ jobs:
           token: ${{ steps.token.outputs.token }}
 
       - name: Approve request
-        id: approve
         if: steps.request.outputs.pull-request-operation == 'created'
         run: gh pr review --approve "${{ steps.request.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Enable automerge
-        id: automerge
         if: steps.request.outputs.pull-request-operation == 'created'
         run: gh pr merge --rebase --auto "${{ steps.request.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
-
-      - name: Create issue
-        id: issue
-        if: failure()
-        uses: dblock/create-a-github-issue@v3
-        env:
-          GITHUB_TOKEN: ${{ steps.token.outputs.token }}
-          GITHUB_SERVER_URL: ${ github.server_url }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
-        with:
-          filename: .github/workflow-issue.md
-          update_existing: true
-          search_existing: open
 
 ...

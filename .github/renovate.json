@@ -3,14 +3,6 @@
   "extends": [
     "github>cloudhippie/.github//renovate/preset"
   ],
-  "packageRules": [
-    {
-      "matchDatasources": [
-        "golang-version"
-      ],
-      "rangeStrategy": "bump"
-    }
-  ],
   "ignorePaths": [
     "stable/"
   ]

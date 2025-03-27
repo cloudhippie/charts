@@ -1,2 +1,6 @@
 .direnv/
+.devenv/
+
 charts/
+
+.pre-commit-config.yaml
