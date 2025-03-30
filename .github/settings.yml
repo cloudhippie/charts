@@ -51,8 +51,6 @@ rulesets:
           required_status_checks:
             - context: Semantic PR
               integration_id: 198092
-            - context: docker
-              integration_id: 15368
             - context: testing
               integration_id: 15368
     bypass_actors:
