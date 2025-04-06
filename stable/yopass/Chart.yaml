@@ -9,7 +9,7 @@ annotations:
     fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
     url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
 apiVersion: v2
-appVersion: 11.19.0
+appVersion: 11.19.1
 dependencies:
 - condition: redis.enabled
   name: redis
@@ -34,4 +34,4 @@ name: yopass
 sources:
 - https://github.com/jhaals/yopass
 type: application
-version: 4.17.0
+version: 4.17.1
