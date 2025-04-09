@@ -12,6 +12,47 @@ entries:
         fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
+    appVersion: 2.13.12
+    created: "2025-04-09T08:19:44.824093432Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.4.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.6.2
+    description: Modern and open-source alternative to AWX/Tower
+    digest: a88641b2faccd5754dc4433908abb0ec983d97cdc1c6d0576bca36f27741b509
+    home: https://semaphoreui.com/
+    icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
+    keywords:
+    - ansible
+    - awx
+    - tower
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: ansible-semaphore
+    sources:
+    - https://github.com/ansible-semaphore/semaphore
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/ansible-semaphore-12.12.5/ansible-semaphore-12.12.5.tgz
+    version: 12.12.5
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/ansible-semaphore/semaphore
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/ansible-semaphore
+      artifacthub.io/signKey: |
+        fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
     appVersion: 2.13.10
     created: "2025-04-08T08:19:32.093992864Z"
     dependencies:
@@ -12865,4 +12906,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-1.0.0/yopass-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-08T08:19:32.09502105Z"
+generated: "2025-04-09T08:19:44.824643244Z"
