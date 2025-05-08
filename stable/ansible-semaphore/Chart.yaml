@@ -9,12 +9,12 @@ annotations:
     fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
     url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
 apiVersion: v2
-appVersion: 2.14.9
+appVersion: 2.14.10
 dependencies:
 - condition: mariadb.enabled
   name: mariadb
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 20.5.3
+  version: 20.5.4
 - condition: postgresql.enabled
   name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
@@ -34,4 +34,4 @@ name: ansible-semaphore
 sources:
 - https://github.com/ansible-semaphore/semaphore
 type: application
-version: 12.14.6
+version: 12.14.7
