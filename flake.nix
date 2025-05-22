@@ -60,8 +60,10 @@
                     nixfmt-rfc-style = {
                       enable = true;
                     };
-
                     gofmt = {
+                      enable = true;
+                    };
+                    golangci-lint = {
                       enable = true;
                     };
                   };
@@ -75,7 +77,6 @@
                 };
 
                 packages = with pkgs; [
-                  _1password-cli
                   chart-testing
                   helm-docs
                   kind
