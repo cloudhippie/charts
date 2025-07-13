@@ -13,6 +13,47 @@ entries:
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
     appVersion: 2.15.0
+    created: "2025-07-13T08:18:11.508089482Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 21.0.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.7.18
+    description: Modern and open-source alternative to AWX/Tower
+    digest: 47be175e743bbb06cb026e61d51af6e23cb82bdd214b8f972226d72caae50a96
+    home: https://semaphoreui.com/
+    icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
+    keywords:
+    - ansible
+    - awx
+    - tower
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: ansible-semaphore
+    sources:
+    - https://github.com/ansible-semaphore/semaphore
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/ansible-semaphore-13.0.6/ansible-semaphore-13.0.6.tgz
+    version: 13.0.6
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/ansible-semaphore/semaphore
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/ansible-semaphore
+      artifacthub.io/signKey: |
+        fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 2.15.0
     created: "2025-07-12T08:18:47.82232417Z"
     dependencies:
     - condition: mariadb.enabled
@@ -15530,4 +15571,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-1.0.0/yopass-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-12T08:18:47.939357066Z"
+generated: "2025-07-13T08:18:11.619538074Z"
