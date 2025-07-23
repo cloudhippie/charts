@@ -1,0 +1,200 @@
+apiVersion: apps/v1
+kind: DaemonSet
+
+metadata:
+  name: {{ include "hcloud-csi-user.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "hcloud-csi-user.labels" . | nindent 4 }}
+  {{- with .Values.annotation }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+spec:
+  {{- if .Values.updateStrategy }}
+  strategy:
+    {{- toYaml .Values.updateStrategy | nindent 4 }}
+
+  {{ end -}}
+  selector:
+    matchLabels:
+      {{- include "hcloud-csi-user.selectorLabels" . | nindent 6 }}
+
+  template:
+    metadata:
+      labels:
+        {{- include "hcloud-csi-user.labels" . | nindent 8 }}
+      {{- if  .Values.annotations }}
+      annotations:
+        {{- toYaml .Values.annotations | nindent 8 }}
+      {{- end }}
+
+    spec:
+      priorityClassName: {{ .Values.priorityClassName }}
+      serviceAccountName: {{ include "hcloud-csi-user.serviceAccountName" . }}
+      {{- if .Values.image.pullSecrets }}
+
+      imagePullSecrets:
+      {{- range .Values.image.pullSecrets }}
+        - name: {{ . }}
+      {{- end }}
+      {{- end }}
+      {{- with .Values.securityContext }}
+
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.extraInitContainers }}
+
+      initContainers:
+        {{- toYaml .Values.extraInitContainers | nindent 8 }}
+      {{- end }}
+
+      containers:
+        - name: csi-registrar
+          image: {{ .Values.image.registrar.repository }}:{{ .Values.image.registrar.tag }}
+          imagePullPolicy: {{ .Values.image.registrar.pullPolicy }}
+
+          args:
+            - --kubelet-registration-path=/var/lib/kubelet/plugins/csi.hetzner.cloud/socket
+          {{- with .Values.podSecurityContext.registrar }}
+
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources.registrar }}
+
+          resources:
+            {{- toYaml .Values.resources.registrar | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /run/csi
+            - name: register-dir
+              mountPath: /registration
+
+        - name: liveness-probe
+          image: {{ .Values.image.liveness.repository }}:{{ .Values.image.liveness.tag }}
+          imagePullPolicy: {{ .Values.image.liveness.pullPolicy }}
+          {{- with .Values.podSecurityContext.liveness }}
+
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources.liveness }}
+
+          resources:
+            {{- toYaml .Values.resources.liveness | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /run/csi
+
+        - name: csi-driver
+          image: {{ .Values.image.driver.repository }}:{{ .Values.image.driver.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.registrar.pullPolicy }}
+
+          args:
+            - -node
+          {{- with .Values.podSecurityContext.driver }}
+
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          env:
+            {{- if .Values.config.enableTopology }}
+            - name: ENABLE_PROVIDED_BY_TOPOLOGY
+              value: "t"
+            {{- end }}
+            - name: CSI_ENDPOINT
+              value: "unix:///run/csi/socket"
+            {{- if .Values.metrics.enabled }}
+            - name: METRICS_ENDPOINT
+              value: "0.0.0.0:9189"
+            - name: ENABLE_METRICS
+              value: "true"
+            {{- end }}
+            {{- if .Values.extraEnvVariables }}
+            {{- toYaml .Values.extraEnvVariables | nindent 12 }}
+            {{- end }}
+
+          ports:
+            {{- if .Values.metrics.enabled }}
+            - name: metrics
+              protocol: TCP
+              containerPort: {{ .Values.metrics.internalPort }}
+            {{- end }}
+            - name: healthz
+              protocol: TCP
+              containerPort: 9808
+          {{- if .Values.resources.driver }}
+
+          resources:
+            {{- toYaml .Values.resources.driver | nindent 12 }}
+          {{- end }}
+
+          livenessProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 3
+            httpGet:
+              path: /healthz
+              port: healthz
+
+          volumeMounts:
+            - name: kubelet-dir
+              mountPath: /var/lib/kubelet
+              mountPropagation: Bidirectional
+            - name: plugin-dir
+              mountPath: /run/csi
+            - name: device-dir
+              mountPath: /dev
+            {{- if .Values.extraVolumeMounts }}
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+            {{- end }}
+        {{- if .Values.extraSidecarContainers }}
+
+        {{- toYaml .Values.extraSidecarContainers | nindent 8 }}
+        {{- end }}
+      {{- if .Values.nodeSelector }}
+
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      volumes:
+        - name: register-dir
+          hostPath:
+            path: /var/lib/kubelet/plugins_registry/
+            type: Directory
+        - name: kubelet-dir
+          hostPath:
+            path: /var/lib/kubelet
+            type: Directory
+        - name: device-dir
+          hostPath:
+            path: /dev
+            type: Directory
+        - name: plugin-dir
+          hostPath:
+            path: /var/lib/kubelet/plugins/csi.hetzner.cloud/
+            type: DirectoryOrCreate
+        {{- if .Values.extraVolumes }}
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
+        {{- end }}
