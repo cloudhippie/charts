@@ -1,0 +1,221 @@
+---
+# -- (string) Override the name
+nameOverride: ""
+
+# -- (string) Override the fullname
+fullnameOverride: ""
+
+# -- (int) Replicas for the deployment
+replicaCount: 1
+
+# -- Security context for the deployment
+securityContext:
+  fsGroup: 1001
+
+podSecurityContext:
+  # -- Security context for the attacher pod
+  attacher: {}
+
+  # -- Security context for the resizer pod
+  resizer: {}
+
+  # -- Security context for the provisioner pod
+  provisioner: {}
+
+  # -- Security context for the liveness-probe pod
+  liveness: {}
+
+  # -- Security context for the driver pod
+  driver: {}
+
+image:
+  # -- Optional name of pull secret if using a private registry
+  pullSecrets: []
+
+  attacher:
+    # -- Image repository used by deployment
+    repository: registry.k8s.io/sig-storage/csi-attacher
+
+    # -- (string) Optional tag for the repository
+    tag: v4.9.0
+
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+
+  resizer:
+    # -- Image repository used by deployment
+    repository: registry.k8s.io/sig-storage/csi-resizer
+
+    # -- (string) Optional tag for the repository
+    tag: v1.14.0
+
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+
+  provisioner:
+    # -- Image repository used by deployment
+    repository: registry.k8s.io/sig-storage/csi-provisioner
+
+    # -- (string) Optional tag for the repository
+    tag: v5.3.0
+
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+
+  liveness:
+    # -- Image repository used by deployment
+    repository: registry.k8s.io/sig-storage/livenessprobe
+
+    # -- (string) Optional tag for the repository
+    tag: v2.16.0
+
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+
+  driver:
+    # -- Image repository used by deployment
+    repository: hetznercloud/hcloud-csi-driver
+
+    # -- (string) Optional tag for the repository, defaults to app version
+    tag: ""
+
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+
+# -- Resources for the deployment
+resources:
+  # -- Resources for the liveness-probe pod
+  attacher:
+    limits: {}
+    requests: {}
+
+  # -- Resources for the liveness-probe pod
+  resizer:
+    limits: {}
+    requests: {}
+
+  # -- Resources for the liveness-probe pod
+  provisioner:
+    limits: {}
+    requests: {}
+
+  # -- Resources for the liveness-probe pod
+  liveness:
+    limits: {}
+    requests: {}
+
+  # -- Resources for the driver pod
+  driver:
+    limits: {}
+    requests:
+      cpu: 100m
+      memory: 64Mi
+
+serviceAccount:
+  # -- Create a new service account
+  create: true
+
+  # -- (string) Optional name for an existing service account
+  name: ""
+
+  # -- Define annotations for the service account
+  annotations: {}
+
+# -- Updaqte strategy for deployment
+updateStrategy:
+  type: Recreate
+
+# -- Define additional labels
+labels: {}
+
+# -- Define additional annotations
+annotations: {}
+
+# -- List of extra init containers
+extraInitContainers: []
+
+# -- List of extra sidecar containers
+extraSidecarContainers: []
+
+# -- List of extra volumes
+extraVolumes: []
+  # - name: extra
+  #   emptyDir: {}
+
+# -- List of extra volume mounts
+extraVolumeMounts: []
+  # - name: extra
+  #   mountPath: /usr/local/share
+  #   readOnly: true
+
+service:
+  # -- Type of the service
+  type: ClusterIP
+
+  # -- Additional annotations for the service
+  annotations: {}
+
+  # -- Additional labels for the service
+  labels: {}
+
+metrics:
+  # -- Enable metrics
+  enabled: true
+
+  # -- (int) Metrics port of the service
+  port: 9189
+
+  # -- (int) Internal metrics port of the service
+  internalPort: 9189
+
+  serviceMonitor:
+    # -- Enable service monitor
+    enabled: false
+
+    # -- (string) Namespace for ServiceMonitor, defaults to release namespace
+    namespace:
+
+    # -- (string) Optional job label for the target service in Prometheus
+    jobLabel:
+
+    # -- (string) Interval at which metrics should be scraped
+    interval:
+
+    # -- (string) Timeout after which the scrape is ended
+    scrapeTimeout:
+
+    # -- HonorLabels chooses the metric’s labels on collisions with target labels
+    honorLabels: false
+
+    # -- List of metric relabel configs to apply to samples before ingestion
+    metricRelabelings: []
+
+    # -- List of relabel configs to apply to samples before scraping
+    relabelings: []
+
+    # -- Additional annotations for the service monitor
+    annotations: {}
+
+    # -- Additional labels for the service monitor
+    labels: {}
+
+# -- Node selector for the deployment
+nodeSelector: {}
+
+# -- Affinity for the deployment
+affinity: {}
+
+# -- Tolerations for the deployment
+tolerations: []
+
+# -- Extra environment variables for driver
+extraEnvVariables: []
+
+config:
+  # -- Enable topology setting
+  enableTopology: true
+
+  # -- (string) Name of the secret containing a kubeconfig
+  kubeconfig: ~
+
+...

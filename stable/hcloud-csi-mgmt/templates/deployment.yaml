@@ -1,0 +1,275 @@
+{{- $enableLeaderElection := gt (int .Values.replicaCount) 1 }}
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ include "hcloud-csi-mgmt.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "hcloud-csi-mgmt.labels" . | nindent 4 }}
+  {{- with .Values.annotation }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 3
+  {{- if .Values.updateStrategy }}
+
+  strategy:
+    {{- toYaml .Values.updateStrategy | nindent 4 }}
+  {{- end }}
+
+  selector:
+    matchLabels:
+      {{- include "hcloud-csi-mgmt.selectorLabels" . | nindent 6 }}
+
+  template:
+    metadata:
+      labels:
+        {{- include "hcloud-csi-mgmt.labels" . | nindent 8 }}
+      {{- if  .Values.annotations }}
+      annotations:
+        {{- toYaml .Values.annotations | nindent 8 }}
+      {{- end }}
+
+    spec:
+      serviceAccountName: {{ include "hcloud-csi-mgmt.serviceAccountName" . }}
+      {{- if .Values.image.pullSecrets }}
+
+      imagePullSecrets:
+      {{- range .Values.image.pullSecrets }}
+        - name: {{ . }}
+      {{- end }}
+      {{- end }}
+      {{- with .Values.securityContext }}
+
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.extraInitContainers }}
+
+      initContainers:
+        {{- toYaml .Values.extraInitContainers | nindent 8 }}
+      {{- end }}
+
+      containers:
+        - name: csi-attacher
+          image: {{ .Values.image.attacher.repository }}:{{ .Values.image.attacher.tag }}
+          imagePullPolicy: {{ .Values.image.attacher.pullPolicy }}
+
+          args:
+            {{- if .Values.config.kubeconfig }}
+            - --kubeconfig=/run/secrets/hcloud-csi/value
+            {{- end }}
+            {{- if $enableLeaderElection }}
+            - --leader-election
+            - --leader-election-namespace={{ .Release.Namespace }}
+            {{- end }}
+            - --default-fstype=ext4
+          {{- with .Values.podSecurityContext.attacher }}
+
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources.attacher }}
+
+          resources:
+            {{- toYaml .Values.resources.attacher | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            {{- if .Values.config.kubeconfig }}
+            - mountPath: /run/secrets/hcloud-csi
+              name: kubeconfig
+            {{- end }}
+            - name: socket-dir
+              mountPath: /run/csi
+
+        - name: csi-resizer
+          image: {{ .Values.image.resizer.repository }}:{{ .Values.image.resizer.tag }}
+          imagePullPolicy: {{ .Values.image.resizer.pullPolicy }}
+          {{- if or .Values.config.kubeconfig $enableLeaderElection }}
+
+          args:
+            {{- if .Values.config.kubeconfig }}
+            - --kubeconfig=/run/secrets/hcloud-csi/value
+            {{- end }}
+            {{- if $enableLeaderElection }}
+            - --leader-election
+            - --leader-election-namespace={{ .Release.Namespace }}
+            {{- end }}
+          {{- end }}
+          {{- with .Values.podSecurityContext.resizer }}
+
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources.resizer }}
+
+          resources:
+            {{- toYaml .Values.resources.resizer | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            {{- if .Values.config.kubeconfig }}
+            - mountPath: /run/secrets/hcloud-csi
+              name: kubeconfig
+            {{- end }}
+            - name: socket-dir
+              mountPath: /run/csi
+
+        - name: csi-provisioner
+          image: {{ .Values.image.provisioner.repository }}:{{ .Values.image.provisioner.tag }}
+          imagePullPolicy: {{ .Values.image.provisioner.pullPolicy }}
+
+          args:
+            {{- if .Values.config.kubeconfig }}
+            - --kubeconfig=/run/secrets/hcloud-csi/value
+            {{- end }}
+            {{- if $enableLeaderElection }}
+            - --leader-election
+            - --leader-election-namespace={{ .Release.Namespace }}
+            {{- end }}
+            - --feature-gates=Topology=true
+            - --default-fstype=ext4
+            - --extra-create-metadata
+          {{- with .Values.podSecurityContext.provisioner }}
+
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources.provisioner }}
+
+          resources:
+            {{- toYaml .Values.resources.provisioner | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            {{- if .Values.config.kubeconfig }}
+            - mountPath: /run/secrets/hcloud-csi
+              name: kubeconfig
+            {{- end }}
+            - name: socket-dir
+              mountPath: /run/csi
+
+        - name: liveness-probe
+          image: {{ .Values.image.liveness.repository }}:{{ .Values.image.liveness.tag }}
+          imagePullPolicy: {{ .Values.image.liveness.pullPolicy }}
+          {{- with .Values.podSecurityContext.liveness }}
+
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources.liveness }}
+
+          resources:
+            {{- toYaml .Values.resources.liveness | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            - mountPath: /run/csi
+              name: socket-dir
+
+        - name: csi-driver
+          image: {{ .Values.image.driver.repository }}:{{ .Values.image.driver.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.driver.pullPolicy }}
+
+          args:
+            - -controller
+          {{- with .Values.podSecurityContext.driver }}
+
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          env:
+            - name: KUBE_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: HCLOUD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hetzner
+                  key: hcloud
+            {{- if .Values.config.enableTopology }}
+            - name: ENABLE_PROVIDED_BY_TOPOLOGY
+              value: "t"
+            {{- end }}
+            - name: CSI_ENDPOINT
+              value: "unix:///run/csi/socket"
+            {{- if .Values.metrics.enabled }}
+            - name: METRICS_ENDPOINT
+              value: "0.0.0.0:9189"
+            - name: ENABLE_METRICS
+              value: "true"
+            {{- end }}
+            {{- if .Values.extraEnvVariables }}
+            {{- toYaml .Values.extraEnvVariables | nindent 12 }}
+            {{- end }}
+
+          ports:
+            {{- if .Values.metrics.enabled }}
+            - name: metrics
+              protocol: TCP
+              containerPort: 9189
+            {{- end }}
+            - name: healthz
+              protocol: TCP
+              containerPort: 9808
+          {{- if .Values.resources.driver }}
+
+          resources:
+            {{- toYaml .Values.resources.driver | nindent 12 }}
+          {{- end }}
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: healthz
+            failureThreshold: 5
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 3
+
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /run/csi
+            {{- if .Values.extraVolumeMounts }}
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+            {{- end }}
+        {{- if .Values.extraSidecarContainers }}
+
+        {{- toYaml .Values.extraSidecarContainers | nindent 8 }}
+        {{- end }}
+      {{- if .Values.nodeSelector }}
+
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      volumes:
+        {{- if .Values.config.kubeconfig }}
+        - name: kubeconfig
+          secret:
+            secretName: {{ .Values.config.kubeconfig }}
+        {{- end }}
+        - name: socket-dir
+          emptyDir: {}
+        {{- if .Values.extraVolumes }}
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
+        {{- end }}

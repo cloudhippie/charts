@@ -1,0 +1,6 @@
+---
+registry: docker.io
+image: hetznercloud/hcloud-csi-driver
+prerelease: false
+
+...
