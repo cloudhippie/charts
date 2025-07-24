@@ -6,6 +6,9 @@ Hetzner Cloud CSI component for user clusters
 
 **Homepage:** <https://github.com/hetznercloud/csi-driver>
 
+**This chart is not maintained by the upstream project and any issues with the
+chart should be raised [here](https://github.com/cloudhippie/charts/issues/new)**
+
 ## Installing the Chart
 
 ### OCI (Recommended)

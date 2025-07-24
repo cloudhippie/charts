@@ -6,6 +6,9 @@ Hetzner Cloud CCM component for management clusters
 
 **Homepage:** <https://github.com/hetznercloud/hcloud-cloud-controller-manager>
 
+**This chart is not maintained by the upstream project and any issues with the
+chart should be raised [here](https://github.com/cloudhippie/charts/issues/new)**
+
 ## Installing the Chart
 
 ### OCI (Recommended)
