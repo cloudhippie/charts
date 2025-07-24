@@ -1,0 +1,13 @@
+---
+fullnameOverride: hcloud-ccm
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+
+config:
+  kubeconfig: demo1-kubeconfig
+  network: demo1
+
+...

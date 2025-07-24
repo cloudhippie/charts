@@ -1,0 +1,6 @@
+---
+registry: docker.io
+image: hetznercloud/hcloud-cloud-controller-manager
+prerelease: false
+
+...

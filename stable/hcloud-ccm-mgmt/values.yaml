@@ -1,0 +1,166 @@
+---
+# -- (string) Override the name
+nameOverride: ""
+
+# -- (string) Override the fullname
+fullnameOverride: ""
+
+# -- (int) Replicas for the deployment
+replicaCount: 1
+
+# -- Security context for the deployment
+securityContext: {}
+
+podSecurityContext:
+  # -- Security context for the controller pod
+  controller: {}
+
+image:
+  # -- Optional name of pull secret if using a private registry
+  pullSecrets: []
+
+  controller:
+    # -- Image repository used by deployment
+    repository: hetznercloud/hcloud-cloud-controller-manager
+
+    # -- (string) Optional tag for the repository, defaults to app version
+    tag: ""
+
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+
+# -- Resources for the deployment
+resources:
+  controller:
+    limits:
+      cpu: 1000m
+      memory: 640Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+
+serviceAccount:
+  # -- Create a new service account
+  create: true
+
+  # -- (string) Optional name for an existing service account
+  name: ""
+
+  # -- Define annotations for the service account
+  annotations: {}
+
+# -- Updaqte strategy for deployment
+updateStrategy:
+  type: Recreate
+
+# -- Define additional labels
+labels: {}
+
+# -- Define additional annotations
+annotations: {}
+
+# -- List of extra init containers
+extraInitContainers: []
+
+# -- List of extra sidecar containers
+extraSidecarContainers: []
+
+# -- List of extra volumes
+extraVolumes: []
+  # - name: extra
+  #   emptyDir: {}
+
+# -- List of extra volume mounts
+extraVolumeMounts: []
+  # - name: extra
+  #   mountPath: /usr/local/share
+  #   readOnly: true
+
+service:
+  # -- Type of the service
+  type: ClusterIP
+
+  # -- Additional annotations for the service
+  annotations: {}
+
+  # -- Additional labels for the service
+  labels: {}
+
+metrics:
+  # -- Enable metrics
+  enabled: true
+
+  # -- (int) Metrics port of the service
+  port: 8233
+
+  # -- (int) Internal metrics port of the service
+  internalPort: 8233
+
+  serviceMonitor:
+    # -- Enable service monitor
+    enabled: false
+
+    # -- (string) Namespace for ServiceMonitor, defaults to release namespace
+    namespace:
+
+    # -- (string) Optional job label for the target service in Prometheus
+    jobLabel:
+
+    # -- (string) Interval at which metrics should be scraped
+    interval:
+
+    # -- (string) Timeout after which the scrape is ended
+    scrapeTimeout:
+
+    # -- HonorLabels chooses the metric’s labels on collisions with target labels
+    honorLabels: false
+
+    # -- List of metric relabel configs to apply to samples before ingestion
+    metricRelabelings: []
+
+    # -- List of relabel configs to apply to samples before scraping
+    relabelings: []
+
+    # -- Additional annotations for the service monitor
+    annotations: {}
+
+    # -- Additional labels for the service monitor
+    labels: {}
+
+# -- Node selector for the deployment
+nodeSelector: {}
+
+# -- Affinity for the deployment
+affinity: {}
+
+# -- Tolerations for the deployment
+tolerations: []
+
+# -- Extra environment variables for controller
+extraEnvVariables:
+  - name: HCLOUD_INSTANCES_ADDRESS_FAMILY
+    value: "dualstack"
+  - name: HCLOUD_LOAD_BALANCERS_ENABLED
+    value: "true"
+  - name: HCLOUD_LOAD_BALANCERS_NETWORK_ZONE
+    value: "eu-central"
+  - name: HCLOUD_LOAD_BALANCERS_DISABLE_IPV6
+    value: "false"
+  - name: HCLOUD_LOAD_BALANCERS_DISABLE_PRIVATE_INGRESS
+    value: "true"
+  - name: HCLOUD_LOAD_BALANCERS_USE_PRIVATE_IP
+    value: "true"
+  - name: HCLOUD_NETWORK_DISABLE_ATTACHED_CHECK
+    value: "true"
+
+config:
+  # --  (string) Name of the secret containing a kubeconfig
+  kubeconfig: ~
+
+  # -- (string) Name of the private cloud network
+  network: ~
+
+  # -- CIDR of the cluster network
+  clusterCidr: 10.1.0.0/16
+
+...
