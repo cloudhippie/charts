@@ -55,7 +55,7 @@ spec:
 
       containers:
         - name: hcloud-ccm
-          image: {{ .Values.image.controller.repository }}:{{ .Values.image.controller.tag | default .Chart.AppVersion }}
+          image: {{ .Values.image.controller.repository }}:{{ .Values.image.controller.tag | default (printf "v%s" .Chart.AppVersion) }}
           imagePullPolicy: {{ .Values.image.controller.pullPolicy }}
 
           args:

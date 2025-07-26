@@ -173,7 +173,7 @@ spec:
               name: socket-dir
 
         - name: csi-driver
-          image: {{ .Values.image.driver.repository }}:{{ .Values.image.driver.tag | default .Chart.AppVersion }}
+          image: {{ .Values.image.driver.repository }}:{{ .Values.image.driver.tag | default (printf "v%s" .Chart.AppVersion) }}
           imagePullPolicy: {{ .Values.image.driver.pullPolicy }}
 
           args:

@@ -9,7 +9,7 @@ annotations:
     fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
     url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
 apiVersion: v2
-appVersion: v1.26.0
+appVersion: 1.26.0
 description: Hetzner Cloud CCM component for management clusters
 home: https://github.com/hetznercloud/hcloud-cloud-controller-manager
 icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
@@ -26,4 +26,4 @@ sources:
 - https://github.com/cloudhippie/charts
 - https://github.com/hetznercloud/hcloud-cloud-controller-manager
 type: application
-version: 1.0.0
+version: 1.0.1
