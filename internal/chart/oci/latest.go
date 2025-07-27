@@ -19,7 +19,7 @@ func init() {
 	versionRegexp = regexp.MustCompile("^" + version.VersionRegexpRaw + "$")
 }
 
-func Latest(needle string, ignored []string, prerelease bool) (string, error) {
+func Latest(needle string, ignored []string, prerelease bool) (*version.Version, error) {
 	repo, err := name.NewRepository(
 		needle,
 		name.WithDefaultRegistry(
@@ -28,7 +28,7 @@ func Latest(needle string, ignored []string, prerelease bool) (string, error) {
 	)
 
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	tags, err := remote.List(
@@ -36,11 +36,11 @@ func Latest(needle string, ignored []string, prerelease bool) (string, error) {
 	)
 
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	if len(tags) == 0 {
-		return "", ErrNoVersionAvailable
+		return nil, ErrNoVersionAvailable
 	}
 
 	versions := make([]*version.Version, 0)
@@ -57,7 +57,7 @@ func Latest(needle string, ignored []string, prerelease bool) (string, error) {
 		v, err := version.NewVersion(tag)
 
 		if err != nil {
-			return "", err
+			return nil, err
 		}
 
 		if !prerelease && v.Prerelease() != "" {
@@ -76,7 +76,7 @@ func Latest(needle string, ignored []string, prerelease bool) (string, error) {
 		),
 	)
 
-	return versions[len(versions)-1].String(), nil
+	return versions[len(versions)-1], nil
 }
 
 func ignoredTag(tag string, ignored []string) bool {

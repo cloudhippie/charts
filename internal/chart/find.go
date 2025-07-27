@@ -1,11 +1,14 @@
 package chart
 
 import (
+	"bufio"
 	"errors"
+	"fmt"
 	"io/fs"
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"gopkg.in/yaml.v3"
@@ -15,14 +18,22 @@ import (
 
 var (
 	ErrFilesNotFound = errors.New("chart files not found")
+	updateMatch      = regexp.MustCompile(`tag:\s*(\S+)\s+#\s*updater:\s*name=([^\s]+)\s+image=([^\s]+)`)
 )
 
 type Source struct {
 	Registry   string   `yaml:"registry"`
 	Image      string   `yaml:"image"`
 	Ignored    []string `yaml:"ignored"`
-	Disabled   bool     `yaml:"disabled"`
 	Prerelease bool     `yaml:"prerelease"`
+	Disabled   bool     `yaml:"disabled"`
+}
+
+type Update struct {
+	Name  string
+	Image string
+	Tag   string
+	Line  int
 }
 
 type Chart struct {
@@ -31,6 +42,8 @@ type Chart struct {
 	Changed bool
 	Meta    *chart.Metadata
 	Source  *Source
+	Updates []*Update
+	Lines   []string
 }
 
 func Save(chart *Chart) error {
@@ -66,10 +79,18 @@ func Find(root string) ([]*Chart, error) {
 			return nil, err
 		}
 
+		lines, updates, err := loadUpdates(file)
+
+		if err != nil {
+			return nil, err
+		}
+
 		charts = append(charts, &Chart{
-			Path:   file,
-			Meta:   chart,
-			Source: source,
+			Path:    file,
+			Meta:    chart,
+			Source:  source,
+			Updates: updates,
+			Lines:   lines,
 		})
 	}
 
@@ -132,4 +153,78 @@ func loadSource(file string) (*Source, error) {
 	}
 
 	return result, nil
+}
+
+func loadUpdates(file string) ([]string, []*Update, error) {
+	lines, err := readLines(
+		path.Join(
+			path.Dir(
+				file,
+			),
+			"values.yaml",
+		),
+	)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	result := make([]*Update, 0)
+
+	for i, line := range lines {
+		if matches := updateMatch.FindStringSubmatch(
+			line,
+		); matches != nil {
+			result = append(result, &Update{
+				Name:  matches[2],
+				Image: matches[3],
+				Tag:   matches[1],
+				Line:  i,
+			})
+		}
+	}
+
+	return lines, result, nil
+}
+
+func readLines(file string) ([]string, error) {
+	handle, err := os.Open(file)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer func() { _ = handle.Close() }()
+
+	lines := []string{}
+	scanner := bufio.NewScanner(handle)
+
+	for scanner.Scan() {
+		lines = append(
+			lines,
+			scanner.Text(),
+		)
+	}
+
+	return lines, scanner.Err()
+}
+
+func writeLines(file string, lines []string) error {
+	handle, err := os.Create(file)
+
+	if err != nil {
+		return err
+	}
+
+	defer func() { _ = handle.Close() }()
+
+	w := bufio.NewWriter(handle)
+
+	for _, line := range lines {
+		if _, err := fmt.Fprintln(w, line); err != nil {
+			return err
+		}
+	}
+
+	return w.Flush()
 }

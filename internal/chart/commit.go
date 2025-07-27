@@ -14,15 +14,7 @@ var (
 	ErrNothingToCommit = errors.New("nothing to commit")
 )
 
-func CommitChanges(c *Chart) error {
-	if c.Bump == NoBump {
-		return nil
-	}
-
-	if !c.Changed {
-		return nil
-	}
-
+func CommitMessage(c *Chart, msg string) error {
 	r, err := git.PlainOpen(
 		".",
 	)
@@ -53,31 +45,6 @@ func CommitChanges(c *Chart) error {
 		return err
 	}
 
-	msg := ""
-
-	switch {
-	case c.Bump == MajorBump:
-		msg = fmt.Sprintf(
-			"major(%s): raised chart version to %s",
-			c.Meta.Name,
-			c.Meta.Version,
-		)
-	case c.Bump == MinorBump:
-		msg = fmt.Sprintf(
-			"minor(%s): raised chart version to %s",
-			c.Meta.Name,
-			c.Meta.Version,
-		)
-	case c.Bump == PatchBump:
-		msg = fmt.Sprintf(
-			"patch(%s): raised chart version to %s",
-			c.Meta.Name,
-			c.Meta.Version,
-		)
-	default:
-		return ErrNothingToCommit
-	}
-
 	_, err = w.Commit(
 		msg,
 		&git.CommitOptions{
@@ -94,4 +61,46 @@ func CommitChanges(c *Chart) error {
 	}
 
 	return nil
+}
+
+func CommitBump(c *Chart) error {
+	if c.Bump == NoBump {
+		return nil
+	}
+
+	if !c.Changed {
+		return nil
+	}
+
+	switch c.Bump {
+	case MajorBump:
+		return CommitMessage(
+			c,
+			fmt.Sprintf(
+				"major(%s): raised chart version to %s",
+				c.Meta.Name,
+				c.Meta.Version,
+			),
+		)
+	case MinorBump:
+		return CommitMessage(
+			c,
+			fmt.Sprintf(
+				"minor(%s): raised chart version to %s",
+				c.Meta.Name,
+				c.Meta.Version,
+			),
+		)
+	case PatchBump:
+		return CommitMessage(
+			c,
+			fmt.Sprintf(
+				"patch(%s): raised chart version to %s",
+				c.Meta.Name,
+				c.Meta.Version,
+			),
+		)
+	default:
+		return ErrNothingToCommit
+	}
 }
