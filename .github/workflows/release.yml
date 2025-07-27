@@ -60,14 +60,16 @@ jobs:
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login --username cloudhippiez --password-stdin ghcr.io
 
-          for pkg in .cr-release-packages/*.tgz; do
-            if [ -z "${pkg:-}" ]; then
-              break
-            fi
+          if test -d .cr-release-packages; then
+            for pkg in .cr-release-packages/*.tgz; do
+              if [ -z "${pkg:-}" ]; then
+                break
+              fi
 
-            echo "Pushing $pkg..."
-            helm push "$pkg" "oci://ghcr.io/$GITHUB_REPOSITORY_OWNER/charts"
-          done
+              echo "Pushing $pkg..."
+              helm push "$pkg" "oci://ghcr.io/$GITHUB_REPOSITORY_OWNER/charts"
+            done
+          fi
 
       - name: Remove secrets
         if: always()
