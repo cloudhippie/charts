@@ -46,14 +46,10 @@ func run(ctx context.Context, root string) error {
 	}
 
 	for _, c := range charts {
-		log.Info().
-			Str("chart", c.Meta.Name).
-			Msg("scanning chart")
-
 		if !c.Source.Disabled {
-			log.Debug().
+			log.Info().
 				Str("chart", c.Meta.Name).
-				Msg("checking app version")
+				Msg("checking version")
 
 			latest, err := oci.Latest(
 				path.Join(
@@ -68,42 +64,101 @@ func run(ctx context.Context, root string) error {
 				log.Error().
 					Err(err).
 					Str("chart", c.Meta.Name).
-					Msg("failed to check latest app version")
+					Msg("failed to check latest version")
 
 				continue
 			}
 
-			if c.Meta.AppVersion != latest {
-				log.Info().
+			if c.Meta.AppVersion != latest.String() {
+				log.Warn().
 					Str("chart", c.Meta.Name).
 					Str("old", c.Meta.AppVersion).
-					Str("new", latest).
-					Msg("found newer app version")
+					Str("new", latest.String()).
+					Msg("found newer version")
 
 				if err := chart.UpdateApp(
 					c,
-					latest,
+					latest.String(),
 				); err != nil {
 					log.Error().
 						Err(err).
 						Str("chart", c.Meta.Name).
 						Str("old", c.Meta.AppVersion).
-						Str("new", latest).
-						Msg("failed to update app version")
+						Str("new", latest.String()).
+						Msg("failed to update version")
 				}
 			} else {
-				log.Info().
+				log.Debug().
 					Str("chart", c.Meta.Name).
 					Str("version", c.Meta.AppVersion).
-					Msg("no newer app version found")
+					Msg("no newer version found")
+			}
+		}
+
+		for _, u := range c.Updates {
+			log.Info().
+				Str("chart", c.Meta.Name).
+				Str("dependency", u.Name).
+				Msg("checking version")
+
+			latest, err := oci.Latest(
+				u.Image,
+				[]string{},
+				false,
+			)
+
+			if err != nil {
+				log.Error().
+					Err(err).
+					Str("chart", c.Meta.Name).
+					Str("dependency", u.Name).
+					Msg("failed to check latest version")
+
+				continue
+			}
+
+			log.Debug().
+				Str("chart", c.Meta.Name).
+				Str("dependency", u.Name).
+				Str("old", u.Tag).
+				Str("new", latest.Original()).
+				Msg("")
+
+			if u.Tag != latest.Original() {
+				log.Warn().
+					Str("chart", c.Meta.Name).
+					Str("dependency", u.Name).
+					Str("old", u.Tag).
+					Str("new", latest.Original()).
+					Msg("found newer version")
+
+				if err := chart.UpdateValue(
+					c,
+					u,
+					latest.Original(),
+				); err != nil {
+					log.Error().
+						Err(err).
+						Str("chart", c.Meta.Name).
+						Str("dependency", u.Name).
+						Str("old", u.Tag).
+						Str("new", latest.Original()).
+						Msg("failed to update version")
+				}
+			} else {
+				log.Debug().
+					Str("chart", c.Meta.Name).
+					Str("dependency", u.Name).
+					Str("version", u.Tag).
+					Msg("no newer version found")
 			}
 		}
 
 		for _, d := range c.Meta.Dependencies {
-			log.Debug().
+			log.Info().
 				Str("chart", c.Meta.Name).
 				Str("dependency", d.Name).
-				Msg("checking dependency version")
+				Msg("checking version")
 
 			switch {
 			case strings.HasPrefix(d.Repository, "oci://"):
@@ -124,38 +179,38 @@ func run(ctx context.Context, root string) error {
 						Err(err).
 						Str("chart", c.Meta.Name).
 						Str("dependency", d.Name).
-						Msg("failed to check latest dependency version")
+						Msg("failed to check latest version")
 
 					continue
 				}
 
-				if d.Version != latest {
-					log.Info().
+				if d.Version != latest.Original() {
+					log.Warn().
 						Str("chart", c.Meta.Name).
 						Str("dependency", d.Name).
 						Str("old", d.Version).
-						Str("new", latest).
-						Msg("found newer dependency version")
+						Str("new", latest.Original()).
+						Msg("found newer version")
 
 					if err := chart.UpdateDependency(
 						c,
 						d,
-						latest,
+						latest.Original(),
 					); err != nil {
 						log.Error().
 							Err(err).
 							Str("chart", c.Meta.Name).
 							Str("dependency", d.Name).
 							Str("old", d.Version).
-							Str("new", latest).
-							Msg("failed to update dependency version")
+							Str("new", latest.Original()).
+							Msg("failed to update version")
 					}
 				} else {
-					log.Info().
+					log.Debug().
 						Str("chart", c.Meta.Name).
 						Str("dependency", d.Name).
 						Str("version", d.Version).
-						Msg("no newer dependency version found")
+						Msg("no newer version found")
 				}
 			default:
 				log.Error().
@@ -175,13 +230,13 @@ func run(ctx context.Context, root string) error {
 				Msg("failed to bump chart version")
 		}
 
-		if err := chart.CommitChanges(
+		if err := chart.CommitBump(
 			c,
 		); err != nil {
 			log.Error().
 				Err(err).
 				Str("chart", c.Meta.Name).
-				Msg("failed to commit changed files")
+				Msg("failed to commit chart version")
 		}
 	}
 
