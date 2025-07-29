@@ -18,7 +18,7 @@ dependencies:
 - condition: memcached.enabled
   name: memcached
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 7.9.3
+  version: 7.9.4
 description: Secure sharing of secrets, passwords and files
 home: https://yopass.se/
 icon: https://raw.githubusercontent.com/jhaals/yopass/master/logo/yopass.svg
