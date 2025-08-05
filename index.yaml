@@ -9138,6 +9138,41 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/ansible-semaphore-1.0.0/ansible-semaphore-1.0.0.tgz
     version: 1.0.0
+  calico-cni-proxy:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/projectcalico/calico
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/calico-cni-proxy
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 0.0.0
+    created: "2025-08-05T14:39:44.163207955Z"
+    description: Calico CNI component for as helm chart proxy deployment
+    digest: b080e28f03da0ffbe535b8e4d19f28152f01fbdfea33bedfcbf479c8a026c940
+    home: https://github.com/projectcalico/calico
+    icon: https://docs.tigera.io/img/calico-logo.png
+    keywords:
+    - calico
+    - cni
+    - kubernetes
+    - clusterapi
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: calico-cni-proxy
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/projectcalico/calico
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/calico-cni-proxy-1.0.0/calico-cni-proxy-1.0.0.tgz
+    version: 1.0.0
   hcloud-ccm-mgmt:
   - annotations:
       artifacthub.io/license: Apache-2.0
@@ -9204,6 +9239,41 @@ entries:
     type: application
     urls:
     - https://github.com/cloudhippie/charts/releases/download/hcloud-ccm-mgmt-1.0.0/hcloud-ccm-mgmt-1.0.0.tgz
+    version: 1.0.0
+  hcloud-ccm-proxy:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/hetznercloud/hcloud-cloud-controller-manager
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/hcloud-ccm-proxy
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 0.0.0
+    created: "2025-08-05T14:39:44.386918788Z"
+    description: Hetzner Cloud CCM component as helm chart proxy deployment
+    digest: 430acbf76ece342d95511c3ac6050f181dc3a0a9986c18b16367cac3788e1d95
+    home: https://github.com/hetznercloud/hcloud-cloud-controller-manager
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
+    keywords:
+    - hetzner
+    - ccm
+    - kubernetes
+    - clusterapi
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: hcloud-ccm-proxy
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/hetznercloud/hcloud-cloud-controller-manager
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/hcloud-ccm-proxy-1.0.0/hcloud-ccm-proxy-1.0.0.tgz
     version: 1.0.0
   hcloud-csi-mgmt:
   - annotations:
@@ -9272,6 +9342,41 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-mgmt-1.0.0/hcloud-csi-mgmt-1.0.0.tgz
     version: 1.0.0
+  hcloud-csi-proxy:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/hetznercloud/csi-driver
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/hcloud-csi-proxy
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 0.0.0
+    created: "2025-08-05T14:39:44.612131454Z"
+    description: Hetzner Cloud CSI component as helm chart proxy deployment
+    digest: 806b03ea0111ea4eb01c0da7dc86dccee0f1251c645b866d9b41c26e69408873
+    home: https://github.com/hetznercloud/csi-driver
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
+    keywords:
+    - hetzner
+    - csi
+    - kubernetes
+    - clusterapi
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: hcloud-csi-proxy
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/hetznercloud/csi-driver
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-proxy-1.0.0/hcloud-csi-proxy-1.0.0.tgz
+    version: 1.0.0
   hcloud-csi-user:
   - annotations:
       artifacthub.io/license: Apache-2.0
@@ -9338,6 +9443,41 @@ entries:
     type: application
     urls:
     - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-user-1.0.0/hcloud-csi-user-1.0.0.tgz
+    version: 1.0.0
+  prom-crds-proxy:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/prometheus-community/helm-charts
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/prom-crds-proxy
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 0.0.0
+    created: "2025-08-05T14:39:44.845181869Z"
+    description: Prometheus Operator CRD component as helm chart proxy deployment
+    digest: e1d8a6463621ca11ae47dfa3be6b94bb1a3d139559118d4af576c39caf80a4d3
+    home: https://github.com/prometheus-community/helm-charts
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/refs/heads/develop/icons/prometheus.svg
+    keywords:
+    - prometheus
+    - operator
+    - crd
+    - kubernetes
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: prom-crds-proxy
+    sources:
+    - https://github.com/cloudhippie/charts
+    - ttps://github.com/prometheus-community/helm-charts
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/prom-crds-proxy-1.0.0/prom-crds-proxy-1.0.0.tgz
     version: 1.0.0
   yopass:
   - annotations:
@@ -16141,4 +16281,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-1.0.0/yopass-1.0.0.tgz
     version: 1.0.0
-generated: "2025-08-05T08:37:10.169519157Z"
+generated: "2025-08-05T14:39:45.05659202Z"
