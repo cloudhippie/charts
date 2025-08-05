@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 5.4.7](https://img.shields.io/badge/Version-5.4.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.20.0](https://img.shields.io/badge/AppVersion-11.20.0-informational?style=flat-square)
+![Version: 5.4.8](https://img.shields.io/badge/Version-5.4.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.20.0](https://img.shields.io/badge/AppVersion-11.20.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
@@ -70,7 +70,7 @@ memcached:
 | Repository | Name | Version |
 |------------|------|---------|
 | oci://registry-1.docker.io/bitnamicharts | memcached | 7.9.4 |
-| oci://registry-1.docker.io/bitnamicharts | redis | 21.2.13 |
+| oci://registry-1.docker.io/bitnamicharts | redis | 21.2.14 |
 
 ## Values
 
