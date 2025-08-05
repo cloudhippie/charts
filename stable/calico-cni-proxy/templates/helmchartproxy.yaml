@@ -1,0 +1,46 @@
+apiVersion: addons.cluster.x-k8s.io/v1alpha1
+kind: HelmChartProxy
+
+metadata:
+  name: {{ include "calico-cni-proxy.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "calico-cni-proxy.labels" . | nindent 4 }}
+  {{- with .Values.annotation }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+spec:
+  clusterSelector:
+    {{- toYaml .Values.target.selector | nindent 4 }}
+
+  repoURL: https://docs.tigera.io/calico/charts
+  chartName: tigera-operator
+  version: {{ .Values.upstream.version }}
+  releaseName: {{ .Values.target.release }}
+  namespace: {{ .Values.target.namespace }}
+  reconcileStrategy: Continuous
+
+  options:
+    waitForJobs: true
+    wait: true
+    timeout: 5m
+    install:
+      createNamespace: true
+      includeCRDs: false
+
+  valuesTemplate: |
+    installation:
+      enabled: true
+    defaultFelixConfiguration:
+      enabled: true
+      prometheusGoMetricsEnabled: true
+      prometheusMetricsEnabled: true
+      prometheusProcessMetricsEnabled: true
+      prometheusWireGuardMetricsEnabled: true
+      wireguardEnabled: true
+      WireguardInterfaceName: wg-v4.cali
+      wireguardEnabledV6: true
+      WireguardInterfaceNameV6: wg-v6.cali
+      usageReportingEnabled: false

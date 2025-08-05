@@ -1,0 +1,29 @@
+---
+# -- (string) Override the name
+nameOverride: ""
+
+# -- (string) Override the fullname
+fullnameOverride: ""
+
+# -- Define additional labels
+labels: {}
+
+# -- Define additional annotations
+annotations: {}
+
+upstream:
+  # -- Upstream chart version
+  version: "v3.30.2"
+
+target:
+  # -- Matching for the target cluster
+  selector:
+    matchLabels: {}
+
+  # -- Release name for chart in chart proxy
+  release: calico-cni
+
+  # -- Namespace for chart in chart proxy
+  namespace: tigera-operator
+
+...
