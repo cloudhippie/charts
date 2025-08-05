@@ -1,0 +1,72 @@
+apiVersion: addons.cluster.x-k8s.io/v1alpha1
+kind: HelmChartProxy
+
+metadata:
+  name: {{ include "hcloud-csi-proxy.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "hcloud-csi-proxy.labels" . | nindent 4 }}
+  {{- with .Values.annotation }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+spec:
+  clusterSelector:
+    {{- toYaml .Values.target.selector | nindent 4 }}
+
+  {{- if .Values.target.kamajiCluster }}
+  repoURL: https://cloudhippie.github.io/charts
+  chartName: hcloud-csi-user
+  version: {{ .Values.downstream.version }}
+  {{- else }}
+  repoURL: https://charts.hetzner.cloud
+  chartName: hcloud-csi
+  version: {{ .Values.upstream.version }}
+  {{- end }}
+  releaseName: {{ .Values.target.release }}
+  namespace: {{ .Values.target.namespace }}
+  reconcileStrategy: Continuous
+
+  options:
+    waitForJobs: true
+    wait: true
+    timeout: 5m
+    install:
+      createNamespace: false
+      includeCRDs: true
+
+  valuesTemplate: |
+    {{- if .Values.target.kamajiCluster }}
+    fullnameOverride: hcloud-csi
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+    {{- else }}
+    fullnameOverride: hcloud-csi
+
+    global:
+      enableProvidedByTopology: true
+
+    controller:
+      priorityClassName: system-cluster-critical
+      hcloudToken:
+        existingSecret:
+          name: hetzner
+          key: hcloud
+
+    node:
+      priorityClassName: system-cluster-critical
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+    storageClasses:
+      - name: hcloud
+        defaultStorageClass: true
+        reclaimPolicy: Delete
+        extraParameters: {}
+    {{- end }}
