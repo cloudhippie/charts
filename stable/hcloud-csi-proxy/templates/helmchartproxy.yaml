@@ -38,13 +38,13 @@ spec:
 
   valuesTemplate: |
     {{- if .Values.target.kamajiCluster }}
-    fullnameOverride: hcloud-csi
+    fullnameOverride: {{ .Values.target.release }}
     metrics:
       enabled: true
       serviceMonitor:
         enabled: true
     {{- else }}
-    fullnameOverride: hcloud-csi
+    fullnameOverride: {{ .Values.target.release }}
 
     global:
       enableProvidedByTopology: true
