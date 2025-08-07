@@ -55,7 +55,7 @@ spec:
 
     networking:
       enabled: true
-      clusterCIDR: {{ printf "{{ .Cluster.spec.clusterNetwork.pods.cidrBlocks.0 }}" }}
+      clusterCIDR: {{ printf "{{ index .Cluster.spec.clusterNetwork.pods.cidrBlocks 0 }}" }}
       network:
         valueFrom:
           secretKeyRef:
