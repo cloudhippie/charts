@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 5.4.8](https://img.shields.io/badge/Version-5.4.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.20.0](https://img.shields.io/badge/AppVersion-11.20.0-informational?style=flat-square)
+![Version: 5.4.9](https://img.shields.io/badge/Version-5.4.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.20.0](https://img.shields.io/badge/AppVersion-11.20.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
@@ -42,6 +42,11 @@ ingress:
 
 ### Redis Storage
 
+> **Warning:** Use this deployment only for testing, we recommend a proper
+> deployment based on some operator to have a real lifecycle management.
+> Besides that does the used Bitnami chart not provide properly tagged images
+> for free.
+
 ```console
 database:
   type: redis
@@ -53,6 +58,26 @@ redis:
 
 memcached:
   enable: false
+```
+
+### Memcached Storage
+
+> **Warning:** Use this deployment only for testing, we recommend a proper
+> deployment based on some operator to have a real lifecycle management.
+> Besides that does the used Bitnami chart not provide properly tagged images
+> for free.
+
+```console
+database:
+  type: memcached
+
+  dsn: memcached:11211
+
+redis:
+  enabled: false
+
+memcached:
+  enable: true
 ```
 
 ## Maintainers

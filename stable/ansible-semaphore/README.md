@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 13.0.11](https://img.shields.io/badge/Version-13.0.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.15.5](https://img.shields.io/badge/AppVersion-2.15.5-informational?style=flat-square)
+![Version: 14.0.0](https://img.shields.io/badge/Version-14.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.15.5](https://img.shields.io/badge/AppVersion-2.15.5-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -42,6 +42,9 @@ ingress:
 
 ### Bundled MariaDB
 
+> **Warning:** Use this database deployment only for testing, we recommend a
+> proper deployment based on some operator to have a real lifecycle management.
+
 ```console
 database:
   type: mysql
@@ -61,6 +64,9 @@ mariadb:
 ```
 
 ### Bundled PostgreSQL
+
+> **Warning:** Use this database deployment only for testing, we recommend a
+> proper deployment based on some operator to have a real lifecycle management.
 
 ```console
 database:
@@ -112,8 +118,8 @@ oidc:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://registry-1.docker.io/bitnamicharts | mariadb | 21.0.3 |
-| oci://registry-1.docker.io/bitnamicharts | postgresql | 16.7.21 |
+| oci://registry-1.docker.io/cloudpirates | mariadb | 0.1.5 |
+| oci://registry-1.docker.io/cloudpirates | postgres | 0.2.0 |
 
 ## Values
 
@@ -199,15 +205,12 @@ oidc:
 | ldap.passwordKey | string | `"password"` | Key used within secret for username |
 | ldap.searchdn | string | `nil` |  |
 | ldap.server | string | `nil` | Address of LDAP server |
-| mariadb.architecture | string | `"standalone"` | Architecture for mariadb |
 | mariadb.auth.database | string | `"semaphore"` | Database created for semaphore |
 | mariadb.auth.password | string | `nil` | Password for semaphore database |
+| mariadb.auth.rootPassword | string | `nil` | Password for mariadb admin user |
 | mariadb.auth.username | string | `"semaphore"` | Username for semaphore database |
 | mariadb.enabled | bool | `false` | Enable mariadb dependency |
 | mariadb.fullnameOverride | string | `"mariadb"` | Override fullname of mariadb dependency |
-| mariadb.metrics.enabled | bool | `true` | Enable metrics for mariadb |
-| mariadb.metrics.serviceMonitor.enabled | bool | `false` | Enable service monitor for mariadb |
-| mariadb.serviceAccount.create | bool | `true` | Create service account for mariadb |
 | nameOverride | string | `""` | Override the name |
 | nodeSelector | object | `{}` | Node selector for the deployment |
 | oidc.enable | bool | `false` | Enable oidc authentication |
@@ -218,15 +221,12 @@ oidc:
 | persistence.size | string | `"10G"` | Size for boltdb volume |
 | persistence.storageClass | string | `nil` | Storage class used for workdir volume |
 | podSecurityContext | object | `{}` | Security context for the pod |
-| postgresql.architecture | string | `"standalone"` | Architecture for postgresql |
-| postgresql.auth.database | string | `"semaphore"` | Database created for semaphore |
-| postgresql.auth.password | string | `nil` | Password for semaphore database |
-| postgresql.auth.username | string | `"semaphore"` | Username for semaphore database |
-| postgresql.enabled | bool | `false` | Enable postgresql dependency |
-| postgresql.fullnameOverride | string | `"postgresql"` | Override fullname of postgresql dependency |
-| postgresql.metrics.enabled | bool | `true` | Enable metrics for postgresql |
-| postgresql.metrics.serviceMonitor.enabled | bool | `false` | Enable service monitor for postgresql |
-| postgresql.serviceAccount.create | bool | `true` | Create service account for postgresql |
+| postgres.auth.database | string | `"semaphore"` | Database created for semaphore |
+| postgres.auth.password | string | `nil` | Password for semaphore database |
+| postgres.auth.postgresPassword | string | `nil` | Password for postgres admin user |
+| postgres.auth.username | string | `"semaphore"` | Username for semaphore database |
+| postgres.enabled | bool | `false` | Enable postgres dependency |
+| postgres.fullnameOverride | string | `"postgres"` | Override fullname of postgres dependency |
 | replicaCount | int | `1` | Replicas for the deployment |
 | resources | object | `{"limits":{},"requests":{"cpu":"100m","memory":"64Mi"}}` | Resources for the deployment |
 | runner.existingSecret | string | `nil` | Existing secret to use for runner |
