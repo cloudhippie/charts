@@ -43,6 +43,11 @@ ingress:
 
 ### Redis Storage
 
+> **Warning:** Use this deployment only for testing, we recommend a proper
+> deployment based on some operator to have a real lifecycle management.
+> Besides that does the used Bitnami chart not provide properly tagged images
+> for free.
+
 ```console
 database:
   type: redis
@@ -54,6 +59,26 @@ redis:
 
 memcached:
   enable: false
+```
+
+### Memcached Storage
+
+> **Warning:** Use this deployment only for testing, we recommend a proper
+> deployment based on some operator to have a real lifecycle management.
+> Besides that does the used Bitnami chart not provide properly tagged images
+> for free.
+
+```console
+database:
+  type: memcached
+
+  dsn: memcached:11211
+
+redis:
+  enabled: false
+
+memcached:
+  enable: true
 ```
 
 {{ template "chart.maintainersSection" . }}
