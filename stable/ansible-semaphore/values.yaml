@@ -413,9 +413,6 @@ mariadb:
   # -- Override fullname of mariadb dependency
   fullnameOverride: mariadb
 
-  # -- Architecture for mariadb
-  architecture: standalone
-
   auth:
     # -- Database created for semaphore
     database: semaphore
@@ -426,27 +423,15 @@ mariadb:
     # -- Password for semaphore database
     password:
 
-  serviceAccount:
-    # -- Create service account for mariadb
-    create: true
+    # -- Password for mariadb admin user
+    rootPassword:
 
-  metrics:
-    # -- Enable metrics for mariadb
-    enabled: true
-
-    serviceMonitor:
-      # -- Enable service monitor for mariadb
-      enabled: false
-
-postgresql:
-  # -- Enable postgresql dependency
+postgres:
+  # -- Enable postgres dependency
   enabled: false
 
-  # -- Override fullname of postgresql dependency
-  fullnameOverride: postgresql
-
-  # -- Architecture for postgresql
-  architecture: standalone
+  # -- Override fullname of postgres dependency
+  fullnameOverride: postgres
 
   auth:
     # -- Database created for semaphore
@@ -458,16 +443,7 @@ postgresql:
     # -- Password for semaphore database
     password:
 
-  serviceAccount:
-    # -- Create service account for postgresql
-    create: true
-
-  metrics:
-    # -- Enable metrics for postgresql
-    enabled: true
-
-    serviceMonitor:
-      # -- Enable service monitor for postgresql
-      enabled: false
+    # -- Password for postgres admin user
+    postgresPassword:
 
 ...
