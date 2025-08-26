@@ -1,6 +1,6 @@
 # hcloud-csi-proxy
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
 
 Hetzner Cloud CSI component as helm chart proxy deployment
 
@@ -41,7 +41,7 @@ helm install hcloud-csi-proxy cloudhippie/hcloud-csi-proxy
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | annotations | object | `{}` | Define additional annotations |
-| downstream.version | string | `"1.0.1"` | Downstream chart version |
+| downstream.version | string | `"1.0.2"` | Downstream chart version |
 | fullnameOverride | string | `""` | Override the fullname |
 | labels | object | `{}` | Define additional labels |
 | nameOverride | string | `""` | Override the name |
