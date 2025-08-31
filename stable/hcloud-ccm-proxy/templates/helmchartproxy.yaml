@@ -52,6 +52,8 @@ spec:
         value: "true"
       HCLOUD_LOAD_BALANCERS_USE_PRIVATE_IP:
         value: "true"
+      HCLOUD_NETWORK_ROUTES_ENABLED:
+        value: "false"
 
     networking:
       enabled: true
