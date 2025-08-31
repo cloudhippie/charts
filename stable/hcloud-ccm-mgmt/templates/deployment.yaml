@@ -86,6 +86,8 @@ spec:
             {{- if .Values.config.network }}
             - name: HCLOUD_NETWORK
               value: "{{ .Values.config.network }}"
+            - name: HCLOUD_NETWORK_ROUTES_ENABLED
+              value: "false"
             {{- end }}
             {{- if .Values.extraEnvVariables }}
             {{- toYaml .Values.extraEnvVariables | nindent 12 }}
