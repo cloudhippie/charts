@@ -9227,6 +9227,39 @@ entries:
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
     appVersion: 1.26.0
+    created: "2025-08-31T20:10:04.201751744Z"
+    description: Hetzner Cloud CCM component for management clusters
+    digest: 78c80b67e8d0bb69d726afe5f7d2d7274a8b837b3541182945335cf3c6f2ea91
+    home: https://github.com/hetznercloud/hcloud-cloud-controller-manager
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
+    keywords:
+    - hetzner
+    - ccm
+    - kubernetes
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: hcloud-ccm-mgmt
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/hetznercloud/hcloud-cloud-controller-manager
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/hcloud-ccm-mgmt-1.1.0/hcloud-ccm-mgmt-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/hetznercloud/hcloud-cloud-controller-manager
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/hcloud-ccm-mgmt
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 1.26.0
     created: "2025-08-26T14:10:34.145890978Z"
     description: Hetzner Cloud CCM component for management clusters
     digest: b42ecaa19cb0c2c424c366c504bc0a406c277a854e7129b1366af22f0720d97d
@@ -9315,6 +9348,40 @@ entries:
     - https://github.com/cloudhippie/charts/releases/download/hcloud-ccm-mgmt-1.0.0/hcloud-ccm-mgmt-1.0.0.tgz
     version: 1.0.0
   hcloud-ccm-proxy:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/hetznercloud/hcloud-cloud-controller-manager
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/hcloud-ccm-proxy
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 0.0.0
+    created: "2025-08-31T20:10:04.404262669Z"
+    description: Hetzner Cloud CCM component as helm chart proxy deployment
+    digest: fe32c7faf545adb023d6b06f4412dd8844b577e9c4b0e63042e08cd62d627f1c
+    home: https://github.com/hetznercloud/hcloud-cloud-controller-manager
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
+    keywords:
+    - hetzner
+    - ccm
+    - kubernetes
+    - clusterapi
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: hcloud-ccm-proxy
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/hetznercloud/hcloud-cloud-controller-manager
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/hcloud-ccm-proxy-1.1.0/hcloud-ccm-proxy-1.1.0.tgz
+    version: 1.1.0
   - annotations:
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |-
@@ -16564,4 +16631,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-1.0.0/yopass-1.0.0.tgz
     version: 1.0.0
-generated: "2025-08-26T14:10:35.102323653Z"
+generated: "2025-08-31T20:10:05.021484739Z"
