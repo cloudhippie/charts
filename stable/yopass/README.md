@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 5.4.9](https://img.shields.io/badge/Version-5.4.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.20.0](https://img.shields.io/badge/AppVersion-11.20.0-informational?style=flat-square)
+![Version: 6.0.0](https://img.shields.io/badge/Version-6.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.20.0](https://img.shields.io/badge/AppVersion-11.20.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
@@ -31,7 +31,7 @@ helm install yopass cloudhippie/yopass
 
 ```console
 ingress:
-  enabled: false
+  enabled: true
 
   hosts:
     - host: yopass.example.com
@@ -44,13 +44,10 @@ ingress:
 
 > **Warning:** Use this deployment only for testing, we recommend a proper
 > deployment based on some operator to have a real lifecycle management.
-> Besides that does the used Bitnami chart not provide properly tagged images
-> for free.
 
 ```console
 database:
   type: redis
-
   dsn: redis://redis:6379/0
 
 redis:
@@ -64,13 +61,10 @@ memcached:
 
 > **Warning:** Use this deployment only for testing, we recommend a proper
 > deployment based on some operator to have a real lifecycle management.
-> Besides that does the used Bitnami chart not provide properly tagged images
-> for free.
 
 ```console
 database:
   type: memcached
-
   dsn: memcached:11211
 
 redis:
@@ -94,8 +88,8 @@ memcached:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://registry-1.docker.io/bitnamicharts | memcached | 7.9.4 |
-| oci://registry-1.docker.io/bitnamicharts | redis | 21.2.14 |
+| oci://registry-1.docker.io/cloudpirates | memcached | 0.1.2 |
+| oci://registry-1.docker.io/cloudpirates | redis | 0.2.1 |
 
 ## Values
 
@@ -126,12 +120,8 @@ memcached:
 | ingress.labels | object | `{}` | Additional labels for the ingress |
 | ingress.tls | list | `[]` | Optional TLS configuration for ingress |
 | labels | object | `{}` | Define additional labels |
-| memcached.enabled | bool | `true` | Enable memcached dependency |
+| memcached.enabled | bool | `false` | Enable memcached dependency |
 | memcached.fullnameOverride | string | `"memcached"` | Override fullname of memcached dependency |
-| memcached.metrics.enabled | bool | `true` | Enable metrics for memcached |
-| memcached.metrics.podAnnotations | string | `nil` | Enforce pod annotations for memcached |
-| memcached.metrics.serviceMonitor.enabled | bool | `false` | Enable service monitor for memcached |
-| memcached.serviceAccount.create | bool | `true` | Create service account for memcached |
 | metrics.enabled | bool | `true` | Enable metrics |
 | metrics.internalPort | int | `3001` | Internal metrics port of the service |
 | metrics.port | int | `3001` | Metrics port of the service |
@@ -148,12 +138,9 @@ memcached:
 | nameOverride | string | `""` | Override the name |
 | nodeSelector | object | `{}` | Node selector for the deployment |
 | podSecurityContext | object | `{}` | Security context for the pod |
+| redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` | Enable redis dependency |
 | redis.fullnameOverride | string | `"redis"` | Override fullname of redis dependency |
-| redis.metrics.enabled | bool | `true` | Enable metrics for redis |
-| redis.metrics.podAnnotations | string | `nil` | Enforce pod annotations for redis |
-| redis.metrics.serviceMonitor.enabled | bool | `false` | Enable service monitor for redis |
-| redis.serviceAccount.create | bool | `true` | Create service account for redis |
 | replicaCount | int | `1` | Replicas for the deployment |
 | resources | object | `{"limits":{},"requests":{"cpu":"100m","memory":"64Mi"}}` | Resources for the deployment |
 | securityContext | object | `{}` | Security context for the deployment |
