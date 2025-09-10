@@ -1,9 +1,9 @@
 dependencies:
 - name: redis
-  repository: oci://registry-1.docker.io/bitnamicharts
-  version: 21.2.14
+  repository: oci://registry-1.docker.io/cloudpirates
+  version: 0.2.1
 - name: memcached
-  repository: oci://registry-1.docker.io/bitnamicharts
-  version: 7.9.4
-digest: sha256:6d5a374120786160340061834729b09174e35cb9e8608705663ae1b14ba6041f
-generated: "2025-08-05T08:34:07.016356564Z"
+  repository: oci://registry-1.docker.io/cloudpirates
+  version: 0.1.2
+digest: sha256:fb4cef1331e224bccf0228dcedbc8b325280907f40126f3e4ce1a52628cb662d
+generated: "2025-09-10T23:27:28.885409+02:00"

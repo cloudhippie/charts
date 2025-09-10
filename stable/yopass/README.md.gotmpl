@@ -32,7 +32,7 @@ helm install {{ template "chart.name" . }} cloudhippie/{{ template "chart.name" 
 
 ```console
 ingress:
-  enabled: false
+  enabled: true
 
   hosts:
     - host: {{ template "chart.name" . }}.example.com
@@ -45,13 +45,10 @@ ingress:
 
 > **Warning:** Use this deployment only for testing, we recommend a proper
 > deployment based on some operator to have a real lifecycle management.
-> Besides that does the used Bitnami chart not provide properly tagged images
-> for free.
 
 ```console
 database:
   type: redis
-
   dsn: redis://redis:6379/0
 
 redis:
@@ -65,13 +62,10 @@ memcached:
 
 > **Warning:** Use this deployment only for testing, we recommend a proper
 > deployment based on some operator to have a real lifecycle management.
-> Besides that does the used Bitnami chart not provide properly tagged images
-> for free.
 
 ```console
 database:
   type: memcached
-
   dsn: memcached:11211
 
 redis:

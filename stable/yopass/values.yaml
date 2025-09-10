@@ -190,41 +190,14 @@ redis:
   # -- Override fullname of redis dependency
   fullnameOverride: redis
 
-  serviceAccount:
-    # -- Create service account for redis
-    create: true
-
-  metrics:
-    # -- Enable metrics for redis
-    enabled: true
-
-    # -- Enforce pod annotations for redis
-    podAnnotations: null
-
-    serviceMonitor:
-      # -- Enable service monitor for redis
-      enabled: false
+  auth:
+    enabled: false
 
 memcached:
   # -- Enable memcached dependency
-  enabled: true
+  enabled: false
 
   # -- Override fullname of memcached dependency
   fullnameOverride: memcached
-
-  serviceAccount:
-    # -- Create service account for memcached
-    create: true
-
-  metrics:
-    # -- Enable metrics for memcached
-    enabled: true
-
-    # -- Enforce pod annotations for memcached
-    podAnnotations: null
-
-    serviceMonitor:
-      # -- Enable service monitor for memcached
-      enabled: false
 
 ...
