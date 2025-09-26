@@ -1,7 +1,9 @@
 ---
+# yaml-language-server: $schema=https://www.schemastore.org/yamllint.json
 extends: default
 
 ignore: |
+  .pre-commit-config.yaml
   .github/
   templates/
 
@@ -12,5 +14,8 @@ rules:
     level: error
   document-start:
     level: error
+
+  indentation:
+    spaces: 2
 
 ...
