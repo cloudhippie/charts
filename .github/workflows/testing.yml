@@ -13,7 +13,6 @@ permissions:
 jobs:
   testing:
     runs-on: ubuntu-latest
-    if: github.repository == 'cloudhippie/charts'
 
     steps:
       - name: Checkout source

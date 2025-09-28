@@ -9,15 +9,24 @@ name: release
       - master
 
 permissions:
-  contents: write
-  packages: write
+  contents: read
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: github.repository == 'cloudhippie/charts'
 
     steps:
+      - name: Generate token
+        id: token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.TOKEN_EXCHANGE_APP }}
+          installation_retrieval_mode: id
+          installation_retrieval_payload: ${{ secrets.TOKEN_EXCHANGE_INSTALL }}
+          private_key: ${{ secrets.TOKEN_EXCHANGE_KEY }}
+          permissions: >-
+            {"contents": "write", "packages": "write"}
+
       - name: Checkout source
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
@@ -50,7 +59,7 @@ jobs:
       - name: Run releaser
         uses: helm/chart-releaser-action@cae68fefc6b5f367a0275617c9f83181ba54714f # v1.7.0
         env:
-          CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CR_TOKEN: ${{ steps.token.outputs.token }}
           CR_KEYRING: secring.gpg
           CR_PASSPHRASE_FILE: passphrase
         with:
@@ -59,7 +68,7 @@ jobs:
 
       - name: Push charts
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login --username cloudhippiez --password-stdin ghcr.io
+          echo "${{ steps.token.outputs.token }}" | helm registry login --username cloudhippiez --password-stdin ghcr.io
 
           if test -d .cr-release-packages; then
             for pkg in .cr-release-packages/*.tgz; do
