@@ -33,6 +33,7 @@ spec:
 {{- end }}
 
     spec:
+      automountServiceAccountToken: {{ .Values.serviceAccount.automountToken }}
       serviceAccountName: {{ include "yopass.serviceAccountName" . }}
       {{- if .Values.image.pullSecrets }}
 
