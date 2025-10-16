@@ -31,6 +31,9 @@ serviceAccount:
   # -- Define annotations for the service account
   annotations: {}
 
+  # -- Automount service account token
+  automountToken: false
+
 # -- Updaqte strategy for deployment
 updateStrategy:
   type: Recreate
