@@ -58,6 +58,7 @@ spec:
 {{- end }}
 
     spec:
+      automountServiceAccountToken: {{ .Values.serviceAccount.automountToken }}
       serviceAccountName: {{ include "ansible-semaphore.serviceAccountName" . }}
       {{- if .Values.image.pullSecrets }}
 
