@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 14.0.0](https://img.shields.io/badge/Version-14.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.15.5](https://img.shields.io/badge/AppVersion-2.15.5-informational?style=flat-square)
+![Version: 14.1.0](https://img.shields.io/badge/Version-14.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.15.5](https://img.shields.io/badge/AppVersion-2.15.5-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -246,6 +246,7 @@ oidc:
 | service.port | int | `3000` | Port of the service |
 | service.type | string | `"ClusterIP"` | Type of the service |
 | serviceAccount.annotations | object | `{}` | Define annotations for the service account |
+| serviceAccount.automountToken | bool | `false` | Automount service account token |
 | serviceAccount.create | bool | `true` | Create a new service account |
 | serviceAccount.name | string | `""` | Optional name for an existing service account |
 | slack.alert | bool | `false` | Enable slack alerting |
