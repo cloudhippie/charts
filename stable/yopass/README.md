@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 6.0.0](https://img.shields.io/badge/Version-6.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.20.0](https://img.shields.io/badge/AppVersion-11.20.0-informational?style=flat-square)
+![Version: 6.1.0](https://img.shields.io/badge/Version-6.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.20.0](https://img.shields.io/badge/AppVersion-11.20.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
@@ -150,6 +150,7 @@ memcached:
 | service.port | int | `3000` | Port of the service |
 | service.type | string | `"ClusterIP"` | Type of the service |
 | serviceAccount.annotations | object | `{}` | Define annotations for the service account |
+| serviceAccount.automountToken | bool | `false` | Automount service account token |
 | serviceAccount.create | bool | `true` | Create a new service account |
 | serviceAccount.name | string | `""` | Optional name for an existing service account |
 | tolerations | list | `[]` | Tolerations for the deployment |
