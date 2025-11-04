@@ -1,6 +1,6 @@
 # hcloud-csi-mgmt
 
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.16.0](https://img.shields.io/badge/AppVersion-2.16.0-informational?style=flat-square)
+![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.18.0](https://img.shields.io/badge/AppVersion-2.18.0-informational?style=flat-square)
 
 Hetzner Cloud CSI component for management clusters
 
@@ -52,20 +52,20 @@ helm install hcloud-csi-mgmt cloudhippie/hcloud-csi-mgmt
 | fullnameOverride | string | `""` | Override the fullname |
 | image.attacher.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.attacher.repository | string | `"registry.k8s.io/sig-storage/csi-attacher"` | Image repository used by deployment |
-| image.attacher.tag | string | `"v4.9.0"` | Optional tag for the repository |
+| image.attacher.tag | string | `"v4.10.0"` | Optional tag for the repository |
 | image.driver.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.driver.repository | string | `"hetznercloud/hcloud-csi-driver"` | Image repository used by deployment |
 | image.driver.tag | string | `""` | Optional tag for the repository, defaults to app version |
 | image.liveness.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.liveness.repository | string | `"registry.k8s.io/sig-storage/livenessprobe"` | Image repository used by deployment |
-| image.liveness.tag | string | `"v2.16.0"` | Optional tag for the repository |
+| image.liveness.tag | string | `"v2.17.0"` | Optional tag for the repository |
 | image.provisioner.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.provisioner.repository | string | `"registry.k8s.io/sig-storage/csi-provisioner"` | Image repository used by deployment |
-| image.provisioner.tag | string | `"v5.3.0"` | Optional tag for the repository |
+| image.provisioner.tag | string | `"v6.0.0"` | Optional tag for the repository |
 | image.pullSecrets | list | `[]` | Optional name of pull secret if using a private registry |
 | image.resizer.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.resizer.repository | string | `"registry.k8s.io/sig-storage/csi-resizer"` | Image repository used by deployment |
-| image.resizer.tag | string | `"v1.14.0"` | Optional tag for the repository |
+| image.resizer.tag | string | `"v2.0.0"` | Optional tag for the repository |
 | labels | object | `{}` | Define additional labels |
 | metrics.enabled | bool | `true` | Enable metrics |
 | metrics.internalPort | int | `9189` | Internal metrics port of the service |
