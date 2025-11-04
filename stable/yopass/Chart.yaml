@@ -9,7 +9,7 @@ annotations:
     fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
     url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
 apiVersion: v2
-appVersion: 11.20.0
+appVersion: 12.4.0
 dependencies:
 - condition: redis.enabled
   name: redis
