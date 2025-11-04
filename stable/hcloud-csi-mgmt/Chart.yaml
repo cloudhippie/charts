@@ -26,4 +26,4 @@ sources:
 - https://github.com/cloudhippie/charts
 - https://github.com/hetznercloud/csi-driver
 type: application
-version: 1.0.2
+version: 2.0.0
