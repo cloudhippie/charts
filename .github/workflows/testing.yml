@@ -26,7 +26,7 @@ jobs:
           python-version-file: .python-version
 
       - name: Setup sops
-        uses: nhedger/setup-sops@v2
+        uses: nhedger/setup-sops@187c90dbb4e28c3225263886266a5b92baa7e5a1 # v2
 
       - name: Setup testing
         uses: helm/chart-testing-action@main
