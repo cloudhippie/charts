@@ -20,13 +20,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup gnupg
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GNUPG_KEY }}
-          passphrase: ${{ secrets.GNUPG_PASSWORD }}
-          trust_level: 5
-
       - name: Setup python
         uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6
         with:
@@ -46,6 +39,8 @@ jobs:
           helm plugin install https://github.com/jkroepke/helm-secrets
 
       - name: Decrypt secrets
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: |
           for FILE in $(find stable -iname \*.enc); do
             helm secrets decrypt ${FILE} >| ${FILE%.enc}.yaml
