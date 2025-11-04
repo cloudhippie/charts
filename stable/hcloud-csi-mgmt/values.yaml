@@ -57,7 +57,7 @@ image:
     repository: registry.k8s.io/sig-storage/csi-provisioner
 
     # -- (string) Optional tag for the repository
-    tag: v5.3.0 # updater: name=provisioner image=registry.k8s.io/sig-storage/csi-provisioner
+    tag: v6.0.0 # updater: name=provisioner image=registry.k8s.io/sig-storage/csi-provisioner
 
     # -- Image pull policy
     pullPolicy: IfNotPresent
