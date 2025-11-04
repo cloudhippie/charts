@@ -125,7 +125,7 @@ func UpdateValue(c *Chart, d *Update, latest string) error {
 	c.Lines[d.Line] = updateMatch.ReplaceAllString(
 		c.Lines[d.Line],
 		fmt.Sprintf(
-			"tag: %s # updater: name=%s image=%s",
+			"tag: %s  # updater: name=%s image=%s",
 			d.Tag,
 			d.Name,
 			d.Image,
