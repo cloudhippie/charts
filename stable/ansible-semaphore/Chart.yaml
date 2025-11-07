@@ -18,7 +18,7 @@ dependencies:
 - condition: postgres.enabled
   name: postgres
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.11.4
+  version: 0.11.5
 description: Modern and open-source alternative to AWX/Tower
 home: https://semaphoreui.com/
 icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
