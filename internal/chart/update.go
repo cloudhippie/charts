@@ -9,8 +9,8 @@ import (
 
 	"github.com/hashicorp/go-version"
 	"github.com/rs/zerolog/log"
-	"helm.sh/helm/v3/pkg/chart"
-	"helm.sh/helm/v3/pkg/chartutil"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
+	"helm.sh/helm/v4/pkg/chart/v2/util"
 )
 
 type Bump int
@@ -52,7 +52,7 @@ func UpdateApp(c *Chart, latest string) error {
 		return nil
 	}
 
-	if err := chartutil.SaveChartfile(
+	if err := util.SaveChartfile(
 		c.Path,
 		c.Meta,
 	); err != nil {
@@ -210,7 +210,7 @@ func UpdateDependency(c *Chart, d *chart.Dependency, latest string) error {
 		return nil
 	}
 
-	if err := chartutil.SaveChartfile(
+	if err := util.SaveChartfile(
 		c.Path,
 		c.Meta,
 	); err != nil {
@@ -324,7 +324,7 @@ func UpdateVersion(c *Chart) error {
 		segments[2],
 	)
 
-	return chartutil.SaveChartfile(
+	return util.SaveChartfile(
 		c.Path,
 		c.Meta,
 	)
