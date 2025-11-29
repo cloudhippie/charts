@@ -9,7 +9,7 @@ annotations:
     fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
     url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
 apiVersion: v2
-appVersion: 2.18.0
+appVersion: 2.18.2
 description: Hetzner Cloud CSI component for user clusters
 home: https://github.com/hetznercloud/csi-driver
 icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
