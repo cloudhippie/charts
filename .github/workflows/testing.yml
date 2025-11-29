@@ -34,9 +34,16 @@ jobs:
       - name: Setup helm
         uses: azure/setup-helm@1a275c3b69536ee54be43f2070a358922e12c8d4 # v4
 
+      - name: Import gnupg
+        run: |
+          curl -fsSL https://github.com/jkroepke.gpg | gpg --import
+          gpg --export > ~/.gnupg/pubring.gpg
+
       - name: Helm plugins
         run: |
-          helm plugin install https://github.com/jkroepke/helm-secrets
+          helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v4.7.4/secrets-4.7.4.tgz
+          helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v4.7.4/secrets-getter-4.7.4.tgz
+          helm plugin install https://github.com/jkroepke/helm-secrets/releases/download/v4.7.4/secrets-post-renderer-4.7.4.tgz
 
       - name: Decrypt secrets
         env:
