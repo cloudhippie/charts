@@ -1,0 +1,72 @@
+{{- if .Values.networkPolicy.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+
+metadata:
+  name: {{ include "yopass.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "yopass.labels" . | nindent 4 }}
+{{- if  .Values.annotations }}
+  annotations:
+    {{- toYaml .Values.annotations | nindent 4 }}
+{{- end }}
+
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "yopass.selectorLabels" . | nindent 6 }}
+
+  policyTypes:
+    - Ingress
+    - Egress
+
+  {{- if .Values.networkPolicy.allowExternalEgress }}
+  egress:
+    - {}
+
+  {{- else }}
+  egress:
+    {{- if .Values.networkPolicy.generalEgress }}
+    {{- .Values.networkPolicy.generalEgress | toYaml | nindent 4 }}
+    {{- end }}
+    {{- if and (eq .Values.database.type "redis") .Values.redis.enabled }}
+    - ports:
+        - port: {{ .Values.networkPolicy.egressRedisPort }}
+      {{- if not .Values.networkPolicy.egressRedisMatch | empty }}
+      to:
+        {{- .Values.networkPolicy.egressRedisMatch | toYaml | nindent 8 }}
+      {{- end }}
+    {{- end }}
+    {{- if and (eq .Values.database.type "memcached") .Values.memcached.enabled }}
+    - ports:
+        - port: {{ .Values.networkPolicy.egressMemcachedPort }}
+      {{- if not .Values.networkPolicy.egressMemcachedMatch | empty }}
+      to:
+        {{- .Values.networkPolicy.egressMemcachedMatch | toYaml | nindent 8 }}
+      {{- end }}
+    {{- end }}
+    {{- if .Values.networkPolicy.extraEgress }}
+    {{- .Values.networkPolicy.extraEgress | toYaml | nindent 4 }}
+    {{- end }}
+
+  {{- end }}
+  ingress:
+    - ports:
+        - port: {{ .Values.service.port }}
+      {{- if and (not .Values.networkPolicy.allowExternalIngress) (not .Values.networkPolicy.ingressServiceMatch | empty) }}
+      from:
+        {{- .Values.networkPolicy.ingressServiceMatch | toYaml | nindent 8 }}
+      {{- end }}
+    {{- if .Values.metrics.enabled }}
+    - ports:
+        - port: {{ .Values.metrics.port }}
+      {{- if and (not .Values.networkPolicy.allowExternalIngress) (not .Values.networkPolicy.ingressMetricsMatch | empty) }}
+      from:
+        {{- .Values.networkPolicy.ingressMetricsMatch | toYaml | nindent 8 }}
+      {{- end }}
+    {{- end }}
+    {{- if .Values.networkPolicy.extraIngress }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.networkPolicy.extraIngress "context" $ ) | nindent 4 }}
+    {{- end }}
+{{- end }}
