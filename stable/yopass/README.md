@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 7.4.2](https://img.shields.io/badge/Version-7.4.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.4.0](https://img.shields.io/badge/AppVersion-12.4.0-informational?style=flat-square)
+![Version: 7.6.0](https://img.shields.io/badge/Version-7.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.4.0](https://img.shields.io/badge/AppVersion-12.4.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
@@ -136,6 +136,18 @@ memcached:
 | metrics.serviceMonitor.relabelings | list | `[]` | List of relabel configs to apply to samples before scraping |
 | metrics.serviceMonitor.scrapeTimeout | string | `nil` | Timeout after which the scrape is ended |
 | nameOverride | string | `""` | Override the name |
+| networkPolicy.allowExternalEgress | bool | `true` | Allow any egress traffic to external sources |
+| networkPolicy.allowExternalIngress | bool | `true` | Allow any ingress traffic from external sources |
+| networkPolicy.egressMemcachedMatch | list | `[{"podSelector":{"matchLabels":{"app.kubernetes.io/name":"memcached"}}}]` | Match to allow egress traffic to Memcached service |
+| networkPolicy.egressMemcachedPort | int | `11211` | Egress port for Memcached service |
+| networkPolicy.egressRedisMatch | list | `[{"podSelector":{"matchLabels":{"app.kubernetes.io/name":"redis"}}}]` | Match to allow egress traffic to Redis service |
+| networkPolicy.egressRedisPort | int | `6379` | Egress port for Redis service |
+| networkPolicy.enabled | bool | `false` | Specifies whether a NetworkPolicy should be created |
+| networkPolicy.extraEgress | list | `[]` | List of extra egress rules to the NetworkPolicy |
+| networkPolicy.extraIngress | list | `[]` | List of extra ingress rules to the NetworkPolicy |
+| networkPolicy.generalEgress | list | `[{"ports":[{"port":53,"protocol":"UDP"},{"port":53,"protocol":"TCP"}]}]` | List of general egress rules to the NetworkPolicy |
+| networkPolicy.ingressMetricsMatch | list | `[]` | Match to allow ingress traffic to metrics port |
+| networkPolicy.ingressServiceMatch | list | `[]` | Match to allow ingress traffic to service port |
 | nodeSelector | object | `{}` | Node selector for the deployment |
 | podSecurityContext | object | `{}` | Security context for the pod |
 | redis.auth.enabled | bool | `false` |  |

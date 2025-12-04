@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 14.5.1](https://img.shields.io/badge/Version-14.5.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.16.45](https://img.shields.io/badge/AppVersion-2.16.45-informational?style=flat-square)
+![Version: 14.7.0](https://img.shields.io/badge/Version-14.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.16.45](https://img.shields.io/badge/AppVersion-2.16.45-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -212,6 +212,17 @@ oidc:
 | mariadb.enabled | bool | `false` | Enable mariadb dependency |
 | mariadb.fullnameOverride | string | `"mariadb"` | Override fullname of mariadb dependency |
 | nameOverride | string | `""` | Override the name |
+| networkPolicy.allowExternalEgress | bool | `true` | Allow any egress traffic to external sources |
+| networkPolicy.allowExternalIngress | bool | `true` | Allow any ingress traffic from external sources |
+| networkPolicy.egressMariadbMatch | list | `[{"podSelector":{"matchLabels":{"app.kubernetes.io/name":"mariadb"}}}]` | Match to allow egress traffic to Redis service |
+| networkPolicy.egressMariadbPort | int | `3306` | Egress port for MariaDB service |
+| networkPolicy.egressPostgresMatch | list | `[{"podSelector":{"matchLabels":{"app.kubernetes.io/name":"postgres"}}}]` | Match to allow egress traffic to Postgres service |
+| networkPolicy.egressPostgresPort | int | `5432` | Egress port for Postgres service |
+| networkPolicy.enabled | bool | `false` | Specifies whether a NetworkPolicy should be created |
+| networkPolicy.extraEgress | list | `[]` | List of extra egress rules to the NetworkPolicy |
+| networkPolicy.extraIngress | list | `[]` | List of extra ingress rules to the NetworkPolicy |
+| networkPolicy.generalEgress | list | `[{"ports":[{"port":53,"protocol":"UDP"},{"port":53,"protocol":"TCP"}]}]` | List of general egress rules to the NetworkPolicy |
+| networkPolicy.ingressServiceMatch | list | `[]` | Match to allow ingress traffic to service port |
 | nodeSelector | object | `{}` | Node selector for the deployment |
 | oidc.enable | bool | `false` | Enable oidc authentication |
 | oidc.providers | object | `{}` | Dictionary of oidc providers |
