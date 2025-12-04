@@ -67,6 +67,54 @@ extraVolumeMounts: []
   #   mountPath: /usr/local/share
   #   readOnly: true
 
+networkPolicy:
+  # -- Specifies whether a NetworkPolicy should be created
+  enabled: false
+
+  # -- Allow any ingress traffic from external sources
+  allowExternalIngress: true
+
+  # -- List of extra ingress rules to the NetworkPolicy
+  extraIngress: []
+
+  # -- Match to allow ingress traffic to service port
+  ingressServiceMatch: []
+
+  # -- Match to allow ingress traffic to metrics port
+  ingressMetricsMatch: []
+
+  # -- Allow any egress traffic to external sources
+  allowExternalEgress: true
+
+  # -- List of general egress rules to the NetworkPolicy
+  generalEgress:
+    - ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+
+  # -- List of extra egress rules to the NetworkPolicy
+  extraEgress: []
+
+  # -- Match to allow egress traffic to Redis service
+  egressRedisMatch:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: redis
+
+  # -- Egress port for Redis service
+  egressRedisPort: 6379
+
+  # -- Match to allow egress traffic to Memcached service
+  egressMemcachedMatch:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: memcached
+
+  # -- Egress port for Memcached service
+  egressMemcachedPort: 11211
+
 service:
   # -- Type of the service
   type: ClusterIP
