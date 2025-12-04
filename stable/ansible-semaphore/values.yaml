@@ -68,6 +68,51 @@ extraVolumeMounts: []
   #   mountPath: /usr/local/share
   #   readOnly: true
 
+networkPolicy:
+  # -- Specifies whether a NetworkPolicy should be created
+  enabled: false
+
+  # -- Allow any ingress traffic from external sources
+  allowExternalIngress: true
+
+  # -- List of extra ingress rules to the NetworkPolicy
+  extraIngress: []
+
+  # -- Match to allow ingress traffic to service port
+  ingressServiceMatch: []
+
+  # -- Allow any egress traffic to external sources
+  allowExternalEgress: true
+
+  # -- List of general egress rules to the NetworkPolicy
+  generalEgress:
+    - ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+
+  # -- List of extra egress rules to the NetworkPolicy
+  extraEgress: []
+
+  # -- Match to allow egress traffic to Redis service
+  egressMariadbMatch:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: mariadb
+
+  # -- Egress port for MariaDB service
+  egressMariadbPort: 3306
+
+  # -- Match to allow egress traffic to Postgres service
+  egressPostgresMatch:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: postgres
+
+  # -- Egress port for Postgres service
+  egressPostgresPort: 5432
+
 service:
   # -- Type of the service
   type: ClusterIP
