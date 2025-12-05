@@ -9734,6 +9734,39 @@ entries:
         fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
+    appVersion: 2.18.3
+    created: "2025-12-05T22:02:14.846380382Z"
+    description: Hetzner Cloud CSI component for management clusters
+    digest: b1549f8c073320548bb79890db3a3e163d31e83be326911c30af33c92ac00a36
+    home: https://github.com/hetznercloud/csi-driver
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
+    keywords:
+    - hetzner
+    - csi
+    - kubernetes
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: hcloud-csi-mgmt
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/hetznercloud/csi-driver
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-mgmt-2.1.1/hcloud-csi-mgmt-2.1.1.tgz
+    version: 2.1.1
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/hetznercloud/csi-driver
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/hcloud-csi-mgmt
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
     appVersion: 2.18.2
     created: "2025-11-29T23:08:00.572085442Z"
     description: Hetzner Cloud CSI component for management clusters
@@ -9856,6 +9889,39 @@ entries:
     - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-mgmt-1.0.0/hcloud-csi-mgmt-1.0.0.tgz
     version: 1.0.0
   hcloud-csi-user:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/hetznercloud/csi-driver
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/hcloud-csi-user
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 2.18.3
+    created: "2025-12-05T22:02:14.992699505Z"
+    description: Hetzner Cloud CSI component for user clusters
+    digest: 9dbdd8c97ff49f590d5918fec4fa8f1e5526a940a9620c5360360d8f84f1a026
+    home: https://github.com/hetznercloud/csi-driver
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
+    keywords:
+    - hetzner
+    - csi
+    - kubernetes
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: hcloud-csi-user
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/hetznercloud/csi-driver
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-user-1.1.2/hcloud-csi-user-1.1.2.tgz
+    version: 1.1.2
   - annotations:
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |-
@@ -17200,4 +17266,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-1.0.0/yopass-1.0.0.tgz
     version: 1.0.0
-generated: "2025-12-04T18:09:57.954675812Z"
+generated: "2025-12-05T22:02:15.165736015Z"
