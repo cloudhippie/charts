@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 14.9.2](https://img.shields.io/badge/Version-14.9.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.16.46](https://img.shields.io/badge/AppVersion-2.16.46-informational?style=flat-square)
+![Version: 14.9.3](https://img.shields.io/badge/Version-14.9.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.16.47](https://img.shields.io/badge/AppVersion-2.16.47-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
