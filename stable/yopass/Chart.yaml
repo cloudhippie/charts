@@ -14,7 +14,7 @@ dependencies:
 - condition: redis.enabled
   name: redis
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.18.0
+  version: 0.19.0
 - condition: memcached.enabled
   name: memcached
   repository: oci://registry-1.docker.io/cloudpirates
