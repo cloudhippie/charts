@@ -12,6 +12,47 @@ entries:
         fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
+    appVersion: 2.16.49
+    created: "2026-01-08T08:37:18.537648153Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.10.1
+    - condition: postgres.enabled
+      name: postgres
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.13.6
+    description: Modern and open-source alternative to AWX/Tower
+    digest: 95e255a601bbd95bd2c98553c2db89693f36f186241c8dae4222665a6707f54f
+    home: https://semaphoreui.com/
+    icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
+    keywords:
+    - ansible
+    - awx
+    - tower
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: ansible-semaphore
+    sources:
+    - https://github.com/ansible-semaphore/semaphore
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/ansible-semaphore-14.9.4/ansible-semaphore-14.9.4.tgz
+    version: 14.9.4
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/ansible-semaphore/semaphore
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/ansible-semaphore
+      artifacthub.io/signKey: |
+        fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
     appVersion: 2.16.47
     created: "2025-12-18T08:36:12.585549199Z"
     dependencies:
@@ -1992,4 +2033,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-6.0.0/yopass-6.0.0.tgz
     version: 6.0.0
-generated: "2026-01-06T08:37:48.294750679Z"
+generated: "2026-01-08T08:37:18.685479187Z"
