@@ -26,4 +26,4 @@ sources:
 - https://github.com/cloudhippie/charts
 - https://github.com/hetznercloud/hcloud-cloud-controller-manager
 type: application
-version: 1.3.0
+version: 1.3.1
