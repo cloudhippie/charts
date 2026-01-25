@@ -57,7 +57,7 @@
               default = {
                 git-hooks = {
                   hooks = {
-                    nixfmt-rfc-style = {
+                    nixfmt = {
                       enable = true;
                     };
                     gofmt = {
@@ -82,7 +82,7 @@
                   kind
                   kubeconform
                   kubernetes-helm
-                  nixfmt-rfc-style
+                  nixfmt
                   yamllint
                 ];
               };
