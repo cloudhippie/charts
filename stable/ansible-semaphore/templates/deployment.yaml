@@ -93,10 +93,10 @@ spec:
                 semaphore user add \
                   --config=/etc/semaphore/config.json \
                   --admin \
-                  --name=$(SEMAPHORE_ADMIN_FULLNAME) \
-                  --login=$(SEMAPHORE_ADMIN_USERNAME) \
-                  --password=$(SEMAPHORE_ADMIN_PASSWORD) \
-                  --email=$(SEMAPHORE_ADMIN_EMAIL)
+                  --name="$SEMAPHORE_ADMIN_FULLNAME" \
+                  --login="$SEMAPHORE_ADMIN_USERNAME" \
+                  --password="$SEMAPHORE_ADMIN_PASSWORD" \
+                  --email="$SEMAPHORE_ADMIN_EMAIL"
               else
                 echo "Admin already extists"
               fi
