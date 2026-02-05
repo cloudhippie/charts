@@ -14,7 +14,7 @@ dependencies:
 - condition: mariadb.enabled
   name: mariadb
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.13.2
+  version: 0.13.4
 - condition: postgres.enabled
   name: postgres
   repository: oci://registry-1.docker.io/cloudpirates
