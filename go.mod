@@ -3,7 +3,7 @@ module github.com/cloudhippie/charts
 go 1.25.0
 
 require (
-	github.com/go-git/go-git/v5 v5.16.4
+	github.com/go-git/go-git/v5 v5.16.5
 	github.com/google/go-containerregistry v0.20.7
 	github.com/hashicorp/go-version v1.8.0
 	github.com/rs/zerolog v1.34.0
