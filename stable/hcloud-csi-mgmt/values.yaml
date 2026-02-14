@@ -47,7 +47,7 @@ image:
     repository: registry.k8s.io/sig-storage/csi-resizer
 
     # -- (string) Optional tag for the repository
-    tag: v2.0.0  # updater: name=resizer image=registry.k8s.io/sig-storage/csi-resizer
+    tag: v2.1.0  # updater: name=resizer image=registry.k8s.io/sig-storage/csi-resizer
 
     # -- Image pull policy
     pullPolicy: IfNotPresent
