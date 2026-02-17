@@ -68,7 +68,7 @@ jobs:
 
       - name: Create kind
         if: steps.detect.outputs.changed == 'true'
-        uses: helm/kind-action@v1.13.0
+        uses: helm/kind-action@v1.14.0
 
       - name: Run testing
         if: steps.detect.outputs.changed == 'true'
