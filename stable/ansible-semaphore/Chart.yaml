@@ -9,16 +9,16 @@ annotations:
     fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
     url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
 apiVersion: v2
-appVersion: 2.16.51
+appVersion: 2.17.14
 dependencies:
 - condition: mariadb.enabled
   name: mariadb
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.13.4
+  version: 0.14.3
 - condition: postgres.enabled
   name: postgres
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.15.5
+  version: 0.16.0
 description: Modern and open-source alternative to AWX/Tower
 home: https://semaphoreui.com/
 icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
@@ -34,4 +34,4 @@ name: ansible-semaphore
 sources:
 - https://github.com/ansible-semaphore/semaphore
 type: application
-version: 14.13.4
+version: 14.14.0
