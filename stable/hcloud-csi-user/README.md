@@ -1,6 +1,6 @@
 # hcloud-csi-user
 
-![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.18.3](https://img.shields.io/badge/AppVersion-2.18.3-informational?style=flat-square)
+![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.19.1](https://img.shields.io/badge/AppVersion-2.19.1-informational?style=flat-square)
 
 Hetzner Cloud CSI component for user clusters
 
@@ -54,11 +54,11 @@ helm install hcloud-csi-user cloudhippie/hcloud-csi-user
 | image.driver.tag | string | `""` | Optional tag for the repository, defaults to app version |
 | image.liveness.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.liveness.repository | string | `"registry.k8s.io/sig-storage/livenessprobe"` | Image repository used by daemonset |
-| image.liveness.tag | string | `"v2.17.0"` | Optional tag for the repository |
+| image.liveness.tag | string | `"v2.18.0"` | Optional tag for the repository |
 | image.pullSecrets | list | `[]` | Optional name of pull secret if using a private registry |
 | image.registrar.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.registrar.repository | string | `"registry.k8s.io/sig-storage/csi-node-driver-registrar"` | Image repository used by daemonset |
-| image.registrar.tag | string | `"v2.15.0"` | Optional tag for the repository |
+| image.registrar.tag | string | `"v2.16.0"` | Optional tag for the repository |
 | labels | object | `{}` | Define additional labels |
 | metrics.enabled | bool | `true` | Enable metrics |
 | metrics.internalPort | int | `9189` | Internal metrics port of the service |
