@@ -29,7 +29,7 @@ image:
     repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
 
     # -- (string) Optional tag for the repository
-    tag: v2.15.0  # updater: name=registrar image=registry.k8s.io/sig-storage/csi-node-driver-registrar
+    tag: v2.16.0  # updater: name=registrar image=registry.k8s.io/sig-storage/csi-node-driver-registrar
 
     # -- Image pull policy
     pullPolicy: IfNotPresent
