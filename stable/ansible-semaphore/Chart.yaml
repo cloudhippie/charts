@@ -34,4 +34,4 @@ name: ansible-semaphore
 sources:
 - https://github.com/ansible-semaphore/semaphore
 type: application
-version: 14.15.1
+version: 14.15.2
