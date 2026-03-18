@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 8.2.1](https://img.shields.io/badge/Version-8.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 13.0.0](https://img.shields.io/badge/AppVersion-13.0.0-informational?style=flat-square)
+![Version: 8.3.0](https://img.shields.io/badge/Version-8.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 13.1.0](https://img.shields.io/badge/AppVersion-13.1.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
