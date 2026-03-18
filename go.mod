@@ -1,10 +1,10 @@
 module github.com/cloudhippie/charts
 
-go 1.25.6
+go 1.25.7
 
 require (
 	github.com/go-git/go-git/v5 v5.17.0
-	github.com/google/go-containerregistry v0.21.2
+	github.com/google/go-containerregistry v0.21.3
 	github.com/hashicorp/go-version v1.8.0
 	github.com/rs/zerolog v1.34.0
 	gopkg.in/yaml.v3 v3.0.1
@@ -20,7 +20,7 @@ require (
 	github.com/containerd/stargz-snapshotter/estargz v0.18.2 // indirect
 	github.com/cyphar/filepath-securejoin v0.6.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/docker/cli v29.2.1+incompatible // indirect
+	github.com/docker/cli v29.3.0+incompatible // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.9.3 // indirect
 	github.com/emicklei/go-restful/v3 v3.12.2 // indirect
@@ -52,7 +52,7 @@ require (
 	github.com/pjbgf/sha1cd v0.3.2 // indirect
 	github.com/santhosh-tekuri/jsonschema/v6 v6.0.2 // indirect
 	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
-	github.com/sirupsen/logrus v1.9.3 // indirect
+	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/skeema/knownhosts v1.3.1 // indirect
 	github.com/vbatts/tar-split v0.12.2 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
@@ -61,9 +61,9 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/crypto v0.47.0 // indirect
 	golang.org/x/net v0.49.0 // indirect
-	golang.org/x/oauth2 v0.35.0 // indirect
-	golang.org/x/sync v0.19.0 // indirect
-	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/oauth2 v0.36.0 // indirect
+	golang.org/x/sync v0.20.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
 	golang.org/x/term v0.39.0 // indirect
 	golang.org/x/text v0.33.0 // indirect
 	golang.org/x/time v0.12.0 // indirect
