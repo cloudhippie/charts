@@ -32,7 +32,7 @@ jobs:
         uses: helm/chart-testing-action@main
 
       - name: Setup helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@v5
 
       - name: Import gnupg
         run: |
