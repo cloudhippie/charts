@@ -5,7 +5,7 @@ go 1.25.7
 require (
 	github.com/go-git/go-git/v5 v5.17.1
 	github.com/google/go-containerregistry v0.21.3
-	github.com/hashicorp/go-version v1.8.0
+	github.com/hashicorp/go-version v1.9.0
 	github.com/rs/zerolog v1.35.0
 	gopkg.in/yaml.v3 v3.0.1
 	helm.sh/helm/v4 v4.1.3
