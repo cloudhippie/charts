@@ -6,7 +6,7 @@ require (
 	github.com/go-git/go-git/v5 v5.18.0
 	github.com/google/go-containerregistry v0.21.5
 	github.com/hashicorp/go-version v1.9.0
-	github.com/rs/zerolog v1.35.0
+	github.com/rs/zerolog v1.35.1
 	gopkg.in/yaml.v3 v3.0.1
 	helm.sh/helm/v4 v4.1.4
 )
