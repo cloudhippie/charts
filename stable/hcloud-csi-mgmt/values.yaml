@@ -211,6 +211,16 @@ tolerations: []
 # -- Extra environment variables for driver
 extraEnvVariables: []
 
+secret:
+  # -- Use an existing secret
+  existing: true
+
+  # -- Name of the secret
+  name: hetzner
+
+  # -- Values of the token within the secret
+  token: ~
+
 config:
   # -- Enable topology setting
   enableTopology: true
