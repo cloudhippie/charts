@@ -153,6 +153,16 @@ extraEnvVariables:
   - name: HCLOUD_NETWORK_DISABLE_ATTACHED_CHECK
     value: "true"
 
+secret:
+  # -- Use an existing secret
+  existing: true
+
+  # -- Name of the secret
+  name: hetzner
+
+  # -- Values of the token within the secret
+  token: ~
+
 config:
   # --  (string) Name of the secret containing a kubeconfig
   kubeconfig: ~
