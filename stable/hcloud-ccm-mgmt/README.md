@@ -1,6 +1,6 @@
 # hcloud-ccm-mgmt
 
-![Version: 1.4.0](https://img.shields.io/badge/Version-1.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.30.1](https://img.shields.io/badge/AppVersion-1.30.1-informational?style=flat-square)
+![Version: 1.5.0](https://img.shields.io/badge/Version-1.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.31.1](https://img.shields.io/badge/AppVersion-1.31.1-informational?style=flat-square)
 
 Hetzner Cloud CCM component for management clusters
 
@@ -74,6 +74,9 @@ helm install hcloud-ccm-mgmt cloudhippie/hcloud-ccm-mgmt
 | podSecurityContext.controller | object | `{}` | Security context for the controller pod |
 | replicaCount | int | `1` | Replicas for the deployment |
 | resources | object | `{"controller":{"limits":{"cpu":"1000m","memory":"640Mi"},"requests":{"cpu":"100m","memory":"64Mi"}}}` | Resources for the deployment |
+| secret.existing | bool | `true` | Use an existing secret |
+| secret.name | string | `"hetzner"` | Name of the secret |
+| secret.token | string | `nil` | Values of the token within the secret |
 | securityContext | object | `{}` | Security context for the deployment |
 | service.annotations | object | `{}` | Additional annotations for the service |
 | service.labels | object | `{}` | Additional labels for the service |

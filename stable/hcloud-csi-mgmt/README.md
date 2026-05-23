@@ -1,6 +1,6 @@
 # hcloud-csi-mgmt
 
-![Version: 2.4.2](https://img.shields.io/badge/Version-2.4.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.20.2](https://img.shields.io/badge/AppVersion-2.20.2-informational?style=flat-square)
+![Version: 2.5.0](https://img.shields.io/badge/Version-2.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.21.1](https://img.shields.io/badge/AppVersion-2.21.1-informational?style=flat-square)
 
 Hetzner Cloud CSI component for management clusters
 
@@ -94,6 +94,9 @@ helm install hcloud-csi-mgmt cloudhippie/hcloud-csi-mgmt
 | resources.liveness | object | `{"limits":{},"requests":{}}` | Resources for the liveness-probe pod |
 | resources.provisioner | object | `{"limits":{},"requests":{}}` | Resources for the liveness-probe pod |
 | resources.resizer | object | `{"limits":{},"requests":{}}` | Resources for the liveness-probe pod |
+| secret.existing | bool | `true` | Use an existing secret |
+| secret.name | string | `"hetzner"` | Name of the secret |
+| secret.token | string | `nil` | Values of the token within the secret |
 | securityContext | object | `{"fsGroup":1001}` | Security context for the deployment |
 | service.annotations | object | `{}` | Additional annotations for the service |
 | service.labels | object | `{}` | Additional labels for the service |
