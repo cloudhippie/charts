@@ -1,9 +1,9 @@
 dependencies:
 - name: redis
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.29.1
+  version: 0.29.2
 - name: memcached
   repository: oci://registry-1.docker.io/cloudpirates
   version: 0.13.3
-digest: sha256:e332b6a2bb934b74f9736d3040888e622306aa1af85380cff18825751a403d09
-generated: "2026-05-23T09:56:31.127315483Z"
+digest: sha256:7524c1d9fd75cc0c60f480524d3c76cb2a055e578cc0fcb368778db9fd82fd96
+generated: "2026-05-28T11:40:33.858944105Z"
