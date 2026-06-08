@@ -1,9 +1,9 @@
 dependencies:
 - name: mariadb
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.16.4
+  version: 0.16.5
 - name: postgres
   repository: oci://registry-1.docker.io/cloudpirates
   version: 0.19.5
-digest: sha256:c796895ec1b4f93d7a4f67f8ec253bbe91b42e3f31cdc321935a46ff387d4e4d
-generated: "2026-05-23T09:56:28.388367725Z"
+digest: sha256:09ea7aa2ccd139ed25468c2fce299d781c444af3be5fd57f7e10b38c2146f5a1
+generated: "2026-06-08T12:36:14.936154408Z"
