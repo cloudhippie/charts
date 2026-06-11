@@ -221,7 +221,7 @@ general:
 
 database:
   # -- Type of database backend
-  type: bolt
+  type: sqlite
 
   # -- Read username from secret
   usernameFromSecret: true
@@ -254,7 +254,7 @@ database:
   options: {}
 
   # -- Path for the boltdb
-  path: /var/lib/semaphore/database.boltdb
+  path: /var/lib/semaphore/database.sqlite
 
   persistence:
     # -- Enable persistence for boltdb
