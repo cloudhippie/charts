@@ -1,10 +1,10 @@
-{{- if and (not .Values.database.persistence.existingClaim) (.Values.database.persistence.enabled) (eq .Values.database.type "bolt") }}
+{{- if and (not .Values.database.persistence.existingClaim) (.Values.database.persistence.enabled) (eq .Values.database.type "sqlite") }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 
 metadata:
-  name: {{ include "ansible-semaphore.fullname" . }}-boltdb
+  name: {{ include "ansible-semaphore.fullname" . }}-sqlite
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "ansible-semaphore.labels" . | nindent 4 }}

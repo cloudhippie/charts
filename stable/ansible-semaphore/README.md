@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 14.18.5](https://img.shields.io/badge/Version-14.18.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.18.10](https://img.shields.io/badge/AppVersion-2.18.10-informational?style=flat-square)
+![Version: 15.0.0](https://img.shields.io/badge/Version-15.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.18.12](https://img.shields.io/badge/AppVersion-2.18.12-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -144,12 +144,12 @@ oidc:
 | database.options | object | `{}` | Options for database connection |
 | database.password | string | `nil` | Password for database |
 | database.passwordKey | string | `"password"` | Key used within secret for password |
-| database.path | string | `"/var/lib/semaphore/database.sqlite"` | Path for the boltdb |
-| database.persistence.accessModes | list | `["ReadWriteOnce"]` | Access modes used for boltdb volume |
-| database.persistence.enabled | bool | `true` | Enable persistence for boltdb |
+| database.path | string | `"/var/lib/semaphore/database.sqlite"` | Path for the SQLite database file |
+| database.persistence.accessModes | list | `["ReadWriteOnce"]` | Access modes used for SQLite volume |
+| database.persistence.enabled | bool | `true` | Enable persistence for SQLite |
 | database.persistence.existingClaim | string | `nil` | Name of an already existing claim |
-| database.persistence.size | string | `"5G"` | Size for boltdb volume |
-| database.persistence.storageClass | string | `nil` | Storage class used for boltdb volume |
+| database.persistence.size | string | `"5G"` | Size for SQLite volume |
+| database.persistence.storageClass | string | `nil` | Storage class used for SQLite volume |
 | database.port | string | `nil` | Port for database connection |
 | database.type | string | `"sqlite"` | Type of database backend |
 | database.username | string | `"semaphore"` | Username for database |
@@ -229,7 +229,7 @@ oidc:
 | persistence.accessModes | list | `["ReadWriteOnce"]` | Access modes used for workdir volume |
 | persistence.enabled | bool | `true` | Enable persistence for workdir |
 | persistence.existingClaim | string | `nil` | Name of an already existing claim |
-| persistence.size | string | `"10G"` | Size for boltdb volume |
+| persistence.size | string | `"10G"` | Size for workdir volume |
 | persistence.storageClass | string | `nil` | Storage class used for workdir volume |
 | podSecurityContext | object | `{}` | Security context for the pod |
 | postgres.auth.database | string | `"semaphore"` | Database created for semaphore |
