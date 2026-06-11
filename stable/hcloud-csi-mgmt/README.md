@@ -1,6 +1,6 @@
 # hcloud-csi-mgmt
 
-![Version: 2.6.1](https://img.shields.io/badge/Version-2.6.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.21.2](https://img.shields.io/badge/AppVersion-2.21.2-informational?style=flat-square)
+![Version: 2.7.0](https://img.shields.io/badge/Version-2.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.21.2](https://img.shields.io/badge/AppVersion-2.21.2-informational?style=flat-square)
 
 Hetzner Cloud CSI component for management clusters
 
@@ -61,11 +61,11 @@ helm install hcloud-csi-mgmt cloudhippie/hcloud-csi-mgmt
 | image.liveness.tag | string | `"v2.19.0"` | Optional tag for the repository |
 | image.provisioner.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.provisioner.repository | string | `"registry.k8s.io/sig-storage/csi-provisioner"` | Image repository used by deployment |
-| image.provisioner.tag | string | `"v6.2.0"` | Optional tag for the repository |
+| image.provisioner.tag | string | `"v6.3.0"` | Optional tag for the repository |
 | image.pullSecrets | list | `[]` | Optional name of pull secret if using a private registry |
 | image.resizer.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.resizer.repository | string | `"registry.k8s.io/sig-storage/csi-resizer"` | Image repository used by deployment |
-| image.resizer.tag | string | `"v2.1.0"` | Optional tag for the repository |
+| image.resizer.tag | string | `"v2.2.0"` | Optional tag for the repository |
 | labels | object | `{}` | Define additional labels |
 | metrics.enabled | bool | `true` | Enable metrics |
 | metrics.internalPort | int | `9189` | Internal metrics port of the service |
