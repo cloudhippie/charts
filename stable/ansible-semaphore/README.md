@@ -144,14 +144,14 @@ oidc:
 | database.options | object | `{}` | Options for database connection |
 | database.password | string | `nil` | Password for database |
 | database.passwordKey | string | `"password"` | Key used within secret for password |
-| database.path | string | `"/var/lib/semaphore/database.boltdb"` | Path for the boltdb |
+| database.path | string | `"/var/lib/semaphore/database.sqlite"` | Path for the boltdb |
 | database.persistence.accessModes | list | `["ReadWriteOnce"]` | Access modes used for boltdb volume |
 | database.persistence.enabled | bool | `true` | Enable persistence for boltdb |
 | database.persistence.existingClaim | string | `nil` | Name of an already existing claim |
 | database.persistence.size | string | `"5G"` | Size for boltdb volume |
 | database.persistence.storageClass | string | `nil` | Storage class used for boltdb volume |
 | database.port | string | `nil` | Port for database connection |
-| database.type | string | `"bolt"` | Type of database backend |
+| database.type | string | `"sqlite"` | Type of database backend |
 | database.username | string | `"semaphore"` | Username for database |
 | database.usernameFromSecret | bool | `true` | Read username from secret |
 | database.usernameKey | string | `"username"` | Key used within secret for username |
