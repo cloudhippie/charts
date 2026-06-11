@@ -156,7 +156,7 @@ persistence:
   # -- Enable persistence for workdir
   enabled: true
 
-  # -- Size for boltdb volume
+  # -- Size for workdir volume
   size: 10G
 
   # -- Storage class used for workdir volume
@@ -253,20 +253,20 @@ database:
   # -- Options for database connection
   options: {}
 
-  # -- Path for the boltdb
+  # -- Path for the SQLite database file
   path: /var/lib/semaphore/database.sqlite
 
   persistence:
-    # -- Enable persistence for boltdb
+    # -- Enable persistence for SQLite
     enabled: true
 
-    # -- Size for boltdb volume
+    # -- Size for SQLite volume
     size: 5G
 
-    # -- Storage class used for boltdb volume
+    # -- Storage class used for SQLite volume
     storageClass:
 
-    # -- Access modes used for boltdb volume
+    # -- Access modes used for SQLite volume
     accessModes:
       - ReadWriteOnce
 
