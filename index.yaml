@@ -2842,6 +2842,39 @@ entries:
         fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
+    appVersion: 1.32.0
+    created: "2026-06-13T10:49:07.008651763Z"
+    description: Hetzner Cloud CCM component for management clusters
+    digest: 02ce9c47784aad161a13f5d191a1c34326fedb48afa12d79819e6851e090b94c
+    home: https://github.com/hetznercloud/hcloud-cloud-controller-manager
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
+    keywords:
+    - hetzner
+    - ccm
+    - kubernetes
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: hcloud-ccm-mgmt
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/hetznercloud/hcloud-cloud-controller-manager
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/hcloud-ccm-mgmt-1.6.0/hcloud-ccm-mgmt-1.6.0.tgz
+    version: 1.6.0
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/hetznercloud/hcloud-cloud-controller-manager
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/hcloud-ccm-mgmt
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
     appVersion: 1.31.1
     created: "2026-05-23T16:55:47.116534981Z"
     description: Hetzner Cloud CCM component for management clusters
@@ -3923,6 +3956,47 @@ entries:
     - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-user-1.0.1/hcloud-csi-user-1.0.1.tgz
     version: 1.0.1
   yopass:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/jhaals/yopass
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/yopass
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 14.2.0
+    created: "2026-06-13T10:49:07.289673571Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.30.3
+    - condition: memcached.enabled
+      name: memcached
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.13.3
+    description: Secure sharing of secrets, passwords and files
+    digest: f51b70160b149554ac8b2f26f6ff305b6cb9288a03878a2ee6edfbc6a3288eef
+    home: https://yopass.se/
+    icon: https://raw.githubusercontent.com/jhaals/yopass/master/logo/yopass.svg
+    keywords:
+    - password
+    - secret
+    - sharing
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: yopass
+    sources:
+    - https://github.com/jhaals/yopass
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/yopass-9.3.0/yopass-9.3.0.tgz
+    version: 9.3.0
   - annotations:
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |-
@@ -6342,4 +6416,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-6.0.0/yopass-6.0.0.tgz
     version: 6.0.0
-generated: "2026-06-11T07:58:03.035705926Z"
+generated: "2026-06-13T10:49:07.290114253Z"
