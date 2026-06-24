@@ -1,34 +1,26 @@
+{{- if .Values.readOnly.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: {{ include "yopass.fullname" . }}
+  name: {{ include "yopass.fullname" . }}-readonly
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "yopass.labels" . | nindent 4 }}
-{{- with .Values.annotation }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-{{- end }}
 
 spec:
-  replicas: {{ .Values.replicaCount }}
-  {{- if .Values.updateStrategy }}
-
-  strategy:
-    {{ toYaml .Values.updateStrategy | nindent 4 }}
-  {{- end }}
+  replicas: {{ default .Values.replicaCount .Values.readOnly.replicaCount }}
 
   selector:
     matchLabels:
       {{- include "yopass.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/component: internal
+      app.kubernetes.io/component: readonly
 
   template:
     metadata:
       labels:
         {{- include "yopass.labels" . | nindent 8 }}
-        app.kubernetes.io/component: internal
+        app.kubernetes.io/component: readonly
 {{- if  .Values.annotations }}
       annotations:
         {{- toYaml .Values.annotations | nindent 8 }}
@@ -62,7 +54,7 @@ spec:
 
           args:
             - --address=0.0.0.0
-            - --port={{ .Values.service.internalPort }}
+            - --port={{ default .Values.service.internalPort .Values.readOnly.service.internalPort }}
             {{- if .Values.metrics.enabled }}
             - --metrics-port={{ .Values.metrics.internalPort }}
             {{- end }}
@@ -74,34 +66,35 @@ spec:
             - --memcached={{ .Values.database.dsn }}
             {{- end }}
             - --max-length={{ .Values.config.maxLength }}
+            - --read-only
           {{- with .Values.podSecurityContext }}
 
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if or .Values.extraEnvSecrets .Values.extraEnvVariables }}
+          {{- if or .Values.readOnly.extraEnvSecrets .Values.readOnly.extraEnvVariables }}
 
           env:
-            {{- range $key, $value := .Values.extraEnvSecrets }}
+            {{- range $key, $value := .Values.readOnly.extraEnvSecrets }}
             - name: {{ $key }}
               valueFrom:
                 secretKeyRef:
                   name: {{ required "Must specify secret!" $value.secret }}
                   key: {{ required "Must specify key!" $value.key }}
             {{- end }}
-            {{- range $key, $value := .Values.extraEnvVariables }}
+            {{- range $key, $value := .Values.readOnly.extraEnvVariables }}
             - name: {{ $key }}
               value: "{{ $value }}"
             {{- end }}
           {{- end }}
-          {{- if or .Values.envFromSecrets .Values.envFromConfigMaps }}
+          {{- if or .Values.readOnly.envFromSecrets .Values.readOnly.envFromConfigMaps }}
 
           envFrom:
-          {{- range $name := .Values.envFromSecrets }}
+          {{- range $name := .Values.readOnly.envFromSecrets }}
             - secretRef:
                 name: {{ $name }}
           {{- end }}
-          {{- range $name := .Values.envFromConfigMaps }}
+          {{- range $name := .Values.readOnly.envFromConfigMaps }}
             - configMapRef:
                 name: {{ $name }}
           {{- end }}
@@ -109,7 +102,7 @@ spec:
 
           ports:
             - name: http
-              containerPort: {{ .Values.service.internalPort }}
+              containerPort: {{ default .Values.service.internalPort .Values.readOnly.service.internalPort }}
               protocol: TCP
             {{- if .Values.metrics.enabled }}
             - name: metrics
@@ -126,36 +119,24 @@ spec:
             httpGet:
               path: /
               port: http
-          {{- if .Values.resources }}
+          {{- if (default .Values.resources .Values.readOnly.resources) }}
 
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml (default .Values.resources .Values.readOnly.resources) | nindent 12 }}
           {{- end }}
-          {{- if .Values.extraVolumeMounts }}
-
-          volumeMounts:
-            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
-          {{- end }}
-        {{- if .Values.extraSidecarContainers }}
-        {{- toYaml .Values.extraSidecarContainers | nindent 8 }}
-        {{- end }}
-      {{- if .Values.nodeSelector }}
+      {{- if (default .Values.nodeSelector .Values.readOnly.nodeSelector) }}
 
       nodeSelector:
-        {{ toYaml .Values.nodeSelector | nindent 8 }}
+        {{- toYaml (default .Values.nodeSelector .Values.readOnly.nodeSelector) | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with (default .Values.affinity .Values.readOnly.affinity) }}
 
       affinity:
         {{ toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with (default .Values.tolerations .Values.readOnly.tolerations) }}
 
       tolerations:
         {{ toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.extraVolumes }}
-
-      volumes:
-        {{- toYaml .Values.extraVolumes | nindent 8 }}
-      {{- end }}
+{{- end }}

@@ -1,0 +1,25 @@
+---
+readOnly:
+  enabled: true
+  ingress:
+    enabled: true
+    hosts:
+      - host: yopass-public.example.com
+        paths:
+          - path: /
+            pathType: Prefix
+
+memcached:
+  enabled: true
+
+ingress:
+  enabled: true
+  hosts:
+    - host: yopass-internal.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources: {}
+
+...
