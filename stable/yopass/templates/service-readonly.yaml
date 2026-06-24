@@ -1,0 +1,36 @@
+{{- if and .Values.readOnly.enabled .Values.readOnly.service.enabled }}
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: {{ template "yopass.fullname" . }}-readonly
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "yopass.labels" . | nindent 4 }}
+{{- if .Values.readOnly.service.labels }}
+    {{- toYaml .Values.readOnly.service.labels | nindent 4 }}
+{{- end }}
+{{- if  .Values.readOnly.service.annotations }}
+  annotations:
+    {{- toYaml .Values.readOnly.service.annotations | nindent 4 }}
+{{- end }}
+
+spec:
+  type: {{ default .Values.service.type .Values.readOnly.service.type }}
+
+  ports:
+    - name: http
+      port: {{ default .Values.service.port .Values.readOnly.service.port }}
+      targetPort: http
+      protocol: TCP
+    {{- if .Values.metrics.enabled }}
+    - name: metrics
+      port: {{ .Values.metrics.port }}
+      targetPort: metrics
+      protocol: TCP
+    {{- end }}
+
+  selector:
+    {{- include "yopass.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: readonly
+{{- end }}
