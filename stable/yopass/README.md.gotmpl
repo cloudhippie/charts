@@ -82,3 +82,90 @@ memcached:
 {{ template "chart.requirementsSection" . }}
 
 {{ template "chart.valuesSection" . }}
+
+## Read-Only Mode & Split Deployments
+
+Read-only mode disables all secret creation endpoints while keeping retrieval fully functional. This chart can deploy an optional second instance in read-only mode within the same release.
+
+### Enable read-only instance
+
+```yaml
+readOnly:
+  enabled: true
+  ingress:
+    enabled: true
+    hosts:
+      - host: yopass.example.com
+        paths:
+          - path: /
+            pathType: Prefix
+```
+
+Resources created for the read-only instance are suffixed with `-readonly` (Deployment, Service, Ingress). Both instances share the same database configured via `.Values.database.*`.
+
+In read-only mode the server is started with `--read-only`. Endpoint behavior:
+
+| Endpoint | Behavior |
+|----------|----------|
+| `POST /create/secret` | 404 Not Found |
+| `POST /create/file` | 404 Not Found |
+| `GET /secret/{key}` | Active |
+| `GET /file/{key}` | Active |
+| `DELETE /secret/{key}` | Active |
+
+The frontend detects `READ_ONLY: true` from the `/config` endpoint and shows a read-only landing page instead of the create form.
+
+### Split deployment pattern (one release)
+
+Deploy one Helm release with both instances sharing one database:
+
+```yaml
+database:
+  type: memcached
+  dsn: memcached:11211
+
+memcached:
+  enabled: true
+
+ingress:
+  enabled: true
+  hosts:
+    - host: internal.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+readOnly:
+  enabled: true
+  ingress:
+    enabled: true
+    hosts:
+      - host: yopass.example.com
+        paths:
+          - path: /
+            pathType: Prefix
+```
+
+Both instances connect to the same Memcached or Redis database. Secrets created on the internal instance can be retrieved via the public read-only instance.
+
+### OIDC on internal, public read-only
+
+Require authentication only on the internal instance while the public instance remains open for retrieval:
+
+```yaml
+extraEnvVariables:
+  REQUIRE_AUTH: "true"
+  OIDC_ISSUER: https://accounts.google.com
+  OIDC_CLIENT_ID: "123456789-abc.apps.googleusercontent.com"
+  OIDC_CLIENT_SECRET: "GOCSPX-..."
+  OIDC_REDIRECT_URL: https://internal.example.com/auth/callback
+  OIDC_ALLOWED_DOMAIN: example.com
+
+readOnly:
+  enabled: true
+  # no auth variables here
+```
+
+Notes:
+- Deletion of one-time secrets happens automatically via `DELETE /secret/{key}` when a recipient opens a secret; this endpoint remains active in read-only mode intentionally.
+- If you use a CDN or caching layer in front of the public instance, ensure retrieval endpoints (`GET /secret/*`, `GET /file/*`) are not cached.

@@ -206,6 +206,80 @@ config:
   # -- (int) Max length of encrypted secret
   maxLength: 10000
 
+# -- Optional second deployment in read-only mode
+readOnly:
+  # -- Enable rendering a second, read-only instance (resources suffixed with -readonly)
+  enabled: false
+
+  # -- (int) Replicas for the read-only deployment (defaults to .Values.replicaCount)
+  replicaCount:
+
+  # -- List of environment variables from existing secrets for read-only instance
+  envFromSecrets: []
+
+  # -- List of environment variables from existing configmaps for read-only instance
+  envFromConfigMaps: []
+
+  # -- Extra environment variables for read-only instance
+  extraEnvVariables: {}
+
+  # -- Extra environment variables from secrets for read-only instance
+  extraEnvSecrets: {}
+
+  # -- Resources for the read-only deployment (defaults to .Values.resources)
+  resources: {}
+
+  # -- Node selector for the read-only deployment (defaults to .Values.nodeSelector)
+  nodeSelector: {}
+
+  # -- Affinity for the read-only deployment (defaults to .Values.affinity)
+  affinity: {}
+
+  # -- Tolerations for the read-only deployment (defaults to .Values.tolerations)
+  tolerations: []
+
+  service:
+    # -- Enable Service for read-only instance
+    enabled: true
+
+    # -- Type of the read-only service (defaults to .Values.service.type)
+    type:
+
+    # -- (int) Port of the read-only service (defaults to .Values.service.port)
+    port:
+
+    # -- (int) Internal port of the read-only service (defaults to .Values.service.internalPort)
+    internalPort:
+
+    # -- Additional annotations for the read-only service
+    annotations: {}
+
+    # -- Additional labels for the read-only service
+    labels: {}
+
+  ingress:
+    # -- Enable ingress for read-only instance
+    enabled: false
+
+    # -- (string) Class name for the ingress resource
+    className:
+
+    # -- Host definition for read-only ingress
+    hosts:
+      - host: example.local
+        paths:
+          - path: /
+            pathType: Prefix
+
+    # -- Optional TLS configuration for read-only ingress
+    tls: []
+
+    # -- Additional annotations for the read-only ingress
+    annotations: {}
+
+    # -- Additional labels for the read-only ingress
+    labels: {}
+
 # -- Resources for the deployment
 resources:
   limits: {}
