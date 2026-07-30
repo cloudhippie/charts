@@ -3,8 +3,7 @@
 extends: default
 
 ignore: |
-  .pre-commit-config.yaml
-  .github/
+  .github/workflows
   templates/
 
 rules:
