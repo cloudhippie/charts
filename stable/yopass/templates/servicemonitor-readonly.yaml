@@ -1,9 +1,9 @@
-{{- if and .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled }}
+{{- if and .Values.readOnly.enabled .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 
 metadata:
-  name: {{ include "yopass.fullname" . }}{{ if .Values.readOnly.enabled }}-internal{{ end }}
+  name: {{ include "yopass.fullname" . }}-readonly
   namespace: {{ default .Release.Namespace .Values.metrics.serviceMonitor.namespace }}
   labels:
     {{- include "yopass.labels" . | nindent 4 }}
@@ -23,7 +23,7 @@ spec:
   selector:
     matchLabels:
       {{- include "yopass.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/component: internal
+      app.kubernetes.io/component: readonly
 
   endpoints:
     - path: /metrics

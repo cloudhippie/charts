@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: {{ include "yopass.fullname" . }}
+  name: {{ include "yopass.fullname" . }}{{ if .Values.readOnly.enabled }}-internal{{ end }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "yopass.labels" . | nindent 4 }}
