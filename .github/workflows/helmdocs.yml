@@ -32,6 +32,7 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v7
         with:
+          fetch-depth: 0
           token: ${{ steps.token.outputs.token }}
 
       - name: Install tools
