@@ -18,4 +18,4 @@ spec:
         - wget
       args:
         - --spider
-        - http://{{ include "yopass.fullname" . }}:{{ .Values.service.port }}
+        - http://{{ include "yopass.fullname" . }}{{ if .Values.readOnly.enabled }}-internal{{ end }}:{{ .Values.service.port }}
