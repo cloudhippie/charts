@@ -53,7 +53,10 @@ jobs:
 
       - name: Run Linting
         run: |
-          ct lint --config ct.yaml
+          ct lint \
+            --config ct.yaml \
+            --chart-yaml-schema $(mise where helm-ct)/etc/chart_schema.yaml \
+            --lint-conf $(mise where helm-ct)/etc/lintconf.yaml
 
       - name: Create kind
         if: steps.detect.outputs.changed == 'true'
