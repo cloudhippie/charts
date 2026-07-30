@@ -1,6 +1,2 @@
-.direnv/
-.devenv/
-
+mise.local.toml
 charts/
-
-.pre-commit-config.yaml

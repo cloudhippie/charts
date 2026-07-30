@@ -1,0 +1,15 @@
+[tools]
+go = "1.26.0"
+helm = "4.2.3"
+helm-ct = "3.14.0"
+helm-docs = "1.14.2"
+node = "24"
+pre-commit = "4.6.1"
+python = "3.14.6"
+sops = "3.13.3"
+yamllint = "1.38.0"
+
+[env]
+CR_CHARTS_REPO = "https://cloudhippie.github.io/charts"
+CR_GIT_REPO = "charts"
+CR_OWNER = "cloudhippie"
