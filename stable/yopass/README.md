@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 9.12.0](https://img.shields.io/badge/Version-9.12.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 14.8.0](https://img.shields.io/badge/AppVersion-14.8.0-informational?style=flat-square)
+![Version: 9.13.0](https://img.shields.io/badge/Version-9.13.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 14.8.0](https://img.shields.io/badge/AppVersion-14.8.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
@@ -150,6 +150,29 @@ memcached:
 | networkPolicy.ingressServiceMatch | list | `[]` | Match to allow ingress traffic to service port |
 | nodeSelector | object | `{}` | Node selector for the deployment |
 | podSecurityContext | object | `{}` | Security context for the pod |
+| readOnly | object | `{"affinity":{},"enabled":false,"envFromConfigMaps":[],"envFromSecrets":[],"extraEnvSecrets":{},"extraEnvVariables":{},"ingress":{"annotations":{},"className":null,"enabled":false,"hosts":[{"host":"example.local","paths":[{"path":"/","pathType":"Prefix"}]}],"labels":{},"tls":[]},"nodeSelector":{},"replicaCount":null,"resources":{},"service":{"annotations":{},"enabled":true,"internalPort":null,"labels":{},"port":null,"type":null},"tolerations":[]}` | Optional second deployment in read-only mode |
+| readOnly.affinity | object | `{}` | Affinity for the read-only deployment (defaults to .Values.affinity) |
+| readOnly.enabled | bool | `false` | Enable rendering a second, read-only instance (resources suffixed with -readonly) |
+| readOnly.envFromConfigMaps | list | `[]` | List of environment variables from existing configmaps for read-only instance |
+| readOnly.envFromSecrets | list | `[]` | List of environment variables from existing secrets for read-only instance |
+| readOnly.extraEnvSecrets | object | `{}` | Extra environment variables from secrets for read-only instance |
+| readOnly.extraEnvVariables | object | `{}` | Extra environment variables for read-only instance |
+| readOnly.ingress.annotations | object | `{}` | Additional annotations for the read-only ingress |
+| readOnly.ingress.className | string | `nil` | Class name for the ingress resource |
+| readOnly.ingress.enabled | bool | `false` | Enable ingress for read-only instance |
+| readOnly.ingress.hosts | list | `[{"host":"example.local","paths":[{"path":"/","pathType":"Prefix"}]}]` | Host definition for read-only ingress |
+| readOnly.ingress.labels | object | `{}` | Additional labels for the read-only ingress |
+| readOnly.ingress.tls | list | `[]` | Optional TLS configuration for read-only ingress |
+| readOnly.nodeSelector | object | `{}` | Node selector for the read-only deployment (defaults to .Values.nodeSelector) |
+| readOnly.replicaCount | int | `nil` | Replicas for the read-only deployment (defaults to .Values.replicaCount) |
+| readOnly.resources | object | `{}` | Resources for the read-only deployment (defaults to .Values.resources) |
+| readOnly.service.annotations | object | `{}` | Additional annotations for the read-only service |
+| readOnly.service.enabled | bool | `true` | Enable Service for read-only instance |
+| readOnly.service.internalPort | int | `nil` | Internal port of the read-only service (defaults to .Values.service.internalPort) |
+| readOnly.service.labels | object | `{}` | Additional labels for the read-only service |
+| readOnly.service.port | int | `nil` | Port of the read-only service (defaults to .Values.service.port) |
+| readOnly.service.type | string | `nil` | Type of the read-only service (defaults to .Values.service.type) |
+| readOnly.tolerations | list | `[]` | Tolerations for the read-only deployment (defaults to .Values.tolerations) |
 | redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` | Enable redis dependency |
 | redis.fullnameOverride | string | `"redis"` | Override fullname of redis dependency |
@@ -167,3 +190,90 @@ memcached:
 | serviceAccount.name | string | `""` | Optional name for an existing service account |
 | tolerations | list | `[]` | Tolerations for the deployment |
 | updateStrategy | object | `{"type":"Recreate"}` | Updaqte strategy for deployment |
+
+## Read-Only Mode & Split Deployments
+
+Read-only mode disables all secret creation endpoints while keeping retrieval fully functional. This chart can deploy an optional second instance in read-only mode within the same release.
+
+### Enable read-only instance
+
+```yaml
+readOnly:
+  enabled: true
+  ingress:
+    enabled: true
+    hosts:
+      - host: yopass.example.com
+        paths:
+          - path: /
+            pathType: Prefix
+```
+
+Resources created for the read-only instance are suffixed with `-readonly` (Deployment, Service, Ingress). Both instances share the same database configured via `.Values.database.*`.
+
+In read-only mode the server is started with `--read-only`. Endpoint behavior:
+
+| Endpoint | Behavior |
+|----------|----------|
+| `POST /create/secret` | 404 Not Found |
+| `POST /create/file` | 404 Not Found |
+| `GET /secret/{key}` | Active |
+| `GET /file/{key}` | Active |
+| `DELETE /secret/{key}` | Active |
+
+The frontend detects `READ_ONLY: true` from the `/config` endpoint and shows a read-only landing page instead of the create form.
+
+### Split deployment pattern (one release)
+
+Deploy one Helm release with both instances sharing one database:
+
+```yaml
+database:
+  type: memcached
+  dsn: memcached:11211
+
+memcached:
+  enabled: true
+
+ingress:
+  enabled: true
+  hosts:
+    - host: internal.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+readOnly:
+  enabled: true
+  ingress:
+    enabled: true
+    hosts:
+      - host: yopass.example.com
+        paths:
+          - path: /
+            pathType: Prefix
+```
+
+Both instances connect to the same Memcached or Redis database. Secrets created on the internal instance can be retrieved via the public read-only instance.
+
+### OIDC on internal, public read-only
+
+Require authentication only on the internal instance while the public instance remains open for retrieval:
+
+```yaml
+extraEnvVariables:
+  REQUIRE_AUTH: "true"
+  OIDC_ISSUER: https://accounts.google.com
+  OIDC_CLIENT_ID: "123456789-abc.apps.googleusercontent.com"
+  OIDC_CLIENT_SECRET: "GOCSPX-..."
+  OIDC_REDIRECT_URL: https://internal.example.com/auth/callback
+  OIDC_ALLOWED_DOMAIN: example.com
+
+readOnly:
+  enabled: true
+  # no auth variables here
+```
+
+Notes:
+- Deletion of one-time secrets happens automatically via `DELETE /secret/{key}` when a recipient opens a secret; this endpoint remains active in read-only mode intentionally.
+- If you use a CDN or caching layer in front of the public instance, ensure retrieval endpoints (`GET /secret/*`, `GET /file/*`) are not cached.
