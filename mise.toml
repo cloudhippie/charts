@@ -6,7 +6,7 @@ helm-docs = "1.14.2"
 node = "24"
 pipx = "1.16.6"
 pre-commit = "4.6.1"
-python = "3.14.6"
+python = "3.14.7"
 sops = "3.13.3"
 yamllint = "1.38.0"
 
