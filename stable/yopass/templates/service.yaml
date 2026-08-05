@@ -6,6 +6,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "yopass.labels" . | nindent 4 }}
+    app.kubernetes.io/component: internal
 {{- if .Values.service.labels }}
     {{- toYaml .Values.service.labels | nindent 4 }}
 {{- end }}
