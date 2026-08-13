@@ -2,7 +2,7 @@
 
 [tools]
 go = "1.26.5"
-helm = "4.2.3"
+helm = "4.2.4"
 helm-ct = "3.14.0"
 helm-docs = "1.14.2"
 node = "24"
