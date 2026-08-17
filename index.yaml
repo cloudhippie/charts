@@ -12,6 +12,47 @@ entries:
         fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
+    appVersion: 2.19.8
+    created: "2026-08-17T08:49:38.155743049Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.16.9
+    - condition: postgres.enabled
+      name: postgres
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.20.1
+    description: Modern and open-source alternative to AWX/Tower
+    digest: cb36713f7c6be0b3808bed5ae06c450833639123cb0c440eb215f1abaf50651d
+    home: https://semaphoreui.com/
+    icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
+    keywords:
+    - ansible
+    - awx
+    - tower
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: ansible-semaphore
+    sources:
+    - https://github.com/ansible-semaphore/semaphore
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/ansible-semaphore-15.2.1/ansible-semaphore-15.2.1.tgz
+    version: 15.2.1
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/ansible-semaphore/semaphore
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/ansible-semaphore
+      artifacthub.io/signKey: |
+        fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
     appVersion: 2.19.7
     created: "2026-08-14T09:13:38.180312Z"
     dependencies:
@@ -4970,6 +5011,47 @@ entries:
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
     appVersion: 14.8.0
+    created: "2026-08-17T08:49:38.348086124Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.34.17
+    - condition: memcached.enabled
+      name: memcached
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.14.6
+    description: Secure sharing of secrets, passwords and files
+    digest: 3eb0683480c03782af1541a408c49211f9d9db0bb07e2a4e2433820ca20dc9d1
+    home: https://yopass.se/
+    icon: https://raw.githubusercontent.com/jhaals/yopass/master/logo/yopass.svg
+    keywords:
+    - password
+    - secret
+    - sharing
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: yopass
+    sources:
+    - https://github.com/jhaals/yopass
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/yopass-9.14.9/yopass-9.14.9.tgz
+    version: 9.14.9
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/jhaals/yopass
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/yopass
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 14.8.0
     created: "2026-08-14T09:13:38.518786719Z"
     dependencies:
     - condition: redis.enabled
@@ -8525,4 +8607,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-6.0.0/yopass-6.0.0.tgz
     version: 6.0.0
-generated: "2026-08-14T09:13:38.519669492Z"
+generated: "2026-08-17T08:49:38.348510415Z"
