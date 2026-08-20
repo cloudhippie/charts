@@ -1,6 +1,6 @@
 # ansible-semaphore
 
-![Version: 15.2.2](https://img.shields.io/badge/Version-15.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.19.8](https://img.shields.io/badge/AppVersion-2.19.8-informational?style=flat-square)
+![Version: 15.2.3](https://img.shields.io/badge/Version-15.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.19.8](https://img.shields.io/badge/AppVersion-2.19.8-informational?style=flat-square)
 
 Modern and open-source alternative to AWX/Tower
 
@@ -118,7 +118,7 @@ oidc:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://registry-1.docker.io/cloudpirates | mariadb | 0.16.10 |
+| oci://registry-1.docker.io/cloudpirates | mariadb | 0.16.11 |
 | oci://registry-1.docker.io/cloudpirates | postgres | 0.20.1 |
 
 ## Values
