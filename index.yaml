@@ -13,6 +13,47 @@ entries:
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
     appVersion: 2.19.12
+    created: "2026-09-03T12:44:55.676713485Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.16.12
+    - condition: postgres.enabled
+      name: postgres
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.20.4
+    description: Modern and open-source alternative to AWX/Tower
+    digest: 38393dcd28d94ec9656e09652d9a88ec4434670f933ad47d504b321284e36f71
+    home: https://semaphoreui.com/
+    icon: https://raw.githubusercontent.com/ansible-semaphore/semaphore/develop/web/public/favicon.svg
+    keywords:
+    - ansible
+    - awx
+    - tower
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: ansible-semaphore
+    sources:
+    - https://github.com/ansible-semaphore/semaphore
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/ansible-semaphore-15.2.7/ansible-semaphore-15.2.7.tgz
+    version: 15.2.7
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/ansible-semaphore/semaphore
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/ansible-semaphore
+      artifacthub.io/signKey: |
+        fingerprint: 2B62F542C0C5614F8B4625AE0DDA0DEB51EF789C
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 2.19.12
     created: "2026-08-30T13:43:00.876439666Z"
     dependencies:
     - condition: mariadb.enabled
@@ -4289,6 +4330,39 @@ entries:
         fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
+    appVersion: 2.23.0
+    created: "2026-09-03T12:44:55.834924471Z"
+    description: Hetzner Cloud CSI component for management clusters
+    digest: ad0942962ec16ef01adc3be4bc4ef9ca9c99d900d2faf0454160fb2a179115f2
+    home: https://github.com/hetznercloud/csi-driver
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
+    keywords:
+    - hetzner
+    - csi
+    - kubernetes
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: hcloud-csi-mgmt
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/hetznercloud/csi-driver
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-mgmt-2.9.0/hcloud-csi-mgmt-2.9.0.tgz
+    version: 2.9.0
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/hetznercloud/csi-driver
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/hcloud-csi-mgmt
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
     appVersion: 2.22.1
     created: "2026-07-30T10:29:56.234523533Z"
     description: Hetzner Cloud CSI component for management clusters
@@ -4818,6 +4892,39 @@ entries:
         fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
         url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
     apiVersion: v2
+    appVersion: 2.23.0
+    created: "2026-09-03T12:44:55.997282261Z"
+    description: Hetzner Cloud CSI component for user clusters
+    digest: bbe48d97a1403aa7c4c0082d671c602ed9a6f3ea8a5d02cee5dd96e6cbdb5473
+    home: https://github.com/hetznercloud/csi-driver
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hetzner.svg
+    keywords:
+    - hetzner
+    - csi
+    - kubernetes
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: hcloud-csi-user
+    sources:
+    - https://github.com/cloudhippie/charts
+    - https://github.com/hetznercloud/csi-driver
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-user-1.7.0/hcloud-csi-user-1.7.0.tgz
+    version: 1.7.0
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/hetznercloud/csi-driver
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/hcloud-csi-user
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
     appVersion: 2.22.1
     created: "2026-07-30T10:29:56.372030813Z"
     description: Hetzner Cloud CSI component for user clusters
@@ -5237,6 +5344,47 @@ entries:
     - https://github.com/cloudhippie/charts/releases/download/hcloud-csi-user-1.0.1/hcloud-csi-user-1.0.1.tgz
     version: 1.0.1
   yopass:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |-
+        - name: Source
+          url: https://github.com/jhaals/yopass
+        - name: Chart
+          url: https://github.com/cloudhippie/charts/tree/master/stable/yopass
+      artifacthub.io/signKey: |
+        fingerprint: 12B3EDFEA2ACC1EA3D29511981ACD5B5DF2DBDAA
+        url: https://raw.githubusercontent.com/cloudhippie/charts/master/cloudhippie.key
+    apiVersion: v2
+    appVersion: 14.9.0
+    created: "2026-09-03T12:44:56.156953256Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.34.26
+    - condition: memcached.enabled
+      name: memcached
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.14.8
+    description: Secure sharing of secrets, passwords and files
+    digest: 78cd4c2557512eb229a7c0c6d4e636b0913d5aa2305ebc6c330e560e24551694
+    home: https://yopass.se/
+    icon: https://raw.githubusercontent.com/jhaals/yopass/master/logo/yopass.svg
+    keywords:
+    - password
+    - secret
+    - sharing
+    maintainers:
+    - email: thomas@webhippie.de
+      name: tboerger
+      url: https://github.com/tboerger
+    name: yopass
+    sources:
+    - https://github.com/jhaals/yopass
+    type: application
+    urls:
+    - https://github.com/cloudhippie/charts/releases/download/yopass-9.15.6/yopass-9.15.6.tgz
+    version: 9.15.6
   - annotations:
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |-
@@ -9091,4 +9239,4 @@ entries:
     urls:
     - https://github.com/cloudhippie/charts/releases/download/yopass-6.0.0/yopass-6.0.0.tgz
     version: 6.0.0
-generated: "2026-08-30T13:43:01.048299211Z"
+generated: "2026-09-03T12:44:56.157431268Z"
