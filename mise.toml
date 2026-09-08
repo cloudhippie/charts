@@ -8,7 +8,7 @@ helm-docs = "1.14.2"
 node = "24"
 prek = "0.5.2"
 sops = "3.13.3"
-uv = "0.12.10"
+uv = "0.12.11"
 yamllint = "1.38.0"
 
 "pipx:yamale" = "6.1.0"
