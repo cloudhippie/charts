@@ -1,6 +1,6 @@
 # hcloud-csi-mgmt
 
-![Version: 2.9.0](https://img.shields.io/badge/Version-2.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.23.0](https://img.shields.io/badge/AppVersion-2.23.0-informational?style=flat-square)
+![Version: 2.10.0](https://img.shields.io/badge/Version-2.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.23.0](https://img.shields.io/badge/AppVersion-2.23.0-informational?style=flat-square)
 
 Hetzner Cloud CSI component for management clusters
 
@@ -52,13 +52,13 @@ helm install hcloud-csi-mgmt cloudhippie/hcloud-csi-mgmt
 | fullnameOverride | string | `""` | Override the fullname |
 | image.attacher.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.attacher.repository | string | `"registry.k8s.io/sig-storage/csi-attacher"` | Image repository used by deployment |
-| image.attacher.tag | string | `"v4.12.0"` | Optional tag for the repository |
+| image.attacher.tag | string | `"v4.13.0"` | Optional tag for the repository |
 | image.driver.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.driver.repository | string | `"hetznercloud/hcloud-csi-driver"` | Image repository used by deployment |
 | image.driver.tag | string | `""` | Optional tag for the repository, defaults to app version |
 | image.liveness.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.liveness.repository | string | `"registry.k8s.io/sig-storage/livenessprobe"` | Image repository used by deployment |
-| image.liveness.tag | string | `"v2.19.0"` | Optional tag for the repository |
+| image.liveness.tag | string | `"v2.20.0"` | Optional tag for the repository |
 | image.provisioner.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.provisioner.repository | string | `"registry.k8s.io/sig-storage/csi-provisioner"` | Image repository used by deployment |
 | image.provisioner.tag | string | `"v6.3.0"` | Optional tag for the repository |
