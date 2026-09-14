@@ -34,4 +34,4 @@ name: yopass
 sources:
 - https://github.com/jhaals/yopass
 type: application
-version: 9.15.9
+version: 9.16.0
