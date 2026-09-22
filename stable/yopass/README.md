@@ -1,6 +1,6 @@
 # yopass
 
-![Version: 9.17.1](https://img.shields.io/badge/Version-9.17.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 14.10.0](https://img.shields.io/badge/AppVersion-14.10.0-informational?style=flat-square)
+![Version: 9.17.2](https://img.shields.io/badge/Version-9.17.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 14.10.0](https://img.shields.io/badge/AppVersion-14.10.0-informational?style=flat-square)
 
 Secure sharing of secrets, passwords and files
 
@@ -88,8 +88,8 @@ memcached:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://registry-1.docker.io/cloudpirates | memcached | 0.14.9 |
-| oci://registry-1.docker.io/cloudpirates | redis | 0.35.2 |
+| oci://registry-1.docker.io/cloudpirates | memcached | 0.14.10 |
+| oci://registry-1.docker.io/cloudpirates | redis | 0.35.4 |
 
 ## Values
 
