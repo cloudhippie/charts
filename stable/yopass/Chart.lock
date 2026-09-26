@@ -4,6 +4,6 @@ dependencies:
   version: 0.35.4
 - name: memcached
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.14.10
-digest: sha256:4387372b1624618cfbef5b4923f13c8ba38abd6fb763ecea6f92c3119c44daf8
-generated: "2026-09-22T13:13:22.946366479Z"
+  version: 0.14.11
+digest: sha256:a156b20906548a5a3923e03f70984a21bdb8d5aab8f5920ae3c0377f6b7b6174
+generated: "2026-09-26T12:47:54.546826106Z"
