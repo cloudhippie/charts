@@ -8,6 +8,10 @@ ignore: |
 
 rules:
   line-length: disable
+  comments-indentation: false
+
+  comments:
+    min-spaces-from-content: 1
 
   document-end:
     level: error
@@ -16,5 +20,12 @@ rules:
 
   indentation:
     spaces: 2
+
+  braces:
+    max-spaces-inside: 1
+
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
 
 ...
