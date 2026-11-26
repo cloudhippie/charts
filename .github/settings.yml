@@ -2,7 +2,7 @@
 repository:
   name: charts
   description: Helm charts used by our services
-  homepage: https://cloudhippie.de
+  homepage: https://www.cloudhippie.de
   topics: cloudhippie, helm, charts
 
   private: false
