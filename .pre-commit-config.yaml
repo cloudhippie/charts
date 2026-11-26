@@ -12,5 +12,10 @@ repos:
           - commit-msg
         additional_dependencies:
           - "@commitlint/config-conventional"
+  - repo: https://github.com/betterleaks/betterleaks
+    rev: v1.10.1
+    hooks:
+      - id: betterleaks-system
+        name: betterleaks
 
 ...
